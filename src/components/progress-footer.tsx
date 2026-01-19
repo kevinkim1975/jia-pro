@@ -34,18 +34,18 @@ export function ProgressFooter({
         <Button
           onClick={onPrevious}
           disabled={currentPage === 1}
-          className="h-12 px-6 gap-2 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-14 px-8 gap-3 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <ChevronLeft className="h-5 w-5" />
-          <span className="text-base">이전 페이지</span>
+          <ChevronLeft className="h-6 w-6" />
+          <span className="text-lg">이전 페이지</span>
         </Button>
 
         {/* Current Page Indicator */}
         <div className="flex flex-col items-center gap-1">
-          <span className="text-xs font-medium text-muted-foreground">
+          <span className="text-sm font-medium text-muted-foreground">
             현재 페이지
           </span>
-          <span className="text-2xl font-bold text-primary">
+          <span className="text-4xl font-bold text-primary">
             {currentPage}
           </span>
         </div>
@@ -54,10 +54,10 @@ export function ProgressFooter({
         <Button
           onClick={onNext}
           disabled={currentPage === totalPages}
-          className="h-12 px-6 gap-2 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-14 px-8 gap-3 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <span className="text-base">다음 페이지</span>
-          <ChevronRight className="h-5 w-5" />
+          <span className="text-lg">다음 페이지</span>
+          <ChevronRight className="h-6 w-6" />
         </Button>
       </div>
     </footer>
