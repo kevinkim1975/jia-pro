@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useCallback, useEffect } from "react"
 import { TopbarHeader } from "./topbar-header"
@@ -16,6 +16,15 @@ export function ProposalViewer() {
   // 현재 슬라이드 가져오기
   const currentSlide = getSlideByPage(currentPage)
   const tocItems = getTocItems()
+
+  // 네비게이션 핸들러 (functional setState - Vercel best practice)
+  const handlePrevious = useCallback(() => {
+    setCurrentPage(prev => Math.max(1, prev - 1))
+  }, [])
+
+  const handleNext = useCallback(() => {
+    setCurrentPage(prev => Math.min(totalPages, prev + 1))
+  }, [totalPages])
 
   // 키보드 네비게이션
   useEffect(() => {
@@ -37,19 +46,7 @@ export function ProposalViewer() {
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [currentPage, totalPages])
-
-  const handlePrevious = useCallback(() => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
-    }
-  }, [currentPage])
-
-  const handleNext = useCallback(() => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1)
-    }
-  }, [currentPage, totalPages])
+  }, [handlePrevious, handleNext, totalPages])
 
   const handleTocClick = () => {
     setTocOpen(true)

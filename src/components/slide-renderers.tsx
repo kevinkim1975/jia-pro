@@ -1,40 +1,25 @@
-"use client"
+﻿"use client"
 
-import type { SlideContent, LineChartData, BarChartData, PieChartData } from "@/types/proposal"
+import dynamic from "next/dynamic"
+import type { SlideContent } from "@/types/proposal"
 import { Card } from "@/components/ui/card"
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts"
 
-// 색상 팔레트
-const CHART_COLORS = {
-  primary: "#004B8D",
-  secondary: "#48A9C5",
-  accent: "#10B981",
-  warning: "#F59E0B",
-  danger: "#EF4444",
-}
-
-const PIE_COLORS = ["#004B8D", "#48A9C5", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"]
+// ChartSlide 동적 로딩 (recharts 번들 분리 - Vercel best practice)
+const ChartSlide = dynamic(() => import("./chart-slide").then(mod => ({ default: mod.ChartSlide })), {
+  loading: () => (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <div className="animate-pulse text-muted-foreground">차트 로딩 중...</div>
+    </div>
+  ),
+  ssr: false
+})
 
 // =====================
 // Cover Slide
 // =====================
 interface CoverSlideProps {
   title: string
-  subtitle?: string  // optional - Boris Cherny: 타입 정의와 일치
+  subtitle?: string  // optional - Boris Cherny: ????뺤쓽? ?쇱튂
   date: string
   company: string
 }
@@ -43,12 +28,12 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
   return (
     <div className="flex flex-col items-center justify-center min-h-[600px] text-center">
       <div className="space-y-8">
-        {/* 로고/아이콘 */}
+        {/* 濡쒓퀬/?꾩씠肄?*/}
         <div className="w-24 h-24 mx-auto rounded-2xl bg-primary flex items-center justify-center">
-          <span className="text-white font-bold text-4xl">정</span>
+          <span className="text-white font-bold text-4xl">??/span>
         </div>
         
-        {/* 제목 */}
+        {/* ?쒕ぉ */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground">
             {title}
@@ -60,7 +45,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
           )}
         </div>
         
-        {/* 하단 정보 */}
+        {/* ?섎떒 ?뺣낫 */}
         <div className="pt-12 space-y-2">
           <p className="text-lg text-muted-foreground">{date}</p>
           <p className="text-xl font-semibold text-secondary">{company}</p>
@@ -87,7 +72,7 @@ interface TocSlideProps {
 export function TocSlide({ items, onNavigate }: TocSlideProps) {
   return (
     <div className="space-y-8 py-8">
-      <h2 className="text-3xl font-bold text-foreground text-center">목차</h2>
+      <h2 className="text-3xl font-bold text-foreground text-center">紐⑹감</h2>
       
       <div className="space-y-3 max-w-2xl mx-auto">
         {items.map((item) => (
@@ -115,7 +100,7 @@ export function TocSlide({ items, onNavigate }: TocSlideProps) {
 }
 
 // =====================
-// Divider Slide (ACT 간지)
+// Divider Slide (ACT 媛꾩?)
 // =====================
 interface DividerSlideProps {
   act: number
@@ -127,17 +112,17 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[600px] text-center bg-gradient-to-br from-primary/5 to-secondary/5 -m-8 md:-m-12 lg:-m-16 p-8">
       <div className="space-y-6">
-        {/* ACT 번호 */}
+        {/* ACT 踰덊샇 */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10">
           <span className="text-primary font-bold text-lg">ACT {act}</span>
         </div>
         
-        {/* 제목 */}
+        {/* ?쒕ぉ */}
         <h1 className="text-5xl md:text-6xl font-bold text-primary">
           {title}
         </h1>
         
-        {/* 서브타이틀 */}
+        {/* ?쒕툕??댄? */}
         <p className="text-2xl font-medium text-secondary">
           {subtitle}
         </p>
@@ -172,17 +157,17 @@ export function ContentSlide({ title, content, bullets, emphasis, tone = "neutra
 
   return (
     <div className="space-y-8">
-      {/* 제목 */}
+      {/* ?쒕ぉ */}
       <h2 className="text-3xl md:text-4xl font-bold text-foreground">
         {title}
       </h2>
       
-      {/* 본문 */}
+      {/* 蹂몃Ц */}
       <p className="text-xl leading-relaxed text-muted-foreground">
         {content}
       </p>
       
-      {/* 불릿 포인트 */}
+      {/* 遺덈┸ ?ъ씤??*/}
       {bullets && bullets.length > 0 && (
         <div className={`p-6 rounded-lg ${toneBg[tone]}`}>
           <ul className="space-y-4">
@@ -200,7 +185,7 @@ export function ContentSlide({ title, content, bullets, emphasis, tone = "neutra
         </div>
       )}
       
-      {/* 강조 문구 */}
+      {/* 媛뺤“ 臾멸뎄 */}
       {emphasis && (
         <div className="mt-8 p-4 border-l-4 border-primary bg-primary/5 rounded-r-lg">
           <p className="text-xl font-semibold text-primary">{emphasis}</p>
@@ -210,116 +195,6 @@ export function ContentSlide({ title, content, bullets, emphasis, tone = "neutra
   )
 }
 
-// =====================
-// Chart Slide
-// =====================
-interface ChartSlideProps {
-  title: string
-  chart: LineChartData | BarChartData | PieChartData
-  highlight?: string
-  description?: string
-}
-
-export function ChartSlide({ title, chart, highlight, description }: ChartSlideProps) {
-  const renderChart = () => {
-    switch (chart.type) {
-      case "line":
-        return (
-          <ResponsiveContainer width="100%" height={350}>
-            <LineChart data={chart.data.map(d => ({ name: d.label, value: d.value, annotation: d.annotation }))}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-              <XAxis dataKey="name" tick={{ fill: "#6B7280" }} />
-              <YAxis tick={{ fill: "#6B7280" }} label={{ value: chart.yAxisLabel, angle: -90, position: "insideLeft", fill: "#6B7280" }} />
-              <Tooltip 
-                contentStyle={{ backgroundColor: "#fff", border: "1px solid #E5E7EB", borderRadius: "8px" }}
-                formatter={(value) => [value ?? 0, "값"]}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="value" 
-                stroke={CHART_COLORS.primary} 
-                strokeWidth={3}
-                dot={{ fill: CHART_COLORS.primary, strokeWidth: 2, r: 6 }}
-                activeDot={{ r: 8, fill: CHART_COLORS.secondary }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        )
-      
-      case "bar":
-        return (
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={chart.data.map(d => ({ name: d.label, value: d.value }))}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-              <XAxis dataKey="name" tick={{ fill: "#6B7280" }} />
-              <YAxis tick={{ fill: "#6B7280" }} label={{ value: chart.yAxisLabel, angle: -90, position: "insideLeft", fill: "#6B7280" }} />
-              <Tooltip 
-                contentStyle={{ backgroundColor: "#fff", border: "1px solid #E5E7EB", borderRadius: "8px" }}
-              />
-              <Bar dataKey="value" fill={CHART_COLORS.primary} radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        )
-      
-      case "pie":
-        return (
-          <ResponsiveContainer width="100%" height={350}>
-            <PieChart>
-              <Pie
-                data={chart.data.map(d => ({ name: d.label, value: d.value }))}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
-                outerRadius={120}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {chart.data.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        )
-      
-      default:
-        return null
-    }
-  }
-
-  return (
-    <div className="space-y-6">
-      {/* 제목 */}
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-        {title}
-      </h2>
-      
-      {/* 차트 */}
-      <Card className="p-6">
-        {renderChart()}
-      </Card>
-      
-      {/* 하이라이트 */}
-      {highlight && (
-        <div className="flex justify-center">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-bold text-xl">
-            {highlight}
-          </div>
-        </div>
-      )}
-      
-      {/* 설명 */}
-      {description && (
-        <p className="text-lg text-muted-foreground text-center">
-          {description}
-        </p>
-      )}
-    </div>
-  )
-}
 
 // =====================
 // Comparison Slide
@@ -339,12 +214,12 @@ interface ComparisonSlideProps {
 export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) {
   return (
     <div className="space-y-8">
-      {/* 제목 */}
+      {/* ?쒕ぉ */}
       <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center">
         {title}
       </h2>
       
-      {/* 비교 테이블 */}
+      {/* 鍮꾧탳 ?뚯씠釉?*/}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Before */}
         <Card className="p-6 border-2 border-muted">
@@ -390,23 +265,23 @@ export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) 
 interface SummarySlideProps {
   title: string
   keyPoints: readonly string[]
-  nextSteps?: readonly string[]  // optional - Boris Cherny: 타입 정의와 일치
+  nextSteps?: readonly string[]  // optional - Boris Cherny: ????뺤쓽? ?쇱튂
 }
 
 export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps) {
   return (
     <div className="space-y-8">
-      {/* 제목 */}
+      {/* ?쒕ぉ */}
       <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center">
         {title}
       </h2>
       
       <div className="grid md:grid-cols-2 gap-8">
-        {/* 핵심 포인트 */}
+        {/* ?듭떖 ?ъ씤??*/}
         <Card className="p-6 bg-primary/5 border-primary/20">
           <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">✓</span>
-            핵심 요약
+            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">??/span>
+            ?듭떖 ?붿빟
           </h3>
           <ul className="space-y-3">
             {keyPoints.map((point, index) => (
@@ -420,11 +295,11 @@ export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps)
           </ul>
         </Card>
         
-        {/* 다음 단계 */}
+        {/* ?ㅼ쓬 ?④퀎 */}
         {nextSteps && nextSteps.length > 0 && (
           <Card className="p-6 bg-accent/5 border-accent/20">
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">→</span>
+              <span className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">??/span>
               Next Steps
             </h3>
             <ul className="space-y-3">
@@ -523,7 +398,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
     default:
       return (
         <div className="text-center text-muted-foreground">
-          알 수 없는 슬라이드 타입입니다.
+          ?????녿뒗 ?щ씪?대뱶 ??낆엯?덈떎.
         </div>
       )
   }
