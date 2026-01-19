@@ -56,7 +56,7 @@ export function BackgroundPattern({
       >
         <defs>
           <radialGradient id="radial-pattern" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor={color} stopOpacity="0.07" />
+            <stop offset="0%" stopColor={color} stopOpacity="0.10" />
             <stop offset="100%" stopColor={color} stopOpacity="0" />
           </radialGradient>
         </defs>
