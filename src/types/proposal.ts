@@ -23,14 +23,19 @@ export type ActSubtitle =
   | 'Summary & Next Step';
 
 // 슬라이드 타입
-export type SlideType = 
+export type SlideType =
   | 'cover'        // 표지
   | 'toc'          // 목차
   | 'divider'      // ACT 간지
   | 'content'      // 일반 콘텐츠
+  | 'cards'        // 카드형 레이아웃 (3열)
   | 'chart'        // 차트/그래프
   | 'comparison'   // 비교
-  | 'summary';     // 요약
+  | 'summary'      // 요약
+  | 'closing'      // 마지막 페이지
+  | 'twoColumn'    // 두 개의 정보 박스
+  | 'quote'        // 중앙 메시지 박스
+  | 'flowSteps';   // 단계별 플로우
 
 // 차트 데이터 타입
 export interface ChartDataPoint {
@@ -92,6 +97,22 @@ export interface ContentSlide {
   readonly tone?: 'positive' | 'negative' | 'neutral';
 }
 
+// 카드 아이템
+export interface CardItem {
+  readonly title: string;
+  readonly subtitle?: string;
+  readonly description?: string;
+}
+
+// 카드형 슬라이드 (3열 레이아웃)
+export interface CardsSlide {
+  readonly type: 'cards';
+  readonly title: string;
+  readonly cards: readonly CardItem[];
+  readonly bottomMessage?: string;
+  readonly tone?: 'positive' | 'negative' | 'neutral';
+}
+
 export interface ChartSlide {
   readonly type: 'chart';
   readonly title: string;
@@ -120,14 +141,66 @@ export interface SummarySlide {
   readonly nextSteps?: readonly string[];
 }
 
-export type SlideContent = 
-  | CoverSlide 
-  | TocSlide 
-  | DividerSlide 
-  | ContentSlide 
-  | ChartSlide 
-  | ComparisonSlide 
-  | SummarySlide;
+export interface ClosingSlide {
+  readonly type: 'closing';
+  readonly title: string;
+  readonly subtitle: string;
+  readonly contact: {
+    readonly email: string;
+    readonly person: string;
+  };
+  readonly company: string;
+}
+
+// 두 개의 정보 박스 슬라이드
+export interface TwoColumnSlide {
+  readonly type: 'twoColumn';
+  readonly title: string;
+  readonly left: {
+    readonly title: string;
+    readonly items: readonly string[];
+    readonly highlight?: string;
+  };
+  readonly right: {
+    readonly title: string;
+    readonly items: readonly string[];
+    readonly highlight?: string;
+  };
+  readonly bottomMessage?: string;
+}
+
+// 중앙 메시지 박스 슬라이드
+export interface QuoteSlide {
+  readonly type: 'quote';
+  readonly message: string;
+  readonly subMessage?: string;
+}
+
+// 단계별 플로우 슬라이드
+export interface FlowStepsSlide {
+  readonly type: 'flowSteps';
+  readonly title: string;
+  readonly steps: readonly {
+    readonly step: number;
+    readonly title: string;
+    readonly description?: string;
+  }[];
+  readonly bottomMessage?: string;
+}
+
+export type SlideContent =
+  | CoverSlide
+  | TocSlide
+  | DividerSlide
+  | ContentSlide
+  | CardsSlide
+  | ChartSlide
+  | ComparisonSlide
+  | SummarySlide
+  | ClosingSlide
+  | TwoColumnSlide
+  | QuoteSlide
+  | FlowStepsSlide;
 
 // 슬라이드 엔티티
 export interface Slide {

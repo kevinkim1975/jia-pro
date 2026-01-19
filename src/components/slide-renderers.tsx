@@ -266,6 +266,88 @@ export function ContentSlide({ title, content, bullets, emphasis, tone = "neutra
 }
 
 // =====================
+// Cards Slide - 카드형 레이아웃 (3열)
+// 원본 "성장의 동력" 슬라이드 스타일
+// =====================
+interface CardItemProps {
+  readonly title: string
+  readonly subtitle?: string
+  readonly description?: string
+}
+
+interface CardsSlideProps {
+  readonly title: string
+  readonly cards: readonly CardItemProps[]
+  readonly bottomMessage?: string
+  readonly tone?: 'positive' | 'negative' | 'neutral'
+}
+
+export function CardsSlide({ title, cards, bottomMessage, tone = 'positive' }: CardsSlideProps) {
+  const toneConfig = {
+    positive: {
+      cardBg: "bg-gradient-to-br from-[#004B8D] to-[#48A9C5]",
+      textColor: "text-white",
+      messageColor: "text-[#004B8D]"
+    },
+    negative: {
+      cardBg: "bg-gradient-to-br from-red-500 to-red-400",
+      textColor: "text-white",
+      messageColor: "text-red-600"
+    },
+    neutral: {
+      cardBg: "bg-gradient-to-br from-gray-600 to-gray-500",
+      textColor: "text-white",
+      messageColor: "text-gray-700"
+    }
+  }
+
+  const config = toneConfig[tone]
+
+  return (
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-12">
+      {/* 타이틀 */}
+      <div className="space-y-2">
+        <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          {title}
+        </h2>
+      </div>
+
+      {/* 카드 그리드 */}
+      <div className="grid md:grid-cols-3 gap-6">
+        {cards.map((card, index) => (
+          <Card 
+            key={index} 
+            className={`${config.cardBg} ${config.textColor} p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+          >
+            <div className="text-center space-y-3">
+              <h3 className="text-4xl font-bold">{card.title}</h3>
+              {card.subtitle && (
+                <p className="text-xl font-medium opacity-90">{card.subtitle}</p>
+              )}
+              {card.description && (
+                <p className="text-sm opacity-75 pt-2 border-t border-white/20">
+                  {card.description}
+                </p>
+              )}
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      {/* 하단 메시지 */}
+      {bottomMessage && (
+        <div className="text-center pt-8">
+          <p className={`text-2xl font-semibold ${config.messageColor} italic`}>
+            {bottomMessage}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =====================
 // Comparison Slide - Before/After 비교
 // 시각적 대비가 명확한 비교 레이아웃
 // =====================
@@ -426,6 +508,254 @@ export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps)
 }
 
 // =====================
+// Closing Slide - 마지막 페이지
+// 미니멀 타이포그래피 중심 디자인
+// =====================
+interface ClosingSlideProps {
+  readonly title: string
+  readonly subtitle: string
+  readonly contact: {
+    readonly email: string
+    readonly person: string
+  }
+  readonly company: string
+}
+
+export function ClosingSlide({ title, subtitle, contact, company }: ClosingSlideProps) {
+  return (
+    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px]">
+      {/* 배경 장식 - 미니멀 */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#004B8D]/[0.02] rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#48A9C5]/[0.03] rounded-full blur-3xl" />
+      </div>
+
+      {/* 메인 콘텐츠 */}
+      <div className="relative z-10 text-center space-y-8 px-8">
+        {/* 메인 타이틀 */}
+        <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-[#004B8D] leading-none">
+          {title}
+        </h1>
+
+        {/* 서브타이틀 */}
+        <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          {subtitle}
+        </p>
+
+        {/* 장식 라인 */}
+        <div className="py-6 flex justify-center">
+          <div className="w-20 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        </div>
+
+        {/* 연락처 정보 */}
+        <div className="space-y-4 pt-4">
+          <p className="text-lg font-semibold text-[#004B8D]">{company}</p>
+          <div className="flex flex-col items-center gap-2 text-gray-500">
+            <p>{contact.person}</p>
+            <p className="text-[#48A9C5]">{contact.email}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// =====================
+// TwoColumn Slide - 두 개의 정보 박스
+// 시장 변화, AI vs 사람 등 대비 레이아웃
+// =====================
+interface TwoColumnSlideProps {
+  readonly title: string
+  readonly left: {
+    readonly title: string
+    readonly items: readonly string[]
+    readonly highlight?: string
+  }
+  readonly right: {
+    readonly title: string
+    readonly items: readonly string[]
+    readonly highlight?: string
+  }
+  readonly bottomMessage?: string
+}
+
+export function TwoColumnSlide({ title, left, right, bottomMessage }: TwoColumnSlideProps) {
+  return (
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+      {/* 타이틀 */}
+      <div className="space-y-2">
+        <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          {title}
+        </h2>
+      </div>
+
+      {/* 2열 박스 */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* 왼쪽 박스 */}
+        <Card className="p-6 border-2 border-[#004B8D]/20 bg-[#004B8D]/5 shadow-sm">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-[#004B8D] pb-3 border-b border-[#004B8D]/20">
+              {left.title}
+            </h3>
+            {left.highlight && (
+              <div className="text-3xl font-bold text-[#004B8D]">{left.highlight}</div>
+            )}
+            <ul className="space-y-3">
+              {left.items.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full bg-[#004B8D]" />
+                  <span className="text-gray-700 leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Card>
+
+        {/* 오른쪽 박스 */}
+        <Card className="p-6 border-2 border-[#48A9C5]/20 bg-[#48A9C5]/5 shadow-sm">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-[#48A9C5] pb-3 border-b border-[#48A9C5]/20">
+              {right.title}
+            </h3>
+            {right.highlight && (
+              <div className="text-3xl font-bold text-[#48A9C5]">{right.highlight}</div>
+            )}
+            <ul className="space-y-3">
+              {right.items.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full bg-[#48A9C5]" />
+                  <span className="text-gray-700 leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Card>
+      </div>
+
+      {/* 하단 메시지 */}
+      {bottomMessage && (
+        <div className="flex items-start gap-4 p-5 rounded-xl bg-gradient-to-r from-[#004B8D]/10 to-[#48A9C5]/10 border-l-4 border-[#004B8D]">
+          <p className="text-xl font-semibold text-[#004B8D]">
+            {bottomMessage}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =====================
+// Quote Slide - 중앙 메시지 박스
+// 전략 방향, 질문 등 임팩트 메시지
+// =====================
+interface QuoteSlideProps {
+  readonly message: string
+  readonly subMessage?: string
+}
+
+export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
+  return (
+    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px]">
+      {/* 배경 장식 */}
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-[#004B8D]/[0.03] rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-[#48A9C5]/[0.03] rounded-full blur-3xl" />
+      </div>
+
+      {/* 메인 콘텐츠 */}
+      <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
+        <Card className="p-12 border-2 border-[#004B8D]/20 bg-white/80 backdrop-blur-sm shadow-lg">
+          <div className="space-y-6">
+            {/* 인용 부호 */}
+            <div className="text-6xl text-[#004B8D]/20 font-serif leading-none">"</div>
+
+            {/* 메인 메시지 */}
+            <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#004B8D] leading-relaxed">
+              {message}
+            </p>
+
+            {/* 서브 메시지 */}
+            {subMessage && (
+              <p className="text-lg md:text-xl text-gray-600 leading-relaxed pt-4">
+                {subMessage}
+              </p>
+            )}
+
+            {/* 인용 부호 닫기 */}
+            <div className="text-6xl text-[#004B8D]/20 font-serif leading-none rotate-180">"</div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  )
+}
+
+// =====================
+// FlowSteps Slide - 단계별 플로우
+// 실행 로드맵, Next Step 등
+// =====================
+interface FlowStepsSlideProps {
+  readonly title: string
+  readonly steps: readonly {
+    readonly step: number
+    readonly title: string
+    readonly description?: string
+  }[]
+  readonly bottomMessage?: string
+}
+
+export function FlowStepsSlide({ title, steps, bottomMessage }: FlowStepsSlideProps) {
+  return (
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+      {/* 타이틀 */}
+      <div className="space-y-2">
+        <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          {title}
+        </h2>
+      </div>
+
+      {/* 플로우 스텝 */}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-2 py-8">
+        {steps.map((step, index) => (
+          <div key={step.step} className="flex items-center">
+            {/* 스텝 카드 */}
+            <Card className="p-6 border-2 border-[#004B8D]/20 bg-gradient-to-br from-[#004B8D]/5 to-[#48A9C5]/5 shadow-md hover:shadow-lg transition-shadow duration-200 min-w-[180px]">
+              <div className="text-center space-y-3">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white font-bold text-xl flex items-center justify-center shadow-md">
+                  {step.step}
+                </div>
+                <h3 className="text-lg font-bold text-[#004B8D]">{step.title}</h3>
+                {step.description && (
+                  <p className="text-sm text-gray-600">{step.description}</p>
+                )}
+              </div>
+            </Card>
+
+            {/* 화살표 (마지막 아이템 제외) */}
+            {index < steps.length - 1 && (
+              <div className="hidden md:flex items-center px-2">
+                <ArrowRight className="w-8 h-8 text-[#48A9C5]" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* 하단 메시지 */}
+      {bottomMessage && (
+        <div className="flex items-start gap-4 p-5 rounded-xl bg-gradient-to-r from-[#004B8D]/10 to-[#48A9C5]/10 border-l-4 border-[#004B8D]">
+          <p className="text-xl font-semibold text-[#004B8D]">
+            {bottomMessage}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =====================
 // Main Slide Renderer
 // 슬라이드 타입에 따른 렌더링 분기
 // =====================
@@ -474,6 +804,16 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
         />
       )
 
+    case "cards":
+      return (
+        <CardsSlide
+          title={content.title}
+          cards={content.cards}
+          bottomMessage={content.bottomMessage}
+          tone={content.tone}
+        />
+      )
+
     case "chart":
       return (
         <ChartSlide
@@ -499,6 +839,43 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           title={content.title}
           keyPoints={content.keyPoints}
           nextSteps={content.nextSteps}
+        />
+      )
+
+    case "closing":
+      return (
+        <ClosingSlide
+          title={content.title}
+          subtitle={content.subtitle}
+          contact={content.contact}
+          company={content.company}
+        />
+      )
+
+    case "twoColumn":
+      return (
+        <TwoColumnSlide
+          title={content.title}
+          left={content.left}
+          right={content.right}
+          bottomMessage={content.bottomMessage}
+        />
+      )
+
+    case "quote":
+      return (
+        <QuoteSlide
+          message={content.message}
+          subMessage={content.subMessage}
+        />
+      )
+
+    case "flowSteps":
+      return (
+        <FlowStepsSlide
+          title={content.title}
+          steps={content.steps}
+          bottomMessage={content.bottomMessage}
         />
       )
 
