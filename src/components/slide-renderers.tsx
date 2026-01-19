@@ -88,41 +88,41 @@ interface TocSlideProps {
 
 export function TocSlide({ items, onNavigate }: TocSlideProps) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       {/* 헤더 */}
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10 mb-4">
-          <span className="text-sm font-semibold text-[#004B8D] uppercase tracking-wider">Contents</span>
+      <div className="text-center mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#004B8D]/10 mb-2">
+          <span className="text-xs font-semibold text-[#004B8D] uppercase tracking-wider">Contents</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#004B8D]">목차</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#004B8D]">목차</h2>
       </div>
 
       {/* 목차 리스트 */}
-      <div className="max-w-2xl mx-auto space-y-3">
+      <div className="max-w-2xl mx-auto space-y-2">
         {items.map((item, index) => (
           <button
             key={item.act}
             onClick={() => onNavigate?.(item.startPage)}
-            className="group w-full flex items-center gap-4 p-5 rounded-xl border-2 border-gray-100 bg-white hover:border-[#004B8D]/30 hover:bg-[#004B8D]/5 transition-all duration-200 shadow-sm hover:shadow-md"
+            className="group w-full flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-white hover:border-[#004B8D]/30 hover:bg-[#004B8D]/5 transition-all duration-200 shadow-sm hover:shadow-md"
           >
             {/* ACT 번호 */}
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white font-bold text-lg flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white font-bold text-base flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
               {item.act}
             </div>
 
             {/* 타이틀 */}
             <div className="flex-1 text-left">
-              <span className="text-lg font-semibold text-gray-800 group-hover:text-[#004B8D] transition-colors duration-200">
+              <span className="text-base font-semibold text-gray-800 group-hover:text-[#004B8D] transition-colors duration-200">
                 {item.title}
               </span>
             </div>
 
             {/* 페이지 번호 & 화살표 */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-400 group-hover:text-[#48A9C5] transition-colors">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-gray-400 group-hover:text-[#48A9C5] transition-colors">
                 p.{item.startPage}
               </span>
-              <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-[#004B8D] group-hover:translate-x-1 transition-all duration-200" />
+              <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-[#004B8D] group-hover:translate-x-1 transition-all duration-200" />
             </div>
           </button>
         ))}
