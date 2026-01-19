@@ -73,7 +73,7 @@ export function ProposalViewer() {
       <main className="flex-1 px-4 py-8 md:px-6 lg:px-8">
         <div className="max-w-[1280px] mx-auto">
           <div>
-            <div className="p-8 md:p-12 lg:p-16 min-h-[600px]">
+            <div className="p-8 md:p-12 lg:p-16 min-h-[700px]">
               {currentSlide ? (
                 <SlideRenderer
                   content={currentSlide.content}
