@@ -309,7 +309,7 @@ function renderChart(chart: ChartData) {
 
 export function ChartSlide({ title, chart, highlight, description }: ChartSlideProps) {
   return (
-    <div className="min-h-[800px] max-h-[800px] overflow-y-auto py-8 space-y-6">
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-6">
       {/* 타이틀 */}
       <div className="space-y-2">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />

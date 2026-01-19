@@ -35,7 +35,7 @@ interface CoverSlideProps {
 
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[800px] max-h-[800px] overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px] overflow-hidden">
       <div className="relative z-10 text-center space-y-6 px-8">
         {/* 메인 타이틀 */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
@@ -87,7 +87,7 @@ interface TocSlideProps {
 
 export function TocSlide({ items, onNavigate }: TocSlideProps) {
   return (
-    <div className="min-h-[800px] max-h-[800px] overflow-y-auto py-8 px-4">
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 px-4">
       {/* 헤더 */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10 mb-4">
@@ -142,7 +142,7 @@ interface DividerSlideProps {
 
 export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[800px] max-h-[800px] overflow-hidden bg-gradient-to-br from-[#004B8D] via-[#004B8D] to-[#48A9C5] -m-8 md:-m-12 lg:-m-16 p-8 md:p-12 lg:p-16">
+    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px] overflow-hidden bg-gradient-to-br from-[#004B8D] via-[#004B8D] to-[#48A9C5] -m-8 md:-m-12 lg:-m-16 p-8 md:p-12 lg:p-16">
       {/* 배경 패턴 */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-40 h-40 border border-white rounded-full" />
@@ -235,7 +235,7 @@ export function ContentSlide({ title, content, bullets, emphasis, tone = "neutra
   const config = toneConfig[tone]
 
   return (
-    <div className="min-h-[800px] max-h-[800px] overflow-y-auto py-8 space-y-8">
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
       {/* 타이틀 */}
       <div className="space-y-2">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
@@ -301,7 +301,7 @@ interface ComparisonSlideProps {
 
 export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) {
   return (
-    <div className="min-h-[800px] max-h-[800px] overflow-y-auto py-8 space-y-8">
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
       {/* 타이틀 */}
       <div className="text-center space-y-3">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full mx-auto" />
@@ -380,7 +380,7 @@ interface SummarySlideProps {
 
 export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps) {
   return (
-    <div className="min-h-[800px] max-h-[800px] overflow-y-auto py-8 space-y-8">
+    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
       {/* 타이틀 */}
       <div className="text-center space-y-3">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10">

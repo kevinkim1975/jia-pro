@@ -29,7 +29,7 @@ export function ProgressFooter({
       </div>
 
       {/* Navigation Controls */}
-      <div className="h-20 flex items-center justify-between px-6 max-w-7xl mx-auto">
+      <div className="h-[130px] flex items-center justify-between px-6 max-w-7xl mx-auto">
         {/* Previous Button */}
         <Button
           onClick={onPrevious}
