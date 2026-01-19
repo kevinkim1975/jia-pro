@@ -278,7 +278,10 @@ function renderChart(chart: ChartData) {
               ))}
             </Pie>
             <Tooltip
-              formatter={(value: number) => [value.toLocaleString(), "값"]}
+              formatter={(value: number | undefined) => {
+                const safeValue = value ?? 0
+                return [safeValue.toLocaleString(), "값"]
+              }}
               contentStyle={{
                 backgroundColor: "white",
                 border: "1px solid #E5E7EB",
