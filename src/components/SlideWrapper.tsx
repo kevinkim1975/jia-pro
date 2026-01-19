@@ -43,7 +43,7 @@ export function SlideWrapper({
         ${className}
       `}
     >
-      {showPattern && <BackgroundPattern opacity={3} />}
+      {showPattern && <BackgroundPattern />}
       <div
         className={`
           relative z-10
