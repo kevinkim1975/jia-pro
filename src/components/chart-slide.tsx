@@ -100,14 +100,20 @@ function renderCustomizedLabel({
   percent,
   name,
 }: {
-  cx: number
-  cy: number
-  midAngle: number
-  innerRadius: number
-  outerRadius: number
-  percent: number
-  name: string
+  cx?: number
+  cy?: number
+  midAngle?: number
+  innerRadius?: number
+  outerRadius?: number
+  percent?: number
+  name?: string
 }) {
+  // undefined 체크
+  if (cx === undefined || cy === undefined || midAngle === undefined || 
+      innerRadius === undefined || outerRadius === undefined || percent === undefined) {
+    return null
+  }
+  
   const RADIAN = Math.PI / 180
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5
   const x = cx + radius * Math.cos(-midAngle * RADIAN)
