@@ -781,7 +781,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "toc":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <TocSlide
             items={content.items}
             onNavigate={onNavigate}
@@ -802,7 +802,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "content":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <ContentSlide
             title={content.title}
             content={content.content}
@@ -815,7 +815,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "cards":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <CardsSlide
             title={content.title}
             cards={content.cards}
@@ -827,7 +827,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "chart":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <ChartSlide
             title={content.title}
             chart={content.chart}
@@ -839,7 +839,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "comparison":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <ComparisonSlide
             title={content.title}
             before={content.before}
@@ -850,7 +850,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "summary":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <SummarySlide
             title={content.title}
             keyPoints={content.keyPoints}
@@ -873,7 +873,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "twoColumn":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <TwoColumnSlide
             title={content.title}
             left={content.left}
@@ -895,7 +895,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "flowSteps":
       return (
-        <SlideWrapper>
+        <SlideWrapper showPattern>
           <FlowStepsSlide
             title={content.title}
             steps={content.steps}
