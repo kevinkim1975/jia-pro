@@ -19,7 +19,7 @@ export function ProgressFooter({
   const progress = (currentPage / totalPages) * 100
 
   return (
-    <footer className="border-t border-border bg-white">
+    <footer className="shrink-0 border-t border-border bg-white">
       {/* Progress Bar */}
       <div className="h-1 w-full bg-surface">
         <div

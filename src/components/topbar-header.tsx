@@ -17,7 +17,7 @@ export function TopbarHeader({
   title = "정이안한의원 마케팅 전략 제안"
 }: TopbarHeaderProps) {
   return (
-    <header className="h-16 flex items-center px-6 gap-6 bg-primary">
+    <header className="h-16 shrink-0 flex items-center px-6 gap-6 bg-primary">
       {/* Logo Section */}
       <div className="flex items-center gap-3 shrink-0">
         <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-secondary">
