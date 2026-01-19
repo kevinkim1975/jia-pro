@@ -36,9 +36,6 @@ interface CoverSlideProps {
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-[600px] max-h-[600px] overflow-hidden">
-      {/* 상단 악센트 라인 */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#004B8D] via-[#48A9C5] to-[#10B981]" />
-
       <div className="relative z-10 text-center space-y-6 px-8">
         {/* 메인 타이틀 */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
