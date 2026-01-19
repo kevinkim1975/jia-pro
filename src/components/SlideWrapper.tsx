@@ -10,7 +10,7 @@ interface SlideWrapperProps {
   /** 배경 패턴 표시 여부 (콘텐츠 슬라이드용) */
   readonly showPattern?: boolean
   /** 패턴 타입 (기본값: crosshatch) */
-  readonly patternType?: 'crosshatch' | 'dots' | 'radial' | 'none'
+  readonly patternType?: 'crosshatch' | 'dots' | 'radial' | 'concentric' | 'none'
   /** 추가 className */
   readonly className?: string
 }

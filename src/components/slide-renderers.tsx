@@ -769,7 +769,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
   switch (content.type) {
     case "cover":
       return (
-        <SlideWrapper fullHeight showPattern patternType="radial">
+        <SlideWrapper fullHeight showPattern patternType="concentric">
           <CoverSlide
             title={content.title}
             subtitle={content.subtitle}

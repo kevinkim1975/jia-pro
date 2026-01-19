@@ -1,7 +1,7 @@
 "use client"
 
 interface BackgroundPatternProps {
-  readonly pattern?: 'crosshatch' | 'dots' | 'radial' | 'none'
+  readonly pattern?: 'crosshatch' | 'dots' | 'radial' | 'concentric' | 'none'
   readonly opacity?: number
   readonly color?: string
 }
@@ -61,6 +61,30 @@ export function BackgroundPattern({
           </radialGradient>
         </defs>
         <rect width="100%" height="100%" fill="url(#radial-pattern)" />
+      </svg>
+    )
+  }
+
+  // concentric 패턴 (동심원 - Cover 슬라이드용)
+  if (pattern === 'concentric') {
+    return (
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            id="concentric-pattern"
+            width="120"
+            height="120"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="60" cy="60" r="20" stroke="#004B8D" strokeWidth="1" fill="none" opacity="0.05" />
+            <circle cx="60" cy="60" r="40" stroke="#004B8D" strokeWidth="1" fill="none" opacity="0.04" />
+            <circle cx="60" cy="60" r="60" stroke="#004B8D" strokeWidth="1" fill="none" opacity="0.03" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#concentric-pattern)" />
       </svg>
     )
   }
