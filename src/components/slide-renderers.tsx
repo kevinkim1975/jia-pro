@@ -30,7 +30,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
       <div className="space-y-8">
         {/* 濡쒓퀬/?꾩씠肄?*/}
         <div className="w-24 h-24 mx-auto rounded-2xl bg-primary flex items-center justify-center">
-          <span className="text-white font-bold text-4xl">??/span>
+          <span className="text-white font-bold text-4xl">호</span>
         </div>
         
         {/* ?쒕ぉ */}
@@ -280,7 +280,7 @@ export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps)
         {/* ?듭떖 ?ъ씤??*/}
         <Card className="p-6 bg-primary/5 border-primary/20">
           <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">??/span>
+            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">호</span>
             ?듭떖 ?붿빟
           </h3>
           <ul className="space-y-3">
@@ -299,7 +299,7 @@ export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps)
         {nextSteps && nextSteps.length > 0 && (
           <Card className="p-6 bg-accent/5 border-accent/20">
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">??/span>
+              <span className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">호</span>
               Next Steps
             </h3>
             <ul className="space-y-3">
