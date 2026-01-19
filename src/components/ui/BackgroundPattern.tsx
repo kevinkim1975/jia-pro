@@ -20,7 +20,7 @@ interface BackgroundPatternProps {
  */
 export function BackgroundPattern({
   pattern = 'crosshatch',
-  opacity = 8,
+  opacity = 7,
   color = '#94A3B8'
 }: BackgroundPatternProps) {
   if (pattern === 'none') return null
