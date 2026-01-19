@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:\\\\Program Files\\\\nodejs\\\\node.exe\" \"C:\\\\Users\\\\gram\\\\mcp-remote-pkg\\\\node_modules\\\\mcp-remote\\\\dist\\\\proxy.js\" --version)",
+      "Bash(dir:*)",
+      "Bash(curl:*)",
+      "Bash(claude mcp add:*)"
+    ]
+  },
+  "mcpServers": {
+    "v0-dev": {
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\gram\\mcp-remote-pkg\\node_modules\\mcp-remote\\dist\\proxy.js",
+        "https://mcp.v0.dev",
+        "--header",
+        "Authorization: Bearer v1:naCSZrnCmzUdXkrkEEfPd7JV:LwYkVuJ8cCYtlJML7L9QdkFh"
+      ]
+    }
+  }
+}

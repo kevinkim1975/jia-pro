@@ -160,7 +160,7 @@ interface DividerSlideProps {
 
 export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[600px] max-h-[600px] overflow-hidden bg-gradient-to-br from-[#004B8D] via-[#004B8D] to-[#48A9C5]">
+    <div className="relative flex flex-col items-center justify-center min-h-[600px] max-h-[600px] overflow-hidden bg-gradient-to-br from-[#004B8D] via-[#004B8D] to-[#48A9C5] -m-8 md:-m-12 lg:-m-16 p-8 md:p-12 lg:p-16">
       {/* 배경 패턴 */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-40 h-40 border border-white rounded-full" />
