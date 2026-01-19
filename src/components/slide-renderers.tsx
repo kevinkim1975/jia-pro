@@ -36,36 +36,36 @@ interface CoverSlideProps {
 
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center">
-      <div className="relative z-10 text-center space-y-6 px-8">
+    <div className="flex flex-col items-center justify-center">
+      <div className="text-center space-y-4 px-8">
         {/* 메인 타이틀 */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#004B8D] leading-tight tracking-tight">
           {title}
         </h1>
-        
+
         {subtitle && (
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#48A9C5]">
+          <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-[#48A9C5]">
             {subtitle}
           </h2>
         )}
 
         {/* 구분 요소 */}
-        <div className="flex items-center justify-center gap-3 py-4">
-          <div className="w-12 h-px bg-[#004B8D]/20" />
+        <div className="flex items-center justify-center gap-3 py-2">
+          <div className="w-10 h-px bg-[#004B8D]/20" />
           <div className="w-1.5 h-1.5 rounded-full bg-[#004B8D]" />
-          <div className="w-12 h-px bg-[#004B8D]/20" />
+          <div className="w-10 h-px bg-[#004B8D]/20" />
         </div>
 
         {/* 날짜 및 회사 정보 */}
-        <div className="space-y-2">
-          <p className="text-lg text-gray-500">{date}</p>
-          <p className="text-xl font-semibold text-[#004B8D]">{company}</p>
+        <div className="space-y-1">
+          <p className="text-base text-gray-500">{date}</p>
+          <p className="text-lg font-semibold text-[#004B8D]">{company}</p>
         </div>
-      </div>
 
-      {/* 하단 라벨 */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Proposal</span>
+        {/* 하단 라벨 */}
+        <div className="pt-4">
+          <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Proposal</span>
+        </div>
       </div>
     </div>
   )
