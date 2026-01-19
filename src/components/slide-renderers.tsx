@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic"
 import type { SlideContent } from "@/types/proposal"
 import { Card } from "@/components/ui/card"
+import { SlideWrapper } from "@/components/SlideWrapper"
 import {
   CheckCircle2,
   ArrowRight,
@@ -35,7 +36,7 @@ interface CoverSlideProps {
 
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px] overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center">
       <div className="relative z-10 text-center space-y-6 px-8">
         {/* 메인 타이틀 */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
@@ -87,7 +88,7 @@ interface TocSlideProps {
 
 export function TocSlide({ items, onNavigate }: TocSlideProps) {
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 px-4">
+    <div className="space-y-8">
       {/* 헤더 */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10 mb-4">
@@ -143,7 +144,7 @@ interface DividerSlideProps {
 
 export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px]">
+    <div className="relative flex flex-col items-center justify-center py-16">
       {/* 대형 배경 숫자 워터마크 */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="text-[400px] font-black text-[#004B8D]/[0.03] leading-none">
@@ -217,7 +218,7 @@ export function ContentSlide({ title, content, bullets, emphasis, tone = "neutra
   const config = toneConfig[tone]
 
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+    <div className="space-y-8">
       {/* 타이틀 */}
       <div className="space-y-2">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
@@ -304,7 +305,7 @@ export function CardsSlide({ title, cards, bottomMessage, tone = 'positive' }: C
   const config = toneConfig[tone]
 
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-12">
+    <div className="space-y-12">
       {/* 타이틀 */}
       <div className="space-y-2">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
@@ -365,7 +366,7 @@ interface ComparisonSlideProps {
 
 export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) {
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+    <div className="space-y-8">
       {/* 타이틀 */}
       <div className="text-center space-y-3">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full mx-auto" />
@@ -444,7 +445,7 @@ interface SummarySlideProps {
 
 export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps) {
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+    <div className="space-y-8">
       {/* 타이틀 */}
       <div className="text-center space-y-3">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10">
@@ -523,7 +524,7 @@ interface ClosingSlideProps {
 
 export function ClosingSlide({ title, subtitle, contact, company }: ClosingSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px]">
+    <div className="relative flex flex-col items-center justify-center py-16">
       {/* 배경 장식 - 미니멀 */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#004B8D]/[0.02] rounded-full blur-3xl" />
@@ -581,7 +582,7 @@ interface TwoColumnSlideProps {
 
 export function TwoColumnSlide({ title, left, right, bottomMessage }: TwoColumnSlideProps) {
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+    <div className="space-y-8">
       {/* 타이틀 */}
       <div className="space-y-2">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
@@ -656,7 +657,7 @@ interface QuoteSlideProps {
 
 export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-[900px] max-h-[900px]">
+    <div className="relative flex flex-col items-center justify-center py-16">
       {/* 배경 장식 */}
       <div className="absolute inset-0 pointer-events-none select-none">
         <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-[#004B8D]/[0.03] rounded-full blur-3xl" />
@@ -707,7 +708,7 @@ interface FlowStepsSlideProps {
 
 export function FlowStepsSlide({ title, steps, bottomMessage }: FlowStepsSlideProps) {
   return (
-    <div className="min-h-[900px] max-h-[900px] overflow-y-auto py-8 space-y-8">
+    <div className="space-y-8">
       {/* 타이틀 */}
       <div className="space-y-2">
         <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
@@ -768,125 +769,151 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
   switch (content.type) {
     case "cover":
       return (
-        <CoverSlide
-          title={content.title}
-          subtitle={content.subtitle}
-          date={content.date}
-          company={content.company}
-        />
+        <SlideWrapper fullHeight>
+          <CoverSlide
+            title={content.title}
+            subtitle={content.subtitle}
+            date={content.date}
+            company={content.company}
+          />
+        </SlideWrapper>
       )
 
     case "toc":
       return (
-        <TocSlide
-          items={content.items}
-          onNavigate={onNavigate}
-        />
+        <SlideWrapper>
+          <TocSlide
+            items={content.items}
+            onNavigate={onNavigate}
+          />
+        </SlideWrapper>
       )
 
     case "divider":
       return (
-        <DividerSlide
-          act={content.act}
-          title={content.title}
-          subtitle={content.subtitle}
-        />
+        <SlideWrapper fullHeight>
+          <DividerSlide
+            act={content.act}
+            title={content.title}
+            subtitle={content.subtitle}
+          />
+        </SlideWrapper>
       )
 
     case "content":
       return (
-        <ContentSlide
-          title={content.title}
-          content={content.content}
-          bullets={content.bullets}
-          emphasis={content.emphasis}
-          tone={content.tone}
-        />
+        <SlideWrapper>
+          <ContentSlide
+            title={content.title}
+            content={content.content}
+            bullets={content.bullets}
+            emphasis={content.emphasis}
+            tone={content.tone}
+          />
+        </SlideWrapper>
       )
 
     case "cards":
       return (
-        <CardsSlide
-          title={content.title}
-          cards={content.cards}
-          bottomMessage={content.bottomMessage}
-          tone={content.tone}
-        />
+        <SlideWrapper>
+          <CardsSlide
+            title={content.title}
+            cards={content.cards}
+            bottomMessage={content.bottomMessage}
+            tone={content.tone}
+          />
+        </SlideWrapper>
       )
 
     case "chart":
       return (
-        <ChartSlide
-          title={content.title}
-          chart={content.chart}
-          highlight={content.highlight}
-          description={content.description}
-        />
+        <SlideWrapper>
+          <ChartSlide
+            title={content.title}
+            chart={content.chart}
+            highlight={content.highlight}
+            description={content.description}
+          />
+        </SlideWrapper>
       )
 
     case "comparison":
       return (
-        <ComparisonSlide
-          title={content.title}
-          before={content.before}
-          after={content.after}
-        />
+        <SlideWrapper>
+          <ComparisonSlide
+            title={content.title}
+            before={content.before}
+            after={content.after}
+          />
+        </SlideWrapper>
       )
 
     case "summary":
       return (
-        <SummarySlide
-          title={content.title}
-          keyPoints={content.keyPoints}
-          nextSteps={content.nextSteps}
-        />
+        <SlideWrapper>
+          <SummarySlide
+            title={content.title}
+            keyPoints={content.keyPoints}
+            nextSteps={content.nextSteps}
+          />
+        </SlideWrapper>
       )
 
     case "closing":
       return (
-        <ClosingSlide
-          title={content.title}
-          subtitle={content.subtitle}
-          contact={content.contact}
-          company={content.company}
-        />
+        <SlideWrapper fullHeight>
+          <ClosingSlide
+            title={content.title}
+            subtitle={content.subtitle}
+            contact={content.contact}
+            company={content.company}
+          />
+        </SlideWrapper>
       )
 
     case "twoColumn":
       return (
-        <TwoColumnSlide
-          title={content.title}
-          left={content.left}
-          right={content.right}
-          bottomMessage={content.bottomMessage}
-        />
+        <SlideWrapper>
+          <TwoColumnSlide
+            title={content.title}
+            left={content.left}
+            right={content.right}
+            bottomMessage={content.bottomMessage}
+          />
+        </SlideWrapper>
       )
 
     case "quote":
       return (
-        <QuoteSlide
-          message={content.message}
-          subMessage={content.subMessage}
-        />
+        <SlideWrapper fullHeight>
+          <QuoteSlide
+            message={content.message}
+            subMessage={content.subMessage}
+          />
+        </SlideWrapper>
       )
 
     case "flowSteps":
       return (
-        <FlowStepsSlide
-          title={content.title}
-          steps={content.steps}
-          bottomMessage={content.bottomMessage}
-        />
+        <SlideWrapper>
+          <FlowStepsSlide
+            title={content.title}
+            steps={content.steps}
+            bottomMessage={content.bottomMessage}
+          />
+        </SlideWrapper>
       )
 
     default:
       return (
-        <div className="flex items-center justify-center min-h-[400px] text-center text-gray-500">
-          <div className="space-y-2">
-            <p className="text-lg">지원하지 않는 슬라이드 타입입니다.</p>
-            <p className="text-sm text-gray-400">관리자에게 문의해주세요.</p>
+        <SlideWrapper>
+          <div className="flex items-center justify-center min-h-[400px] text-center text-gray-500">
+            <div className="space-y-2">
+              <p className="text-lg">지원하지 않는 슬라이드 타입입니다.</p>
+              <p className="text-sm text-gray-400">관리자에게 문의해주세요.</p>
+            </div>
           </div>
-        </div>
+        </SlideWrapper>
       )
   }
 }
