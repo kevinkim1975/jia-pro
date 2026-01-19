@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect } from "react"
 import { TopbarHeader } from "./topbar-header"
 import { ProgressFooter } from "./progress-footer"
 import { SlideRenderer } from "./slide-renderers"
-import { Card } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { proposal, getSlideByPage, getTocItems } from "@/data/proposal-data"
 
@@ -73,7 +72,7 @@ export function ProposalViewer() {
       {/* Main Content Area */}
       <main className="flex-1 px-4 py-8 md:px-6 lg:px-8">
         <div className="max-w-[1280px] mx-auto">
-          <Card className="rounded-md shadow-sm border border-border bg-white">
+          <div>
             <div className="p-8 md:p-12 lg:p-16 min-h-[600px]">
               {currentSlide ? (
                 <SlideRenderer
@@ -86,7 +85,7 @@ export function ProposalViewer() {
                 </div>
               )}
             </div>
-          </Card>
+          </div>
         </div>
       </main>
 
