@@ -34,11 +34,11 @@ export const slides: Slide[] = [
       type: 'toc',
       items: [
         { act: 1, title: '상황', startPage: 3 },
-        { act: 2, title: '위기', startPage: 7 },
-        { act: 3, title: '전환점', startPage: 14 },
-        { act: 4, title: '해결책 1: 마케팅 전략', startPage: 19 },
-        { act: 5, title: '해결책 2: AI CRM', startPage: 26 },
-        { act: 6, title: '요약 및 Next Step', startPage: 46 },
+        { act: 2, title: '위기', startPage: 6 },
+        { act: 3, title: '전환점', startPage: 13 },
+        { act: 4, title: '해결책 1: 마케팅 전략', startPage: 18 },
+        { act: 5, title: '해결책 2: AI CRM', startPage: 25 },
+        { act: 6, title: '요약 및 Next Step', startPage: 45 },
       ],
     },
   },
@@ -94,7 +94,7 @@ export const slides: Slide[] = [
   // ACT 2 간지
   {
     id: 'slide-6',
-    pageNumber: 7,
+    pageNumber: 6,
     act: 2,
     content: {
       type: 'divider',
@@ -107,7 +107,7 @@ export const slides: Slide[] = [
   // 2-1: 22년 이후의 변화
   {
     id: 'slide-7',
-    pageNumber: 8,
+    pageNumber: 7,
     act: 2,
     content: {
       type: 'chart',
@@ -129,7 +129,7 @@ export const slides: Slide[] = [
   // 2-2: 원인 1 - 시장 변화
   {
     id: 'slide-8',
-    pageNumber: 9,
+    pageNumber: 8,
     act: 2,
     content: {
       type: 'twoColumn',
@@ -156,7 +156,7 @@ export const slides: Slide[] = [
   // 2-3: 원인 2 - 경쟁 격화
   {
     id: 'slide-9',
-    pageNumber: 10,
+    pageNumber: 9,
     act: 2,
     content: {
       type: 'twoColumn',
@@ -181,7 +181,7 @@ export const slides: Slide[] = [
   // 2-4: 원인 3 - 블로그 환경
   {
     id: 'slide-10',
-    pageNumber: 11,
+    pageNumber: 10,
     act: 2,
     content: {
       type: 'content',
@@ -200,7 +200,7 @@ export const slides: Slide[] = [
   // 2-5: 원인 4 - 질환 구조
   {
     id: 'slide-11',
-    pageNumber: 12,
+    pageNumber: 11,
     act: 2,
     content: {
       type: 'content',
@@ -218,7 +218,7 @@ export const slides: Slide[] = [
   // 2-6: 현재 위치 요약
   {
     id: 'slide-12',
-    pageNumber: 13,
+    pageNumber: 12,
     act: 2,
     content: {
       type: 'content',
@@ -237,7 +237,7 @@ export const slides: Slide[] = [
   // ACT 3 간지
   {
     id: 'slide-13',
-    pageNumber: 14,
+    pageNumber: 13,
     act: 3,
     content: {
       type: 'divider',
@@ -249,7 +249,7 @@ export const slides: Slide[] = [
   // 3-1: 같은 상황, 다른 결과
   {
     id: 'slide-14',
-    pageNumber: 15,
+    pageNumber: 14,
     act: 3,
     content: {
       type: 'quote',
@@ -260,7 +260,7 @@ export const slides: Slide[] = [
   // 3-2: 2년 만에 10배 성장
   {
     id: 'slide-15',
-    pageNumber: 16,
+    pageNumber: 15,
     act: 3,
     content: {
       type: 'comparison',
@@ -285,7 +285,7 @@ export const slides: Slide[] = [
   // 3-3: 성공의 3가지 조건
   {
     id: 'slide-16',
-    pageNumber: 17,
+    pageNumber: 16,
     act: 3,
     content: {
       type: 'content',
@@ -302,7 +302,7 @@ export const slides: Slide[] = [
   // 3-4: 질문
   {
     id: 'slide-17',
-    pageNumber: 18,
+    pageNumber: 17,
     act: 3,
     content: {
       type: 'quote',
@@ -313,7 +313,7 @@ export const slides: Slide[] = [
   // ACT 4 간지
   {
     id: 'slide-18',
-    pageNumber: 19,
+    pageNumber: 18,
     act: 4,
     content: {
       type: 'divider',
@@ -325,7 +325,7 @@ export const slides: Slide[] = [
   // 4-1: 전략 방향
   {
     id: 'slide-19',
-    pageNumber: 20,
+    pageNumber: 19,
     act: 4,
     content: {
       type: 'quote',
@@ -335,7 +335,7 @@ export const slides: Slide[] = [
   // 4-2: 전략 1 - 지식인 극대화
   {
     id: 'slide-20',
-    pageNumber: 21,
+    pageNumber: 20,
     act: 4,
     content: {
       type: 'twoColumn',
@@ -362,7 +362,7 @@ export const slides: Slide[] = [
   // 4-3: 전략 2 - 블로그 전환
   {
     id: 'slide-21',
-    pageNumber: 22,
+    pageNumber: 21,
     act: 4,
     content: {
       type: 'twoColumn',
@@ -388,7 +388,7 @@ export const slides: Slide[] = [
   // 4-4: 전략 3 - 파워링크 최적화
   {
     id: 'slide-22',
-    pageNumber: 23,
+    pageNumber: 22,
     act: 4,
     content: {
       type: 'twoColumn',
@@ -415,7 +415,7 @@ export const slides: Slide[] = [
   // 4-5: 실행 로드맵
   {
     id: 'slide-23',
-    pageNumber: 24,
+    pageNumber: 23,
     act: 4,
     content: {
       type: 'flowSteps',
@@ -431,7 +431,7 @@ export const slides: Slide[] = [
   // 4-6: 예산 변경
   {
     id: 'slide-24',
-    pageNumber: 25,
+    pageNumber: 24,
     act: 4,
     content: {
       type: 'twoColumn',
@@ -457,7 +457,7 @@ export const slides: Slide[] = [
   // ACT 5 간지
   {
     id: 'slide-25',
-    pageNumber: 26,
+    pageNumber: 25,
     act: 5,
     content: {
       type: 'divider',
@@ -469,7 +469,7 @@ export const slides: Slide[] = [
   // 5-1: 질문
   {
     id: 'slide-26',
-    pageNumber: 27,
+    pageNumber: 26,
     act: 5,
     content: {
       type: 'quote',
@@ -479,7 +479,7 @@ export const slides: Slide[] = [
   // 5-2: 두 가지 의료기관
   {
     id: 'slide-27',
-    pageNumber: 28,
+    pageNumber: 27,
     act: 5,
     content: {
       type: 'comparison',
@@ -505,7 +505,7 @@ export const slides: Slide[] = [
   // 5-3: 호원앤컴퍼니 CRM 연혁
   {
     id: 'slide-28',
-    pageNumber: 29,
+    pageNumber: 28,
     act: 5,
     content: {
       type: 'cards',
@@ -523,7 +523,7 @@ export const slides: Slide[] = [
   // 5-4: AI CRM 차별점
   {
     id: 'slide-29',
-    pageNumber: 30,
+    pageNumber: 29,
     act: 5,
     content: {
       type: 'twoColumn',
@@ -550,7 +550,7 @@ export const slides: Slide[] = [
   // 5-5: 3가지 확산 경로
   {
     id: 'slide-30',
-    pageNumber: 31,
+    pageNumber: 30,
     act: 5,
     content: {
       type: 'cards',
@@ -567,7 +567,7 @@ export const slides: Slide[] = [
   // 5-6: AI CRM 구성 요소
   {
     id: 'slide-31',
-    pageNumber: 32,
+    pageNumber: 31,
     act: 5,
     content: {
       type: 'cards',
@@ -583,7 +583,7 @@ export const slides: Slide[] = [
   // 5-7: PTD 경영진단
   {
     id: 'slide-32',
-    pageNumber: 33,
+    pageNumber: 32,
     act: 5,
     content: {
       type: 'twoColumn',
@@ -610,7 +610,7 @@ export const slides: Slide[] = [
   // 5-8: PTD 방법론
   {
     id: 'slide-33',
-    pageNumber: 34,
+    pageNumber: 33,
     act: 5,
     content: {
       type: 'cards',
@@ -627,7 +627,7 @@ export const slides: Slide[] = [
   // 5-9: 교육 프로그램 개요
   {
     id: 'slide-34',
-    pageNumber: 35,
+    pageNumber: 34,
     act: 5,
     content: {
       type: 'cards',
@@ -644,7 +644,7 @@ export const slides: Slide[] = [
   // 5-10: 전직원 교육 - 에니어그램
   {
     id: 'slide-35',
-    pageNumber: 36,
+    pageNumber: 35,
     act: 5,
     content: {
       type: 'content',
@@ -661,7 +661,7 @@ export const slides: Slide[] = [
   // 5-11: 전직원 교육 - SQI 리더십
   {
     id: 'slide-36',
-    pageNumber: 37,
+    pageNumber: 36,
     act: 5,
     content: {
       type: 'content',
@@ -677,7 +677,7 @@ export const slides: Slide[] = [
   // 5-12: 경영진 교육
   {
     id: 'slide-37',
-    pageNumber: 38,
+    pageNumber: 37,
     act: 5,
     content: {
       type: 'twoColumn',
@@ -702,7 +702,7 @@ export const slides: Slide[] = [
   // 5-13: 상담팀 교육 (ASC)
   {
     id: 'slide-38',
-    pageNumber: 39,
+    pageNumber: 38,
     act: 5,
     content: {
       type: 'content',
@@ -717,7 +717,7 @@ export const slides: Slide[] = [
   // 5-14: CRM 시스템 기능 (1)
   {
     id: 'slide-39',
-    pageNumber: 40,
+    pageNumber: 39,
     act: 5,
     content: {
       type: 'twoColumn',
@@ -741,7 +741,7 @@ export const slides: Slide[] = [
   // 5-15: CRM 시스템 기능 (2)
   {
     id: 'slide-40',
-    pageNumber: 41,
+    pageNumber: 40,
     act: 5,
     content: {
       type: 'twoColumn',
@@ -765,7 +765,7 @@ export const slides: Slide[] = [
   // 5-16: 도입 성과
   {
     id: 'slide-41',
-    pageNumber: 42,
+    pageNumber: 41,
     act: 5,
     content: {
       type: 'quote',
@@ -776,7 +776,7 @@ export const slides: Slide[] = [
   // 5-17: 원장님 고민 연결
   {
     id: 'slide-42',
-    pageNumber: 43,
+    pageNumber: 42,
     act: 5,
     content: {
       type: 'comparison',
@@ -802,7 +802,7 @@ export const slides: Slide[] = [
   // 5-18: 가격 구성
   {
     id: 'slide-43',
-    pageNumber: 44,
+    pageNumber: 43,
     act: 5,
     content: {
       type: 'twoColumn',
@@ -830,7 +830,7 @@ export const slides: Slide[] = [
   // 5-19: 투자 비용
   {
     id: 'slide-44',
-    pageNumber: 45,
+    pageNumber: 44,
     act: 5,
     content: {
       type: 'content',
@@ -847,7 +847,7 @@ export const slides: Slide[] = [
   // ACT 6 간지
   {
     id: 'slide-45',
-    pageNumber: 46,
+    pageNumber: 45,
     act: 6,
     content: {
       type: 'divider',
@@ -859,7 +859,7 @@ export const slides: Slide[] = [
   // 6-1: 현재 상황 요약
   {
     id: 'slide-46',
-    pageNumber: 47,
+    pageNumber: 46,
     act: 6,
     content: {
       type: 'cards',
@@ -877,7 +877,7 @@ export const slides: Slide[] = [
   // 6-2: 제안 방향 요약
   {
     id: 'slide-47',
-    pageNumber: 48,
+    pageNumber: 47,
     act: 6,
     content: {
       type: 'twoColumn',
@@ -906,7 +906,7 @@ export const slides: Slide[] = [
   // 6-3: Next Step
   {
     id: 'slide-48',
-    pageNumber: 49,
+    pageNumber: 48,
     act: 6,
     content: {
       type: 'flowSteps',
@@ -922,7 +922,7 @@ export const slides: Slide[] = [
   // 6-4: 마무리
   {
     id: 'slide-49',
-    pageNumber: 50,
+    pageNumber: 49,
     act: 6,
     content: {
       type: 'quote',
@@ -956,7 +956,7 @@ export const proposal: Proposal = {
   clientName: '정이안한의원',
   createdAt: '2026-01-01',
   acts: groupSlidesByAct(slides),
-  totalPages: 50,
+  totalPages: 49,
 };
 
 // 페이지 번호로 슬라이드 찾기
