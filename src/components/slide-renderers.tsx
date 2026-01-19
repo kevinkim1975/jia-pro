@@ -36,53 +36,38 @@ interface CoverSlideProps {
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-[600px] max-h-[600px] overflow-hidden">
-      {/* 배경 그라데이션 장식 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#004B8D]/5 via-transparent to-[#48A9C5]/5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#004B8D]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#48A9C5]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-
-      {/* 상단 장식 라인 */}
+      {/* 상단 악센트 라인 */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#004B8D] via-[#48A9C5] to-[#10B981]" />
 
-      <div className="relative z-10 text-center space-y-8 px-8">
-        {/* 로고 영역 */}
-        <div className="flex justify-center">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] flex items-center justify-center shadow-lg shadow-[#004B8D]/20 transition-transform duration-300 hover:scale-105">
-            <span className="text-white font-bold text-3xl tracking-tight">H</span>
-          </div>
-        </div>
-
+      <div className="relative z-10 text-center space-y-6 px-8">
         {/* 메인 타이틀 */}
-        <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
-            {title}
-          </h1>
-          {subtitle && (
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#48A9C5]">
-              {subtitle}
-            </h2>
-          )}
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
+          {title}
+        </h1>
+        
+        {subtitle && (
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#48A9C5]">
+            {subtitle}
+          </h2>
+        )}
+
+        {/* 구분 요소 */}
+        <div className="flex items-center justify-center gap-3 py-4">
+          <div className="w-12 h-px bg-[#004B8D]/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#004B8D]" />
+          <div className="w-12 h-px bg-[#004B8D]/20" />
         </div>
 
-        {/* 구분선 */}
-        <div className="flex items-center justify-center gap-4">
-          <div className="w-16 h-px bg-gradient-to-r from-transparent to-[#004B8D]/30" />
-          <div className="w-2 h-2 rounded-full bg-[#004B8D]" />
-          <div className="w-16 h-px bg-gradient-to-l from-transparent to-[#004B8D]/30" />
-        </div>
-
-        {/* 하단 정보 */}
-        <div className="pt-8 space-y-3">
-          <p className="text-lg text-gray-500 font-medium">{date}</p>
+        {/* 날짜 및 회사 정보 */}
+        <div className="space-y-2">
+          <p className="text-lg text-gray-500">{date}</p>
           <p className="text-xl font-semibold text-[#004B8D]">{company}</p>
         </div>
       </div>
 
-      {/* 하단 장식 */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-gray-400">
-        <div className="w-8 h-px bg-gray-300" />
-        <span className="text-sm font-medium uppercase tracking-wider">Proposal</span>
-        <div className="w-8 h-px bg-gray-300" />
+      {/* 하단 라벨 */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Proposal</span>
       </div>
     </div>
   )
