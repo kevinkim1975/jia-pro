@@ -60,7 +60,7 @@ export function ProposalViewer() {
   const currentAct = currentSlide?.act || 1
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface">
+    <div className="h-screen flex flex-col bg-surface overflow-hidden">
       {/* Top Bar */}
       <TopbarHeader
         currentPage={currentPage}
@@ -70,17 +70,17 @@ export function ProposalViewer() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 px-4 py-8 md:px-6 lg:px-8">
-        <div className="max-w-[1280px] mx-auto">
-          <div>
-            <div className="p-8 md:p-12 lg:p-16 min-h-[900px]">
+      <main className="flex-1 overflow-hidden">
+        <div className="h-full max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8">
+          <div className="h-full">
+            <div className="h-full">
               {currentSlide ? (
                 <SlideRenderer
                   content={currentSlide.content}
                   onNavigate={handlePageSelect}
                 />
               ) : (
-                <div className="flex items-center justify-center min-h-[400px] text-muted-foreground">
+                <div className="flex items-center justify-center h-full text-muted-foreground">
                   <p>페이지를 불러오는 중...</p>
                 </div>
               )}

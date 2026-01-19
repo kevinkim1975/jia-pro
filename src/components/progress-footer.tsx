@@ -29,23 +29,23 @@ export function ProgressFooter({
       </div>
 
       {/* Navigation Controls */}
-      <div className="h-[130px] flex items-center justify-between px-6 max-w-7xl mx-auto">
+      <div className="h-14 flex items-center justify-between px-4 max-w-7xl mx-auto">
         {/* Previous Button */}
         <Button
           onClick={onPrevious}
           disabled={currentPage === 1}
-          className="h-14 px-8 gap-3 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-9 px-4 gap-2 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <ChevronLeft className="h-6 w-6" />
-          <span className="text-lg">이전 페이지</span>
+          <ChevronLeft className="h-4 w-4" />
+          <span className="text-sm">이전</span>
         </Button>
 
         {/* Current Page Indicator */}
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-sm font-medium text-muted-foreground">
-            현재 페이지
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground">
+            페이지
           </span>
-          <span className="text-4xl font-bold text-primary">
+          <span className="text-xl font-bold text-primary">
             {currentPage}
           </span>
         </div>
@@ -54,10 +54,10 @@ export function ProgressFooter({
         <Button
           onClick={onNext}
           disabled={currentPage === totalPages}
-          className="h-14 px-8 gap-3 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-9 px-4 gap-2 font-semibold text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <span className="text-lg">다음 페이지</span>
-          <ChevronRight className="h-6 w-6" />
+          <span className="text-sm">다음</span>
+          <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
     </footer>

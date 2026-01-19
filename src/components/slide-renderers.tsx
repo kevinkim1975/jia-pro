@@ -144,34 +144,34 @@ interface DividerSlideProps {
 
 export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center py-16">
+    <div className="relative flex flex-col items-center justify-center py-4">
       {/* 대형 배경 숫자 워터마크 */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="text-[400px] font-black text-[#004B8D]/[0.03] leading-none">
+        <span className="text-[180px] font-black text-[#004B8D]/[0.03] leading-none">
           {act}
         </span>
       </div>
 
       {/* 메인 콘텐츠 */}
-      <div className="relative z-10 text-center space-y-6">
+      <div className="relative z-10 text-center space-y-4">
         {/* ACT 레이블 */}
-        <span className="inline-block text-sm font-semibold tracking-[0.4em] text-[#48A9C5] uppercase">
+        <span className="inline-block text-xs font-semibold tracking-[0.4em] text-[#48A9C5] uppercase">
           ACT {act}
         </span>
 
         {/* 메인 타이틀 */}
-        <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-[#004B8D] leading-none">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#004B8D] leading-none">
           {title}
         </h1>
 
         {/* 서브타이틀 */}
-        <p className="text-2xl md:text-3xl font-light text-[#48A9C5] tracking-wide">
+        <p className="text-base md:text-lg font-light text-[#48A9C5] tracking-wide">
           {subtitle}
         </p>
 
         {/* 하단 장식 */}
-        <div className="pt-8 flex justify-center">
-          <div className="w-16 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        <div className="pt-4 flex justify-center">
+          <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
         </div>
       </div>
     </div>
