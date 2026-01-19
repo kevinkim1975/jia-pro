@@ -769,7 +769,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
   switch (content.type) {
     case "cover":
       return (
-        <SlideWrapper fullHeight>
+        <SlideWrapper fullHeight showPattern patternType="radial">
           <CoverSlide
             title={content.title}
             subtitle={content.subtitle}
@@ -791,7 +791,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "divider":
       return (
-        <SlideWrapper fullHeight>
+        <SlideWrapper fullHeight showPattern patternType="radial">
           <DividerSlide
             act={content.act}
             title={content.title}
@@ -861,7 +861,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "closing":
       return (
-        <SlideWrapper fullHeight>
+        <SlideWrapper fullHeight showPattern patternType="radial">
           <ClosingSlide
             title={content.title}
             subtitle={content.subtitle}
@@ -885,7 +885,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "quote":
       return (
-        <SlideWrapper fullHeight>
+        <SlideWrapper fullHeight showPattern patternType="radial">
           <QuoteSlide
             message={content.message}
             subMessage={content.subMessage}

@@ -9,6 +9,8 @@ interface SlideWrapperProps {
   readonly fullHeight?: boolean
   /** 배경 패턴 표시 여부 (콘텐츠 슬라이드용) */
   readonly showPattern?: boolean
+  /** 패턴 타입 (기본값: crosshatch) */
+  readonly patternType?: 'crosshatch' | 'dots' | 'radial' | 'none'
   /** 추가 className */
   readonly className?: string
 }
@@ -28,6 +30,7 @@ export function SlideWrapper({
   children,
   fullHeight = false,
   showPattern = false,
+  patternType = 'crosshatch',
   className = ""
 }: SlideWrapperProps) {
   return (
@@ -43,7 +46,7 @@ export function SlideWrapper({
         ${className}
       `}
     >
-      {showPattern && <BackgroundPattern />}
+      {showPattern && <BackgroundPattern pattern={patternType} />}
       <div
         className={`
           relative z-10

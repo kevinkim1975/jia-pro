@@ -1,7 +1,7 @@
 "use client"
 
 interface BackgroundPatternProps {
-  readonly pattern?: 'crosshatch' | 'dots' | 'none'
+  readonly pattern?: 'crosshatch' | 'dots' | 'radial' | 'none'
   readonly opacity?: number
   readonly color?: string
 }
@@ -43,6 +43,24 @@ export function BackgroundPattern({
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#dots-pattern)" />
+      </svg>
+    )
+  }
+
+  // radial 패턴 (fullHeight 슬라이드용 - 중앙에서 퍼지는 은은한 그라데이션)
+  if (pattern === 'radial') {
+    return (
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="radial-pattern" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={color} stopOpacity="0.05" />
+            <stop offset="100%" stopColor={color} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#radial-pattern)" />
       </svg>
     )
   }
