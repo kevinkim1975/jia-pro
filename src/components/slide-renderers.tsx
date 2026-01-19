@@ -1,8 +1,16 @@
-﻿"use client"
+"use client"
 
 import dynamic from "next/dynamic"
 import type { SlideContent } from "@/types/proposal"
 import { Card } from "@/components/ui/card"
+import {
+  CheckCircle2,
+  ArrowRight,
+  Target,
+  Lightbulb,
+  TrendingUp,
+  ChevronRight
+} from "lucide-react"
 
 // ChartSlide 동적 로딩 (recharts 번들 분리 - Vercel best practice)
 const ChartSlide = dynamic(() => import("./chart-slide").then(mod => ({ default: mod.ChartSlide })), {
@@ -15,83 +23,124 @@ const ChartSlide = dynamic(() => import("./chart-slide").then(mod => ({ default:
 })
 
 // =====================
-// Cover Slide
+// Cover Slide - 표지
+// Cleveland Clinic 스타일의 전문적인 표지
 // =====================
 interface CoverSlideProps {
-  title: string
-  subtitle?: string  // optional - Boris Cherny: ????뺤쓽? ?쇱튂
-  date: string
-  company: string
+  readonly title: string
+  readonly subtitle?: string
+  readonly date: string
+  readonly company: string
 }
 
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[600px] text-center">
-      <div className="space-y-8">
-        {/* 濡쒓퀬/?꾩씠肄?*/}
-        <div className="w-24 h-24 mx-auto rounded-2xl bg-primary flex items-center justify-center">
-          <span className="text-white font-bold text-4xl">호</span>
+    <div className="relative flex flex-col items-center justify-center min-h-[600px] max-h-[600px] overflow-hidden">
+      {/* 배경 그라데이션 장식 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#004B8D]/5 via-transparent to-[#48A9C5]/5" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#004B8D]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#48A9C5]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+      {/* 상단 장식 라인 */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#004B8D] via-[#48A9C5] to-[#10B981]" />
+
+      <div className="relative z-10 text-center space-y-8 px-8">
+        {/* 로고 영역 */}
+        <div className="flex justify-center">
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] flex items-center justify-center shadow-lg shadow-[#004B8D]/20 transition-transform duration-300 hover:scale-105">
+            <span className="text-white font-bold text-3xl tracking-tight">H</span>
+          </div>
         </div>
-        
-        {/* ?쒕ぉ */}
+
+        {/* 메인 타이틀 */}
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#004B8D] leading-tight tracking-tight">
             {title}
           </h1>
           {subtitle && (
-            <h2 className="text-2xl md:text-3xl font-semibold text-primary">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#48A9C5]">
               {subtitle}
             </h2>
           )}
         </div>
-        
-        {/* ?섎떒 ?뺣낫 */}
-        <div className="pt-12 space-y-2">
-          <p className="text-lg text-muted-foreground">{date}</p>
-          <p className="text-xl font-semibold text-secondary">{company}</p>
+
+        {/* 구분선 */}
+        <div className="flex items-center justify-center gap-4">
+          <div className="w-16 h-px bg-gradient-to-r from-transparent to-[#004B8D]/30" />
+          <div className="w-2 h-2 rounded-full bg-[#004B8D]" />
+          <div className="w-16 h-px bg-gradient-to-l from-transparent to-[#004B8D]/30" />
         </div>
+
+        {/* 하단 정보 */}
+        <div className="pt-8 space-y-3">
+          <p className="text-lg text-gray-500 font-medium">{date}</p>
+          <p className="text-xl font-semibold text-[#004B8D]">{company}</p>
+        </div>
+      </div>
+
+      {/* 하단 장식 */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 text-gray-400">
+        <div className="w-8 h-px bg-gray-300" />
+        <span className="text-sm font-medium uppercase tracking-wider">Proposal</span>
+        <div className="w-8 h-px bg-gray-300" />
       </div>
     </div>
   )
 }
 
 // =====================
-// TOC Slide
+// TOC Slide - 목차
+// 인터랙티브한 네비게이션 목차
 // =====================
 interface TocItem {
-  act: number
-  title: string
-  startPage: number
+  readonly act: number
+  readonly title: string
+  readonly startPage: number
 }
 
 interface TocSlideProps {
-  items: readonly TocItem[]
-  onNavigate?: (page: number) => void
+  readonly items: readonly TocItem[]
+  readonly onNavigate?: (page: number) => void
 }
 
 export function TocSlide({ items, onNavigate }: TocSlideProps) {
   return (
-    <div className="space-y-8 py-8">
-      <h2 className="text-3xl font-bold text-foreground text-center">紐⑹감</h2>
-      
-      <div className="space-y-3 max-w-2xl mx-auto">
-        {items.map((item) => (
+    <div className="min-h-[600px] max-h-[600px] overflow-y-auto py-8 px-4">
+      {/* 헤더 */}
+      <div className="text-center mb-10">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10 mb-4">
+          <span className="text-sm font-semibold text-[#004B8D] uppercase tracking-wider">Contents</span>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-[#004B8D]">목차</h2>
+      </div>
+
+      {/* 목차 리스트 */}
+      <div className="max-w-2xl mx-auto space-y-3">
+        {items.map((item, index) => (
           <button
             key={item.act}
             onClick={() => onNavigate?.(item.startPage)}
-            className="w-full flex items-center justify-between p-4 rounded-lg border border-border hover:bg-surface hover:border-primary transition-colors group"
+            className="group w-full flex items-center gap-4 p-5 rounded-xl border-2 border-gray-100 bg-white hover:border-[#004B8D]/30 hover:bg-[#004B8D]/5 transition-all duration-200 shadow-sm hover:shadow-md"
           >
-            <div className="flex items-center gap-4">
-              <span className="w-10 h-10 rounded-full bg-primary text-white font-bold flex items-center justify-center">
-                {item.act}
-              </span>
-              <span className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+            {/* ACT 번호 */}
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white font-bold text-lg flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+              {item.act}
+            </div>
+
+            {/* 타이틀 */}
+            <div className="flex-1 text-left">
+              <span className="text-lg font-semibold text-gray-800 group-hover:text-[#004B8D] transition-colors duration-200">
                 {item.title}
               </span>
             </div>
-            <span className="text-muted-foreground font-medium">
-              p.{item.startPage}
-            </span>
+
+            {/* 페이지 번호 & 화살표 */}
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-gray-400 group-hover:text-[#48A9C5] transition-colors">
+                p.{item.startPage}
+              </span>
+              <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-[#004B8D] group-hover:translate-x-1 transition-all duration-200" />
+            </div>
           </button>
         ))}
       </div>
@@ -100,218 +149,311 @@ export function TocSlide({ items, onNavigate }: TocSlideProps) {
 }
 
 // =====================
-// Divider Slide (ACT 媛꾩?)
+// Divider Slide - ACT 구분 페이지
+// 임팩트 있는 섹션 전환 페이지
 // =====================
 interface DividerSlideProps {
-  act: number
-  title: string
-  subtitle: string
+  readonly act: number
+  readonly title: string
+  readonly subtitle: string
 }
 
 export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[600px] text-center bg-gradient-to-br from-primary/5 to-secondary/5 -m-8 md:-m-12 lg:-m-16 p-8">
-      <div className="space-y-6">
-        {/* ACT 踰덊샇 */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10">
-          <span className="text-primary font-bold text-lg">ACT {act}</span>
+    <div className="relative flex flex-col items-center justify-center min-h-[600px] max-h-[600px] overflow-hidden bg-gradient-to-br from-[#004B8D] via-[#004B8D] to-[#48A9C5]">
+      {/* 배경 패턴 */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-20 w-40 h-40 border border-white rounded-full" />
+        <div className="absolute top-32 left-32 w-24 h-24 border border-white rounded-full" />
+        <div className="absolute bottom-20 right-20 w-56 h-56 border border-white rounded-full" />
+        <div className="absolute bottom-32 right-32 w-32 h-32 border border-white rounded-full" />
+      </div>
+
+      {/* 큰 배경 숫자 */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-5">
+        <span className="text-[300px] font-bold text-white select-none">
+          {act}
+        </span>
+      </div>
+
+      <div className="relative z-10 text-center space-y-6 px-8">
+        {/* ACT 배지 */}
+        <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+          <span className="text-white font-bold text-lg tracking-wider">ACT {act}</span>
         </div>
-        
-        {/* ?쒕ぉ */}
-        <h1 className="text-5xl md:text-6xl font-bold text-primary">
+
+        {/* 메인 타이틀 */}
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
           {title}
         </h1>
-        
-        {/* ?쒕툕??댄? */}
-        <p className="text-2xl font-medium text-secondary">
+
+        {/* 서브타이틀 */}
+        <p className="text-2xl md:text-3xl font-medium text-white/80">
           {subtitle}
         </p>
+
+        {/* 장식 라인 */}
+        <div className="pt-8 flex justify-center">
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded-full" />
+        </div>
+      </div>
+
+      {/* 하단 진행 표시 */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
+        {[1, 2, 3, 4, 5, 6].map((n) => (
+          <div
+            key={n}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              n === act ? 'w-8 bg-white' : n < act ? 'bg-white/60' : 'bg-white/30'
+            }`}
+          />
+        ))}
       </div>
     </div>
   )
 }
 
 // =====================
-// Content Slide
+// Content Slide - 일반 콘텐츠
+// 가독성 높은 콘텐츠 레이아웃
 // =====================
 interface ContentSlideProps {
-  title: string
-  content: string
-  bullets?: readonly string[]
-  emphasis?: string
-  tone?: "positive" | "negative" | "neutral"
+  readonly title: string
+  readonly content: string
+  readonly bullets?: readonly string[]
+  readonly emphasis?: string
+  readonly tone?: "positive" | "negative" | "neutral"
 }
 
 export function ContentSlide({ title, content, bullets, emphasis, tone = "neutral" }: ContentSlideProps) {
-  const toneColors = {
-    positive: "text-accent",
-    negative: "text-destructive",
-    neutral: "text-foreground",
-  }
-  
-  const toneBg = {
-    positive: "bg-accent/10",
-    negative: "bg-destructive/10",
-    neutral: "bg-surface",
+  const toneConfig = {
+    positive: {
+      accent: "#10B981",
+      bg: "bg-emerald-50",
+      border: "border-emerald-200",
+      text: "text-emerald-700",
+      icon: <TrendingUp className="w-5 h-5" />
+    },
+    negative: {
+      accent: "#EF4444",
+      bg: "bg-red-50",
+      border: "border-red-200",
+      text: "text-red-700",
+      icon: <Target className="w-5 h-5" />
+    },
+    neutral: {
+      accent: "#004B8D",
+      bg: "bg-blue-50",
+      border: "border-blue-200",
+      text: "text-[#004B8D]",
+      icon: <Lightbulb className="w-5 h-5" />
+    }
   }
 
+  const config = toneConfig[tone]
+
   return (
-    <div className="space-y-8">
-      {/* ?쒕ぉ */}
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-        {title}
-      </h2>
-      
-      {/* 蹂몃Ц */}
-      <p className="text-xl leading-relaxed text-muted-foreground">
+    <div className="min-h-[600px] max-h-[600px] overflow-y-auto py-8 space-y-8">
+      {/* 타이틀 */}
+      <div className="space-y-2">
+        <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          {title}
+        </h2>
+      </div>
+
+      {/* 본문 */}
+      <p className="text-lg md:text-xl leading-relaxed text-gray-600">
         {content}
       </p>
-      
-      {/* 遺덈┸ ?ъ씤??*/}
+
+      {/* 불릿 포인트 */}
       {bullets && bullets.length > 0 && (
-        <div className={`p-6 rounded-lg ${toneBg[tone]}`}>
+        <Card className={`p-6 ${config.bg} ${config.border} border-2 shadow-sm`}>
           <ul className="space-y-4">
             {bullets.map((bullet, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-semibold ${
-                  tone === "positive" ? "bg-accent" : tone === "negative" ? "bg-destructive" : "bg-primary"
-                }`}>
+              <li key={index} className="flex items-start gap-4">
+                <span
+                  className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-white text-sm font-bold shadow-sm"
+                  style={{ backgroundColor: config.accent }}
+                >
                   {index + 1}
                 </span>
-                <span className={`text-lg ${toneColors[tone]}`}>{bullet}</span>
+                <span className="text-lg text-gray-700 leading-relaxed pt-0.5">
+                  {bullet}
+                </span>
               </li>
             ))}
           </ul>
-        </div>
+        </Card>
       )}
-      
-      {/* 媛뺤“ 臾멸뎄 */}
+
+      {/* 강조 문구 */}
       {emphasis && (
-        <div className="mt-8 p-4 border-l-4 border-primary bg-primary/5 rounded-r-lg">
-          <p className="text-xl font-semibold text-primary">{emphasis}</p>
+        <div className="flex items-start gap-4 p-5 rounded-xl bg-gradient-to-r from-[#004B8D]/10 to-[#48A9C5]/10 border-l-4 border-[#004B8D]">
+          <Lightbulb className="w-6 h-6 text-[#004B8D] flex-shrink-0 mt-0.5" />
+          <p className="text-xl font-semibold text-[#004B8D]">
+            {emphasis}
+          </p>
         </div>
       )}
     </div>
   )
 }
 
-
 // =====================
-// Comparison Slide
+// Comparison Slide - Before/After 비교
+// 시각적 대비가 명확한 비교 레이아웃
 // =====================
 interface ComparisonSlideProps {
-  title: string
-  before: {
-    label: string
-    items: readonly string[]
+  readonly title: string
+  readonly before: {
+    readonly label: string
+    readonly items: readonly string[]
   }
-  after: {
-    label: string
-    items: readonly string[]
+  readonly after: {
+    readonly label: string
+    readonly items: readonly string[]
   }
 }
 
 export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) {
   return (
-    <div className="space-y-8">
-      {/* ?쒕ぉ */}
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center">
-        {title}
-      </h2>
-      
-      {/* 鍮꾧탳 ?뚯씠釉?*/}
+    <div className="min-h-[600px] max-h-[600px] overflow-y-auto py-8 space-y-8">
+      {/* 타이틀 */}
+      <div className="text-center space-y-3">
+        <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full mx-auto" />
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          {title}
+        </h2>
+      </div>
+
+      {/* 비교 테이블 */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Before */}
-        <Card className="p-6 border-2 border-muted">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-muted-foreground text-center pb-2 border-b">
-              {before.label}
-            </h3>
+        <Card className="p-6 border-2 border-gray-200 bg-gray-50/50 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="space-y-5">
+            <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
+              <div className="w-10 h-10 rounded-lg bg-gray-400 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">B</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-500">
+                {before.label}
+              </h3>
+            </div>
             <ul className="space-y-3">
               {before.items.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-muted-foreground" />
-                  <span className="text-muted-foreground">{item}</span>
+                  <div className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full bg-gray-400" />
+                  <span className="text-gray-500 leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
         </Card>
-        
+
         {/* After */}
-        <Card className="p-6 border-2 border-primary bg-primary/5">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-primary text-center pb-2 border-b border-primary/20">
-              {after.label}
-            </h3>
+        <Card className="p-6 border-2 border-[#004B8D]/30 bg-gradient-to-br from-[#004B8D]/5 to-[#48A9C5]/5 shadow-sm hover:shadow-lg transition-shadow duration-200">
+          <div className="space-y-5">
+            <div className="flex items-center gap-3 pb-4 border-b border-[#004B8D]/20">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#004B8D] to-[#48A9C5] flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-lg">A</span>
+              </div>
+              <h3 className="text-xl font-bold text-[#004B8D]">
+                {after.label}
+              </h3>
+            </div>
             <ul className="space-y-3">
               {after.items.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary" />
-                  <span className="text-foreground font-medium">{item}</span>
+                  <CheckCircle2 className="flex-shrink-0 w-5 h-5 mt-0.5 text-[#10B981]" />
+                  <span className="text-gray-700 font-medium leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
         </Card>
       </div>
+
+      {/* 화살표 표시 (모바일에서 숨김) */}
+      <div className="hidden md:flex justify-center">
+        <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#10B981]/10 text-[#10B981]">
+          <span className="font-semibold">변화의 핵심</span>
+          <ArrowRight className="w-5 h-5" />
+        </div>
+      </div>
     </div>
   )
 }
 
 // =====================
-// Summary Slide
+// Summary Slide - 핵심 요약
+// 액션 지향적인 요약 레이아웃
 // =====================
 interface SummarySlideProps {
-  title: string
-  keyPoints: readonly string[]
-  nextSteps?: readonly string[]  // optional - Boris Cherny: ????뺤쓽? ?쇱튂
+  readonly title: string
+  readonly keyPoints: readonly string[]
+  readonly nextSteps?: readonly string[]
 }
 
 export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps) {
   return (
-    <div className="space-y-8">
-      {/* ?쒕ぉ */}
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center">
-        {title}
-      </h2>
-      
-      <div className="grid md:grid-cols-2 gap-8">
-        {/* ?듭떖 ?ъ씤??*/}
-        <Card className="p-6 bg-primary/5 border-primary/20">
-          <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">호</span>
-            ?듭떖 ?붿빟
-          </h3>
-          <ul className="space-y-3">
-            {keyPoints.map((point, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-white text-sm font-bold flex items-center justify-center">
-                  {index + 1}
-                </span>
-                <span className="text-foreground">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-        
-        {/* ?ㅼ쓬 ?④퀎 */}
-        {nextSteps && nextSteps.length > 0 && (
-          <Card className="p-6 bg-accent/5 border-accent/20">
-            <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">호</span>
-              Next Steps
-            </h3>
-            <ul className="space-y-3">
-              {nextSteps.map((step, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center">
+    <div className="min-h-[600px] max-h-[600px] overflow-y-auto py-8 space-y-8">
+      {/* 타이틀 */}
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10">
+          <Target className="w-4 h-4 text-[#004B8D]" />
+          <span className="text-sm font-semibold text-[#004B8D] uppercase tracking-wider">Summary</span>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          {title}
+        </h2>
+      </div>
+
+      <div className={`grid gap-6 ${nextSteps && nextSteps.length > 0 ? 'md:grid-cols-2' : 'max-w-2xl mx-auto'}`}>
+        {/* 핵심 포인트 */}
+        <Card className="p-6 border-2 border-[#004B8D]/20 bg-gradient-to-br from-[#004B8D]/5 to-transparent shadow-sm">
+          <div className="space-y-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] flex items-center justify-center shadow-md">
+                <Lightbulb className="w-5 h-5 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-[#004B8D]">핵심 요약</h3>
+            </div>
+            <ul className="space-y-4">
+              {keyPoints.map((point, index) => (
+                <li key={index} className="flex items-start gap-4">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-[#004B8D] text-white text-sm font-bold flex items-center justify-center shadow-sm">
                     {index + 1}
                   </span>
-                  <span className="text-foreground">{step}</span>
+                  <span className="text-gray-700 leading-relaxed pt-0.5">{point}</span>
                 </li>
               ))}
             </ul>
+          </div>
+        </Card>
+
+        {/* Next Steps */}
+        {nextSteps && nextSteps.length > 0 && (
+          <Card className="p-6 border-2 border-[#10B981]/20 bg-gradient-to-br from-[#10B981]/5 to-transparent shadow-sm">
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10B981] to-[#48A9C5] flex items-center justify-center shadow-md">
+                  <ArrowRight className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-[#10B981]">Next Steps</h3>
+              </div>
+              <ul className="space-y-4">
+                {nextSteps.map((step, index) => (
+                  <li key={index} className="flex items-start gap-4">
+                    <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-[#10B981] text-white text-sm font-bold flex items-center justify-center shadow-sm">
+                      {index + 1}
+                    </span>
+                    <span className="text-gray-700 leading-relaxed pt-0.5">{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Card>
         )}
       </div>
@@ -321,10 +463,11 @@ export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps)
 
 // =====================
 // Main Slide Renderer
+// 슬라이드 타입에 따른 렌더링 분기
 // =====================
 interface SlideRendererProps {
-  content: SlideContent
-  onNavigate?: (page: number) => void
+  readonly content: SlideContent
+  readonly onNavigate?: (page: number) => void
 }
 
 export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
@@ -338,7 +481,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           company={content.company}
         />
       )
-    
+
     case "toc":
       return (
         <TocSlide
@@ -346,7 +489,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           onNavigate={onNavigate}
         />
       )
-    
+
     case "divider":
       return (
         <DividerSlide
@@ -355,7 +498,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           subtitle={content.subtitle}
         />
       )
-    
+
     case "content":
       return (
         <ContentSlide
@@ -366,7 +509,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           tone={content.tone}
         />
       )
-    
+
     case "chart":
       return (
         <ChartSlide
@@ -376,7 +519,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           description={content.description}
         />
       )
-    
+
     case "comparison":
       return (
         <ComparisonSlide
@@ -385,7 +528,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           after={content.after}
         />
       )
-    
+
     case "summary":
       return (
         <SummarySlide
@@ -394,11 +537,14 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           nextSteps={content.nextSteps}
         />
       )
-    
+
     default:
       return (
-        <div className="text-center text-muted-foreground">
-          ?????녿뒗 ?щ씪?대뱶 ??낆엯?덈떎.
+        <div className="flex items-center justify-center min-h-[400px] text-center text-gray-500">
+          <div className="space-y-2">
+            <p className="text-lg">지원하지 않는 슬라이드 타입입니다.</p>
+            <p className="text-sm text-gray-400">관리자에게 문의해주세요.</p>
+          </div>
         </div>
       )
   }
