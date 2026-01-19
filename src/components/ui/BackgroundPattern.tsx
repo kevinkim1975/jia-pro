@@ -8,7 +8,7 @@ interface BackgroundPatternProps {
 
 export function BackgroundPattern({
   pattern = 'crosshatch',
-  opacity = 3,
+  opacity = 5,
   color = '#94A3B8'
 }: BackgroundPatternProps) {
   if (pattern === 'none') return null
