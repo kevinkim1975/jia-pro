@@ -824,6 +824,7 @@ export const slides: Slide[] = [
           '*AI 기능 추가 포함',
         ],
       },
+      bottomMessage: '모니터링 요원 비용은 실비 청구됩니다',
     },
   },
   // 5-19: 투자 비용
