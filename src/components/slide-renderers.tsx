@@ -678,7 +678,7 @@ export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
 
             {/* 서브 메시지 */}
             {subMessage && (
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed pt-4">
+              <p className="text-lg md:text-xl text-gray-600 leading-relaxed pt-4 text-left whitespace-pre-line">
                 {subMessage}
               </p>
             )}
