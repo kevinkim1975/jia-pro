@@ -713,52 +713,52 @@ export const slides: Slide[] = [
       tone: 'positive',
     },
   },
-  // 5-14: CRM 시스템 기능 (1)
+  // 5-14: AI 기반 CRM의 강점
   {
     id: 'slide-39',
     pageNumber: 39,
     act: 5,
     content: {
-      type: 'twoColumn',
-      title: 'CRM 시스템 기능',
-      left: {
-        title: '환자 세분화',
+      type: 'comparison',
+      title: 'AI 기반 CRM의 강점',
+      quote: '환자가 확산되는 시스템',
+      before: {
+        label: '기존 CRM',
         items: [
-          '등급별 분류',
-          '행동 패턴 분석',
+          '기록 관리 중심',
         ],
       },
-      right: {
-        title: '자동 알림',
+      after: {
+        label: '호원앤컴퍼니',
         items: [
-          '연락 타이밍',
-          '자동 추천',
+          'AI 기반 환자확산 시스템',
         ],
       },
     },
   },
-  // 5-15: CRM 시스템 기능 (2)
+  // 5-15: AI 협업 구조
   {
     id: 'slide-40',
     pageNumber: 40,
     act: 5,
     content: {
       type: 'twoColumn',
-      title: 'CRM 시스템 기능',
+      title: 'AI 협업 구조',
       left: {
-        title: '상담 스크립트',
+        title: 'AI가 하는 일',
         items: [
-          '상황별 대응',
-          '가이드 제공',
+          '데이터 분석',
+          '타이밍 알림',
         ],
       },
       right: {
-        title: '성과 추적',
+        title: '사람이 하는 일',
         items: [
-          'KPI 대시보드',
-          '리포트 자동화',
+          '상담 실행',
+          '관계 형성',
         ],
       },
+      bottomMessage: 'AI는 기록과 알람을, 사람은 진심을',
     },
   },
   // 5-16: 도입 성과
