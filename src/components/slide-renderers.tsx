@@ -354,6 +354,7 @@ export function CardsSlide({ title, cards, bottomMessage, tone = 'positive' }: C
 // =====================
 interface ComparisonSlideProps {
   readonly title: string
+  readonly quote?: string
   readonly before: {
     readonly label: string
     readonly items: readonly string[]
@@ -364,7 +365,7 @@ interface ComparisonSlideProps {
   }
 }
 
-export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) {
+export function ComparisonSlide({ title, quote, before, after }: ComparisonSlideProps) {
   return (
     <div className="space-y-8">
       {/* 타이틀 */}
@@ -374,6 +375,13 @@ export function ComparisonSlide({ title, before, after }: ComparisonSlideProps) 
           {title}
         </h2>
       </div>
+
+      {/* 인용구 */}
+      {quote && (
+        <p className="text-center text-lg italic text-gray-600 mb-8">
+          "{quote}"
+        </p>
+      )}
 
       {/* 비교 테이블 */}
       <div className="grid md:grid-cols-2 gap-6">
@@ -842,6 +850,7 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
         <SlideWrapper showPattern>
           <ComparisonSlide
             title={content.title}
+            quote={content.quote}
             before={content.before}
             after={content.after}
           />

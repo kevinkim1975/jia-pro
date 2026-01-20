@@ -641,62 +641,61 @@ export const slides: Slide[] = [
       tone: 'positive',
     },
   },
-  // 5-10: 전직원 교육 - 에니어그램
+  // 5-10: 스킬 vs 의도
   {
     id: 'slide-35',
     pageNumber: 35,
     act: 5,
     content: {
-      type: 'content',
-      title: '전직원 교육: 에니어그램',
-      content: '목적: 조직원간 소통 극대화',
-      bullets: [
-        '9가지 성격 유형 이해',
-        '상호 이해',
-        '협업 향상',
-      ],
-      tone: 'neutral',
+      type: 'comparison',
+      title: '스킬이 중요한가 의도가 중요한가',
+      quote: '마케팅은 사냥, 교육은 농사',
+      before: {
+        label: '일반 교육',
+        items: [
+          '단순 스킬 전달',
+        ],
+      },
+      after: {
+        label: '호원앤컴퍼니',
+        items: [
+          '마인드 + 체계 변화',
+        ],
+      },
     },
   },
-  // 5-11: 전직원 교육 - SQI 리더십
+  // 5-11: 4가지 실전 교육 프로그램
   {
     id: 'slide-36',
     pageNumber: 36,
     act: 5,
     content: {
-      type: 'content',
-      title: '전직원 교육: SQI 리더십',
-      content: 'Service Quality Institute',
-      bullets: [
-        '고객 4유형 분류',
-        '유형별 맞춤 상담',
+      type: 'cards',
+      title: '4가지 실전 교육 프로그램',
+      cards: [
+        { title: '경영진', subtitle: 'SQI 리더십, 비전 설계', description: '' },
+        { title: '중간관리자', subtitle: '조직관리, 코칭', description: '' },
+        { title: '상담팀', subtitle: 'ASC 상담스킬 (8단계)', description: '' },
+        { title: '전직원', subtitle: '에니어그램, SQI 커뮤니케이션', description: '' },
       ],
       tone: 'neutral',
     },
   },
-  // 5-12: 경영진 교육
+  // 5-12: 이론 + 실전 교육
   {
     id: 'slide-37',
     pageNumber: 37,
     act: 5,
     content: {
-      type: 'twoColumn',
-      title: '경영진 교육',
-      left: {
-        title: '원장 교육',
-        items: [
-          '비전과 팀웍 방향',
-          '의사결정 기준',
-          'AI 시대의 시스템',
-        ],
-      },
-      right: {
-        title: '전체 교육',
-        items: [
-          '엔진/플랫폼',
-          '설정',
-        ],
-      },
+      type: 'flowSteps',
+      title: '이론은 의도를 배양하고 실전에서 역량을',
+      steps: [
+        { step: 1, title: '형태', description: '맞춤형 교육 (조직 요청 기반)' },
+        { step: 2, title: '이론교육', description: '의도와 마인드 배양' },
+        { step: 3, title: '행동교정', description: '실전 역량 강화' },
+        { step: 4, title: '혼합형 교육 시스템', description: '이론 + 실전의 통합' },
+      ],
+      bottomMessage: '방식: 이론교육 + 행동교정 → 혼합형 교육 시스템',
     },
   },
   // 5-13: 상담팀 교육 (ASC)

@@ -124,6 +124,7 @@ export interface ChartSlide {
 export interface ComparisonSlide {
   readonly type: 'comparison';
   readonly title: string;
+  readonly quote?: string;
   readonly before: {
     readonly label: string;
     readonly items: readonly string[];
