@@ -779,7 +779,7 @@ export const slides: Slide[] = [
     act: 5,
     content: {
       type: 'comparison',
-      title: '원장님의 고민',
+      title: '모든 의료기관의 고민 해결',
       before: {
         label: '고민',
         items: [
