@@ -473,7 +473,7 @@ export const slides: Slide[] = [
     act: 5,
     content: {
       type: 'quote',
-      message: '광고말고. 초진 문의를 늘리는 방법은\n없을까요?',
+      message: '더 강력하게 초진 문의를 늘리는 방법은\n없을까요?',
     },
   },
   // 5-2: 두 가지 의료기관
