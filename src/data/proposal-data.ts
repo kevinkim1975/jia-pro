@@ -690,7 +690,7 @@ export const slides: Slide[] = [
       type: 'flowSteps',
       title: '이론은 의도를 배양하고 실전에서 역량을',
       steps: [
-        { step: 1, title: '형태', description: '맞춤형 교육 (조직 요청 기반)' },
+        { step: 1, title: '형태', description: '맞춤형 교육 (조직 진단 기반)' },
         { step: 2, title: '이론교육', description: '의도와 마인드 배양' },
         { step: 3, title: '행동교정', description: '실전 역량 강화' },
         { step: 4, title: '혼합형 교육 시스템', description: '이론 + 실전의 통합' },
