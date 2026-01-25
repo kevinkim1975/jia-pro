@@ -19,6 +19,7 @@ import {
   neutral,
   spacing,
 } from "@/tokens"
+import CoverSlideTemplate from "@/templates/CoverSlide"
 
 // =====================
 // Slide Tokens - 슬라이드 공통 토큰
@@ -971,14 +972,12 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
   switch (content.type) {
     case "cover":
       return (
-        <SlideWrapper fullHeight showPattern patternType="concentric">
-          <CoverSlide
-            title={content.title}
-            subtitle={content.subtitle}
-            date={content.date}
-            company={content.company}
-          />
-        </SlideWrapper>
+        <CoverSlideTemplate
+          clinicName={content.company}
+          proposalTitle={content.title}
+          subtitle={content.subtitle}
+          date={content.date}
+        />
       )
 
     case "toc":
