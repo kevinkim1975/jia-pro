@@ -12,6 +12,32 @@ import {
   TrendingUp,
   ChevronRight
 } from "lucide-react"
+import {
+  primary,
+  secondary,
+  accent,
+  neutral,
+  spacing,
+} from "@/tokens"
+
+// =====================
+// Slide Tokens - 슬라이드 공통 토큰
+// =====================
+const slideTokens = {
+  // 색상
+  primaryColor: primary.DEFAULT,     // #1A5F7A
+  primaryDark: primary.dark,         // #134558
+  secondaryColor: secondary.DEFAULT, // #57A0A0
+  accentColor: accent.DEFAULT,       // #9DC5BB
+  textDark: neutral.gray900,         // #1E293B
+  textMuted: neutral.gray400,        // #94A3B8
+  // 간격
+  gap: {
+    sm: spacing[2],  // 8px
+    md: spacing[4],  // 16px
+    lg: spacing[8],  // 32px
+  },
+} as const
 
 // ChartSlide 동적 로딩 (recharts 번들 분리 - Vercel best practice)
 const ChartSlide = dynamic(() => import("./chart-slide").then(mod => ({ default: mod.ChartSlide })), {
@@ -25,7 +51,7 @@ const ChartSlide = dynamic(() => import("./chart-slide").then(mod => ({ default:
 
 // =====================
 // Cover Slide - 표지
-// Cleveland Clinic 스타일의 전문적인 표지
+// 토큰 기반 전문적인 표지 디자인
 // =====================
 interface CoverSlideProps {
   readonly title: string
@@ -34,37 +60,67 @@ interface CoverSlideProps {
   readonly company: string
 }
 
+// Cover 전용 스타일 (토큰 기반)
+const coverStyles = {
+  title: {
+    color: slideTokens.primaryColor,
+  },
+  subtitle: {
+    color: slideTokens.secondaryColor,
+  },
+  divider: {
+    backgroundColor: slideTokens.primaryColor,
+  },
+  dividerLine: {
+    backgroundColor: `${slideTokens.primaryColor}33`, // 20% opacity
+  },
+  company: {
+    color: slideTokens.primaryColor,
+  },
+} as const
+
 export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="text-center space-y-4 px-8">
         {/* 메인 타이틀 */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#004B8D] leading-tight tracking-tight">
+        <h1
+          className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight"
+          style={coverStyles.title}
+        >
           {title}
         </h1>
 
         {subtitle && (
-          <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-[#48A9C5]">
+          <h2
+            className="text-lg md:text-xl lg:text-2xl font-medium"
+            style={coverStyles.subtitle}
+          >
             {subtitle}
           </h2>
         )}
 
         {/* 구분 요소 */}
         <div className="flex items-center justify-center gap-3 py-2">
-          <div className="w-10 h-px bg-[#004B8D]/20" />
-          <div className="w-1.5 h-1.5 rounded-full bg-[#004B8D]" />
-          <div className="w-10 h-px bg-[#004B8D]/20" />
+          <div className="w-10 h-px" style={coverStyles.dividerLine} />
+          <div className="w-1.5 h-1.5 rounded-full" style={coverStyles.divider} />
+          <div className="w-10 h-px" style={coverStyles.dividerLine} />
         </div>
 
         {/* 날짜 및 회사 정보 */}
         <div className="space-y-1">
-          <p className="text-base text-gray-500">{date}</p>
-          <p className="text-lg font-semibold text-[#004B8D]">{company}</p>
+          <p className="text-base" style={{ color: slideTokens.textMuted }}>{date}</p>
+          <p className="text-lg font-semibold" style={coverStyles.company}>{company}</p>
         </div>
 
         {/* 하단 라벨 */}
         <div className="pt-4">
-          <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Proposal</span>
+          <span
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: slideTokens.textMuted }}
+          >
+            Proposal
+          </span>
         </div>
       </div>
     </div>
@@ -73,7 +129,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
 
 // =====================
 // TOC Slide - 목차
-// 인터랙티브한 네비게이션 목차
+// 토큰 기반 인터랙티브 네비게이션 목차
 // =====================
 interface TocItem {
   readonly act: number
@@ -86,43 +142,87 @@ interface TocSlideProps {
   readonly onNavigate?: (page: number) => void
 }
 
+// TOC 전용 스타일 (토큰 기반)
+const tocStyles = {
+  badge: {
+    backgroundColor: `${slideTokens.primaryColor}1A`, // 10% opacity
+  },
+  badgeText: {
+    color: slideTokens.primaryColor,
+  },
+  title: {
+    color: slideTokens.primaryColor,
+  },
+  actNumber: {
+    background: `linear-gradient(to bottom right, ${slideTokens.primaryColor}, ${slideTokens.secondaryColor})`,
+  },
+} as const
+
 export function TocSlide({ items, onNavigate }: TocSlideProps) {
   return (
     <div className="space-y-4">
       {/* 헤더 */}
       <div className="text-center mb-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#004B8D]/10 mb-2">
-          <span className="text-xs font-semibold text-[#004B8D] uppercase tracking-wider">Contents</span>
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-2"
+          style={tocStyles.badge}
+        >
+          <span
+            className="text-xs font-semibold uppercase tracking-wider"
+            style={tocStyles.badgeText}
+          >
+            Contents
+          </span>
         </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#004B8D]">목차</h2>
+        <h2
+          className="text-2xl md:text-3xl font-bold"
+          style={tocStyles.title}
+        >
+          목차
+        </h2>
       </div>
 
       {/* 목차 리스트 */}
       <div className="max-w-2xl mx-auto space-y-2">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <button
             key={item.act}
             onClick={() => onNavigate?.(item.startPage)}
-            className="group w-full flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-white hover:border-[#004B8D]/30 hover:bg-[#004B8D]/5 transition-all duration-200 shadow-sm hover:shadow-md"
+            className="group w-full flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-white transition-all duration-200 shadow-sm hover:shadow-md"
+            style={{
+              ['--hover-border' as string]: `${slideTokens.primaryColor}4D`,
+              ['--hover-bg' as string]: `${slideTokens.primaryColor}0D`,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = `${slideTokens.primaryColor}4D`
+              e.currentTarget.style.backgroundColor = `${slideTokens.primaryColor}0D`
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = ''
+              e.currentTarget.style.backgroundColor = ''
+            }}
           >
             {/* ACT 번호 */}
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white font-bold text-base flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
+            <div
+              className="flex-shrink-0 w-10 h-10 rounded-lg text-white font-bold text-base flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200"
+              style={tocStyles.actNumber}
+            >
               {item.act}
             </div>
 
             {/* 타이틀 */}
             <div className="flex-1 text-left">
-              <span className="text-base font-semibold text-gray-800 group-hover:text-[#004B8D] transition-colors duration-200">
+              <span className="text-base font-semibold text-gray-800 transition-colors duration-200">
                 {item.title}
               </span>
             </div>
 
             {/* 페이지 번호 & 화살표 */}
             <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-gray-400 group-hover:text-[#48A9C5] transition-colors">
+              <span className="text-xs font-medium text-gray-400 transition-colors">
                 p.{item.startPage}
               </span>
-              <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-[#004B8D] group-hover:translate-x-1 transition-all duration-200" />
+              <ChevronRight className="w-4 h-4 text-gray-300 group-hover:translate-x-1 transition-all duration-200" />
             </div>
           </button>
         ))}
@@ -133,8 +233,7 @@ export function TocSlide({ items, onNavigate }: TocSlideProps) {
 
 // =====================
 // Divider Slide - ACT 구분 페이지
-// 미니멀 타이포그래피 중심 디자인
-// 배경색 없음 - 전체 페이지와 통일
+// 토큰 기반 미니멀 타이포그래피 디자인
 // =====================
 interface DividerSlideProps {
   readonly act: number
@@ -142,12 +241,34 @@ interface DividerSlideProps {
   readonly subtitle: string
 }
 
+// Divider 전용 스타일 (토큰 기반)
+const dividerStyles = {
+  watermark: {
+    color: `${slideTokens.primaryColor}08`, // 3% opacity
+  },
+  actLabel: {
+    color: slideTokens.secondaryColor,
+  },
+  title: {
+    color: slideTokens.primaryColor,
+  },
+  subtitle: {
+    color: slideTokens.secondaryColor,
+  },
+  gradient: {
+    background: `linear-gradient(to right, ${slideTokens.primaryColor}, ${slideTokens.secondaryColor})`,
+  },
+} as const
+
 export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
   return (
     <div className="relative flex flex-col items-center justify-center py-4">
       {/* 대형 배경 숫자 워터마크 */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="text-[180px] font-black text-[#004B8D]/[0.03] leading-none">
+        <span
+          className="text-[180px] font-black leading-none"
+          style={dividerStyles.watermark}
+        >
           {act}
         </span>
       </div>
@@ -155,23 +276,35 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
       {/* 메인 콘텐츠 */}
       <div className="relative z-10 text-center space-y-4">
         {/* ACT 레이블 */}
-        <span className="inline-block text-xs font-semibold tracking-[0.4em] text-[#48A9C5] uppercase">
+        <span
+          className="inline-block text-xs font-semibold tracking-[0.4em] uppercase"
+          style={dividerStyles.actLabel}
+        >
           ACT {act}
         </span>
 
         {/* 메인 타이틀 */}
-        <h1 className="text-4xl md:text-5xl font-bold text-[#004B8D] leading-none">
+        <h1
+          className="text-4xl md:text-5xl font-bold leading-none"
+          style={dividerStyles.title}
+        >
           {title}
         </h1>
 
         {/* 서브타이틀 */}
-        <p className="text-base md:text-lg font-light text-[#48A9C5] tracking-wide">
+        <p
+          className="text-base md:text-lg font-light tracking-wide"
+          style={dividerStyles.subtitle}
+        >
           {subtitle}
         </p>
 
         {/* 하단 장식 */}
         <div className="pt-4 flex justify-center">
-          <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+          <div
+            className="w-12 h-1 rounded-full"
+            style={dividerStyles.gradient}
+          />
         </div>
       </div>
     </div>
@@ -571,7 +704,7 @@ export function ClosingSlide({ title, subtitle, contact, company }: ClosingSlide
 
 // =====================
 // TwoColumn Slide - 두 개의 정보 박스
-// 시장 변화, AI vs 사람 등 대비 레이아웃
+// 토큰 기반 대비 레이아웃
 // =====================
 interface TwoColumnSlideProps {
   readonly title: string
@@ -588,12 +721,48 @@ interface TwoColumnSlideProps {
   readonly bottomMessage?: string
 }
 
+// TwoColumn 전용 스타일 (토큰 기반)
+const twoColumnStyles = {
+  gradient: {
+    background: `linear-gradient(to right, ${slideTokens.primaryColor}, ${slideTokens.secondaryColor})`,
+  },
+  leftBox: {
+    border: `2px solid ${slideTokens.primaryColor}33`, // 20% opacity
+    backgroundColor: `${slideTokens.primaryColor}0D`, // 5% opacity
+  },
+  leftTitle: {
+    color: slideTokens.primaryColor,
+    borderBottom: `1px solid ${slideTokens.primaryColor}33`,
+  },
+  leftBullet: {
+    backgroundColor: slideTokens.primaryColor,
+  },
+  rightBox: {
+    border: `2px solid ${slideTokens.secondaryColor}33`,
+    backgroundColor: `${slideTokens.secondaryColor}0D`,
+  },
+  rightTitle: {
+    color: slideTokens.secondaryColor,
+    borderBottom: `1px solid ${slideTokens.secondaryColor}33`,
+  },
+  rightBullet: {
+    backgroundColor: slideTokens.secondaryColor,
+  },
+  bottomMessage: {
+    background: `linear-gradient(to right, ${slideTokens.primaryColor}1A, ${slideTokens.secondaryColor}1A)`,
+    borderLeft: `4px solid ${slideTokens.primaryColor}`,
+  },
+  bottomText: {
+    color: slideTokens.primaryColor,
+  },
+} as const
+
 export function TwoColumnSlide({ title, left, right, bottomMessage }: TwoColumnSlideProps) {
   return (
     <div className="space-y-8">
       {/* 타이틀 */}
       <div className="space-y-2">
-        <div className="w-12 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
+        <div className="w-12 h-1 rounded-full" style={twoColumnStyles.gradient} />
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
           {title}
         </h2>
@@ -602,18 +771,29 @@ export function TwoColumnSlide({ title, left, right, bottomMessage }: TwoColumnS
       {/* 2열 박스 */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* 왼쪽 박스 */}
-        <Card className="p-6 border-2 border-[#004B8D]/20 bg-[#004B8D]/5 shadow-sm">
+        <Card className="p-6 shadow-sm" style={twoColumnStyles.leftBox}>
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-[#004B8D] pb-3 border-b border-[#004B8D]/20">
+            <h3
+              className="text-xl font-bold pb-3"
+              style={twoColumnStyles.leftTitle}
+            >
               {left.title}
             </h3>
             {left.highlight && (
-              <div className="text-3xl font-bold text-[#004B8D]">{left.highlight}</div>
+              <div
+                className="text-3xl font-bold"
+                style={{ color: slideTokens.primaryColor }}
+              >
+                {left.highlight}
+              </div>
             )}
             <ul className="space-y-3">
               {left.items.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full bg-[#004B8D]" />
+                  <div
+                    className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full"
+                    style={twoColumnStyles.leftBullet}
+                  />
                   <span className="text-gray-700 leading-relaxed">{item}</span>
                 </li>
               ))}
@@ -622,18 +802,29 @@ export function TwoColumnSlide({ title, left, right, bottomMessage }: TwoColumnS
         </Card>
 
         {/* 오른쪽 박스 */}
-        <Card className="p-6 border-2 border-[#48A9C5]/20 bg-[#48A9C5]/5 shadow-sm">
+        <Card className="p-6 shadow-sm" style={twoColumnStyles.rightBox}>
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-[#48A9C5] pb-3 border-b border-[#48A9C5]/20">
+            <h3
+              className="text-xl font-bold pb-3"
+              style={twoColumnStyles.rightTitle}
+            >
               {right.title}
             </h3>
             {right.highlight && (
-              <div className="text-3xl font-bold text-[#48A9C5]">{right.highlight}</div>
+              <div
+                className="text-3xl font-bold"
+                style={{ color: slideTokens.secondaryColor }}
+              >
+                {right.highlight}
+              </div>
             )}
             <ul className="space-y-3">
               {right.items.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full bg-[#48A9C5]" />
+                  <div
+                    className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full"
+                    style={twoColumnStyles.rightBullet}
+                  />
                   <span className="text-gray-700 leading-relaxed">{item}</span>
                 </li>
               ))}
@@ -644,8 +835,11 @@ export function TwoColumnSlide({ title, left, right, bottomMessage }: TwoColumnS
 
       {/* 하단 메시지 */}
       {bottomMessage && (
-        <div className="flex items-start gap-4 p-5 rounded-xl bg-gradient-to-r from-[#004B8D]/10 to-[#48A9C5]/10 border-l-4 border-[#004B8D]">
-          <p className="text-xl font-semibold text-[#004B8D]">
+        <div
+          className="flex items-start gap-4 p-5 rounded-xl"
+          style={twoColumnStyles.bottomMessage}
+        >
+          <p className="text-xl font-semibold" style={twoColumnStyles.bottomText}>
             {bottomMessage}
           </p>
         </div>
