@@ -7,12 +7,22 @@
 // Colors
 export {
   colors,
+  // New tokens
+  background,
+  text,
+  ui,
+  // Legacy tokens
   primary,
   secondary,
   accent,
   neutral,
   semantic,
   getColor,
+  // New types
+  type BackgroundColor,
+  type TextColor,
+  type UIColor,
+  // Legacy types
   type ColorToken,
   type PrimaryColor,
   type SecondaryColor,
