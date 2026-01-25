@@ -257,14 +257,14 @@ export const slides: Slide[] = [
       subMessage: '휴한의원 (2014~2015)\n\n"환자 감소, 매출 정체, 경쟁 심화"\n정이안한의원과 같은 고민을 가진 한의원이었습니다',
     },
   },
-  // 3-2: 2년 만에 5배 성장
+  // 3-2: 2년 만에 10배 성장
   {
     id: 'slide-15',
     pageNumber: 15,
     act: 3,
     content: {
       type: 'comparison',
-      title: '2년 만에 5배 성장',
+      title: '2년 만에 10배 성장',
       before: {
         label: 'Before',
         items: [
@@ -276,7 +276,7 @@ export const slides: Slide[] = [
         label: 'After',
         items: [
           '월 매출',
-          '1.5억원',
+          '3억원',
           '선택한 질환: 틱장애',
         ],
       },
