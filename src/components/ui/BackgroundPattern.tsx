@@ -1,20 +1,5 @@
 "use client"
 
-import {
-  primary,
-  neutral,
-  opacity as opacityTokens,
-} from "@/tokens"
-
-// 배경 패턴 토큰 상수
-const patternTokens = {
-  defaultColor: neutral.gray400,    // #94A3B8
-  primaryColor: primary.DEFAULT,     // #1A5F7A
-  primaryDark: primary.dark,         // #134558
-  opacityLight: opacityTokens[25],   // 0.25
-  opacitySubtle: 0.07,               // 7% (radial gradient)
-} as const
-
 interface BackgroundPatternProps {
   readonly pattern?: 'crosshatch' | 'dots' | 'radial' | 'concentric' | 'none'
   readonly opacity?: number
@@ -23,16 +8,20 @@ interface BackgroundPatternProps {
 
 /**
  * BackgroundPattern - 슬라이드 배경 패턴 컴포넌트
- *
+ * 
  * Boris Cherny 타입 안전성 원칙 적용:
  * - readonly props로 불변성 보장
  * - 리터럴 타입으로 패턴 종류 제한
- * - 토큰 기반 색상 시스템 적용
+ * 
+ * 가시성 조정 (2025-01-19):
+ * - opacity: 3% → 8% (은은하지만 인식 가능)
+ * - strokeWidth: 0.5px → 0.8px (선명도 향상)
+ * - 패턴 크기: 8px → 20px (덜 촘촘하게)
  */
 export function BackgroundPattern({
   pattern = 'crosshatch',
   opacity = 7,
-  color = patternTokens.defaultColor,
+  color = '#94A3B8'
 }: BackgroundPatternProps) {
   if (pattern === 'none') return null
 
@@ -67,11 +56,7 @@ export function BackgroundPattern({
       >
         <defs>
           <radialGradient id="radial-pattern" cx="50%" cy="50%" r="50%">
-            <stop
-              offset="0%"
-              stopColor={color}
-              stopOpacity={patternTokens.opacitySubtle}
-            />
+            <stop offset="0%" stopColor={color} stopOpacity="0.07" />
             <stop offset="100%" stopColor={color} stopOpacity="0" />
           </radialGradient>
         </defs>
@@ -82,7 +67,6 @@ export function BackgroundPattern({
 
   // concentric 패턴 (동심원 - Cover 슬라이드용)
   if (pattern === 'concentric') {
-    const concentricColor = patternTokens.primaryColor
     return (
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -95,33 +79,9 @@ export function BackgroundPattern({
             height="120"
             patternUnits="userSpaceOnUse"
           >
-            <circle
-              cx="60"
-              cy="60"
-              r="20"
-              stroke={concentricColor}
-              strokeWidth="1"
-              fill="none"
-              opacity="0.05"
-            />
-            <circle
-              cx="60"
-              cy="60"
-              r="40"
-              stroke={concentricColor}
-              strokeWidth="1"
-              fill="none"
-              opacity="0.04"
-            />
-            <circle
-              cx="60"
-              cy="60"
-              r="60"
-              stroke={concentricColor}
-              strokeWidth="1"
-              fill="none"
-              opacity="0.03"
-            />
+            <circle cx="60" cy="60" r="20" stroke="#004B8D" strokeWidth="1" fill="none" opacity="0.05" />
+            <circle cx="60" cy="60" r="40" stroke="#004B8D" strokeWidth="1" fill="none" opacity="0.04" />
+            <circle cx="60" cy="60" r="60" stroke="#004B8D" strokeWidth="1" fill="none" opacity="0.03" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#concentric-pattern)" />
@@ -155,5 +115,3 @@ export function BackgroundPattern({
     </svg>
   )
 }
-
-export { patternTokens }
