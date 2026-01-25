@@ -973,9 +973,9 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
     case "cover":
       return (
         <CoverSlideTemplate
-          clinicName={content.company}
-          proposalTitle={content.title}
-          subtitle={content.subtitle}
+          clinicName={content.title}
+          proposalTitle={content.subtitle || ''}
+          subtitle={content.company}
           date={content.date}
         />
       )
