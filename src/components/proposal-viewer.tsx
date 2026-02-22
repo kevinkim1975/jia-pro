@@ -71,7 +71,7 @@ export function ProposalViewer() {
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-hidden">
-        <div className="h-full max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8">
+        <div className={`h-full mx-auto ${currentSlide?.content.type === "cover" ? "" : "max-w-[1280px] px-4 md:px-6 lg:px-8"}`}>
           <div className="h-full">
             <div className="h-full">
               {currentSlide ? (
