@@ -119,7 +119,6 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
         <ClosingSlide
           title={content.title}
           subtitle={content.subtitle}
-          contact={content.contact}
           company={content.company}
         />
       )
