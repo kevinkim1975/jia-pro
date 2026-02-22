@@ -10,42 +10,96 @@ interface TopbarHeaderProps {
   title?: string
 }
 
-export function TopbarHeader({ 
-  currentPage, 
-  totalPages, 
+export function TopbarHeader({
+  currentPage,
+  totalPages,
   onTocClick,
-  title = "정이안한의원 마케팅 전략 제안"
+  title = "정이안한의원 마케팅 전략 제안",
 }: TopbarHeaderProps) {
   return (
-    <header className="h-14 shrink-0 flex items-center px-4 gap-4 bg-primary">
-      {/* Logo Section */}
-      <div className="flex items-center gap-2 shrink-0">
-        <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-secondary">
-          <span className="text-white font-semibold text-lg">정</span>
+    <header
+      className="flex items-center justify-between px-4 shrink-0 select-none"
+      style={{
+        height: 44,
+        backgroundColor: "#FFFFFF",
+        borderBottom: "1px solid #E2E8F0",
+        fontFamily: "Pretendard, -apple-system, BlinkMacSystemFont, sans-serif",
+      }}
+    >
+      {/* Left: Logo + Title */}
+      <div className="flex items-center gap-3 min-w-0">
+        {/* Logo */}
+        <div
+          className="flex items-center justify-center shrink-0 rounded-lg"
+          style={{
+            width: 26,
+            height: 26,
+            border: "1.5px solid #004B8D",
+            backgroundColor: "transparent",
+          }}
+        >
+          <span
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              color: "#004B8D",
+              lineHeight: 1,
+            }}
+          >
+            정
+          </span>
         </div>
-      </div>
 
-      {/* Title Section - Centered */}
-      <div className="flex-1 flex justify-center">
-        <h1 className="text-white font-semibold text-base md:text-lg text-pretty text-center">
+        {/* Title */}
+        <span
+          className="truncate"
+          style={{
+            fontSize: 14,
+            fontWeight: 500,
+            color: "#475569",
+            lineHeight: 1,
+          }}
+        >
           {title}
-        </h1>
+        </span>
       </div>
 
-      {/* Right Section - TOC Button + Page Number */}
-      <div className="flex items-center gap-2 shrink-0">
+      {/* Right: TOC button + Page indicator */}
+      <div className="flex items-center gap-4 shrink-0">
+        {/* Page indicator */}
+        <span
+          style={{
+            fontSize: 12,
+            color: "#94A3B8",
+            lineHeight: 1,
+            whiteSpace: "nowrap",
+          }}
+        >
+          {currentPage} / {totalPages}
+        </span>
+
+        {/* TOC Button */}
         <Button
           variant="ghost"
           size="sm"
           onClick={onTocClick}
-          className="text-white hover:bg-white/10 gap-1.5 font-medium text-sm"
+          className="h-7 gap-1.5 px-2 hover:bg-transparent"
+          style={{
+            fontSize: 13,
+            color: "#94A3B8",
+            backgroundColor: "transparent",
+            border: "none",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#004B8D"
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "#94A3B8"
+          }}
         >
-          <Menu className="h-4 w-4" />
-          <span className="hidden sm:inline">목차</span>
+          <Menu style={{ width: 14, height: 14 }} />
+          <span>목차</span>
         </Button>
-        <div className="text-white font-semibold text-sm bg-white/10 px-3 py-1.5 rounded-md">
-          {currentPage}/{totalPages}
-        </div>
       </div>
     </header>
   )

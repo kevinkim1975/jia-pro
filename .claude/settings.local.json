@@ -4,7 +4,8 @@
       "Bash(\"C:\\\\Program Files\\\\nodejs\\\\node.exe\" \"C:\\\\Users\\\\gram\\\\mcp-remote-pkg\\\\node_modules\\\\mcp-remote\\\\dist\\\\proxy.js\" --version)",
       "Bash(dir:*)",
       "Bash(curl:*)",
-      "Bash(claude mcp add:*)"
+      "Bash(claude mcp add:*)",
+      "Bash(cd:*)"
     ]
   },
   "mcpServers": {
