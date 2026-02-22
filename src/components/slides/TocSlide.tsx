@@ -1,26 +1,4 @@
-/**
- * TocSlide — 목차 슬라이드
- *
- * ── Skeleton (고정 불변) ──────────────────────
- * 구조: badge-header → title → toc-list(button×N)
- * 배경: SLIDE_TOKEN_MAP.toc.bg (surface 계열)
- * 정렬: center header, left-aligned list items
- *
- * ── Exchange Table ─────────────────────────────
- * 교체 가능 (Props):
- *   - items: TocItem[] (act, title, startPage)
- *   - onNavigate?: (page) => void
- *
- * 고정 (절대 불변):
- *   - "Contents" 뱃지 상단 고정
- *   - ACT 번호 gradient box (from-[#004B8D] to-[#48A9C5])
- *   - hover 시 border + bg 변화
- *
- * ── Tailwind 패턴 (확정값) ──────────────────────
- * 뱃지: "inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#004B8D]/10"
- * 리스트 버튼: "group w-full flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-white"
- * ACT 번호: "w-10 h-10 rounded-lg bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white"
- */
+"use client"
 
 import { ChevronRight } from "lucide-react"
 
@@ -35,39 +13,361 @@ interface TocSlideProps {
   readonly onNavigate?: (page: number) => void
 }
 
-export function TocSlide({ items, onNavigate }: TocSlideProps) {
+const sampleItems: TocItem[] = [
+  { act: 1, title: "상황", startPage: 3 },
+  { act: 2, title: "위기", startPage: 6 },
+  { act: 3, title: "전환점", startPage: 13 },
+  { act: 4, title: "해결책 1: 마케팅 전략", startPage: 18 },
+  { act: 5, title: "해결책 2: AI CRM", startPage: 25 },
+  { act: 6, title: "요약 및 Next Step", startPage: 45 },
+]
+
+export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
   return (
-    <div className="space-y-4">
-      <div className="text-center mb-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#004B8D]/10 mb-2">
-          <span className="text-xs font-semibold text-[#004B8D] uppercase tracking-wider">Contents</span>
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#004B8D]">목차</h2>
+    <div
+      className="relative w-full h-full flex flex-col px-6 py-14 overflow-hidden select-none"
+      style={{ fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif" }}
+    >
+      <style>{`
+        @keyframes fadeSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes drawLineDown {
+          from {
+            transform: scaleY(0);
+          }
+          to {
+            transform: scaleY(1);
+          }
+        }
+
+        @keyframes headerLineGrow {
+          from {
+            transform: scaleX(0);
+          }
+          to {
+            transform: scaleX(1);
+          }
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes floatSlow {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          50% { transform: translate(6px, -8px) rotate(1.5deg); }
+        }
+
+        @keyframes floatMedium {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          50% { transform: translate(-4px, 6px) rotate(-1deg); }
+        }
+
+        @keyframes floatFast {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(3px, -5px); }
+        }
+
+        .toc-row {
+          animation: fadeSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+        }
+
+        .toc-row:nth-child(1) { animation-delay: 0.3s; }
+        .toc-row:nth-child(2) { animation-delay: 0.42s; }
+        .toc-row:nth-child(3) { animation-delay: 0.54s; }
+        .toc-row:nth-child(4) { animation-delay: 0.66s; }
+        .toc-row:nth-child(5) { animation-delay: 0.78s; }
+        .toc-row:nth-child(6) { animation-delay: 0.9s; }
+
+        .toc-vertical-line {
+          animation: drawLineDown 0.9s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
+          transform-origin: top center;
+        }
+
+        .toc-header-line {
+          animation: headerLineGrow 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
+          transform-origin: left center;
+        }
+
+        .toc-header-label {
+          animation: fadeSlideIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.05s both;
+        }
+
+        .toc-row .act-number {
+          transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .toc-row .row-title {
+          transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .toc-row .row-page {
+          transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .toc-row .row-chevron {
+          transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+          opacity: 0;
+          transform: translateX(-6px);
+        }
+
+        .toc-row .dot-leader {
+          transition: opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .toc-row:hover .act-number {
+          opacity: 1 !important;
+          color: #004B8D;
+        }
+
+        .toc-row:hover .row-title {
+          color: #004B8D;
+          transform: translateX(4px);
+        }
+
+        .toc-row:hover .row-page {
+          color: #004B8D;
+        }
+
+        .toc-row:hover .row-chevron {
+          opacity: 1;
+          transform: translateX(0);
+          color: #48A9C5;
+        }
+
+        .toc-row:hover .dot-leader {
+          opacity: 0.3;
+        }
+
+        .toc-row:focus-visible {
+          outline: 2px solid #48A9C5;
+          outline-offset: 4px;
+          border-radius: 4px;
+        }
+
+        @keyframes pulseOpacity1 {
+          0%, 100% { opacity: 0.04; border-color: #004B8D; }
+          30% { opacity: 0.12; border-color: #48A9C5; }
+          60% { opacity: 0.06; border-color: #0068C8; }
+        }
+
+        @keyframes pulseOpacity2 {
+          0%, 100% { opacity: 0.05; border-color: #48A9C5; }
+          40% { opacity: 0.14; border-color: #004B8D; }
+          70% { opacity: 0.03; border-color: #6BC5DB; }
+        }
+
+        @keyframes pulseGradient {
+          0%, 100% { opacity: 0.03; filter: hue-rotate(0deg) brightness(1); }
+          35% { opacity: 0.10; filter: hue-rotate(15deg) brightness(1.3); }
+          65% { opacity: 0.06; filter: hue-rotate(-10deg) brightness(0.9); }
+        }
+
+        @keyframes pulseLine {
+          0%, 100% { opacity: 0.05; }
+          25% { opacity: 0.14; }
+          50% { opacity: 0.03; }
+          75% { opacity: 0.10; }
+        }
+
+        .deco-1 {
+          animation: floatSlow 14s ease-in-out infinite, fadeIn 1.2s ease 0.5s both, pulseOpacity1 8s ease-in-out infinite;
+        }
+        .deco-2 {
+          animation: floatMedium 11s ease-in-out infinite, fadeIn 1.2s ease 0.8s both, pulseOpacity2 6.5s ease-in-out infinite;
+        }
+        .deco-3 {
+          animation: floatFast 9s ease-in-out infinite, fadeIn 1.2s ease 1.1s both, pulseGradient 7s ease-in-out infinite;
+        }
+        .deco-4 {
+          animation: floatSlow 16s ease-in-out infinite, fadeIn 1.2s ease 1.3s both, pulseLine 5s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* ── Decorative Background Elements ── */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        {/* Large circle — top right */}
+        <div
+          className="deco-1 absolute"
+          style={{
+            top: "-60px",
+            right: "-40px",
+            width: "280px",
+            height: "280px",
+            borderRadius: "50%",
+            border: "1.5px solid #004B8D",
+            opacity: 0.05,
+          }}
+        />
+        {/* Rotated square — right middle */}
+        <div
+          className="deco-2 absolute"
+          style={{
+            top: "38%",
+            right: "60px",
+            width: "120px",
+            height: "120px",
+            border: "1.5px solid #48A9C5",
+            opacity: 0.06,
+            transform: "rotate(45deg)",
+          }}
+        />
+        {/* Small circle — bottom left */}
+        <div
+          className="deco-3 absolute"
+          style={{
+            bottom: "80px",
+            left: "30px",
+            width: "90px",
+            height: "90px",
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, #004B8D, #48A9C5)",
+            opacity: 0.04,
+          }}
+        />
+        {/* Horizontal line accent — bottom right */}
+        <div
+          className="deco-4 absolute"
+          style={{
+            bottom: "140px",
+            right: "100px",
+            width: "180px",
+            height: "1.5px",
+            background: "linear-gradient(90deg, transparent, #004B8D, transparent)",
+            opacity: 0.06,
+          }}
+        />
       </div>
 
-      <div className="max-w-2xl mx-auto space-y-2">
-        {items.map((item) => (
-          <button
-            key={item.act}
-            onClick={() => onNavigate?.(item.startPage)}
-            className="group w-full flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-white hover:border-[#004B8D]/30 hover:bg-[#004B8D]/5 transition-all duration-200 shadow-sm hover:shadow-md"
-          >
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-[#004B8D] to-[#48A9C5] text-white font-bold text-base flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
-              {item.act}
-            </div>
-            <div className="flex-1 text-left">
-              <span className="text-base font-semibold text-gray-800 group-hover:text-[#004B8D] transition-colors duration-200">
+      {/* ── Header Section ── */}
+      <div className="relative mb-14" style={{ zIndex: 10 }}>
+        <p
+          className="toc-header-label text-xs font-semibold tracking-[0.25em] uppercase mb-3"
+          style={{ color: "#004B8D" }}
+        >
+          Contents
+        </p>
+        <div
+          className="toc-header-line h-[2px] w-24"
+          style={{
+            background: "linear-gradient(90deg, #004B8D, #48A9C5)",
+          }}
+        />
+      </div>
+
+      {/* ── Editorial List ── */}
+      <div className="relative flex flex-1" style={{ zIndex: 10 }}>
+        {/* Vertical accent line */}
+        <div className="relative flex-shrink-0" style={{ width: "110px" }}>
+          <div
+            className="toc-vertical-line absolute right-0 top-0 bottom-0"
+            style={{
+              width: "1.5px",
+              background: "linear-gradient(180deg, #004B8D 0%, #48A9C5 60%, transparent 100%)",
+              opacity: 0.3,
+            }}
+          />
+        </div>
+
+        {/* Content rows */}
+        <div className="flex flex-col justify-between flex-1 pl-8">
+          {(items ?? sampleItems).map((item) => (
+            <button
+              key={item.act}
+              className="toc-row group relative flex items-center w-full text-left py-4 cursor-pointer bg-transparent border-none"
+              onClick={() => onNavigate?.(item.startPage)}
+              aria-label={`ACT ${item.act}: ${item.title} — Page ${item.startPage}`}
+            >
+              {/* Large ACT number — positioned over the left zone */}
+              <span
+                className="act-number absolute font-light tabular-nums"
+                style={{
+                  left: "-130px",
+                  width: "100px",
+                  textAlign: "right",
+                  fontSize: "54px",
+                  lineHeight: "1",
+                  color: "#004B8D",
+                  opacity: 0.15,
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                {String(item.act).padStart(2, "0")}
+              </span>
+
+              {/* Title */}
+              <span
+                className="row-title flex-shrink-0 text-lg font-medium"
+                style={{ color: "#1E293B" }}
+              >
                 {item.title}
               </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-gray-400 group-hover:text-[#48A9C5] transition-colors">
-                p.{item.startPage}
+
+              {/* Dot leaders */}
+              <span
+                className="dot-leader flex-1 mx-4 overflow-hidden"
+                style={{
+                  borderBottom: "1.5px dotted #CBD5E1",
+                  minWidth: "40px",
+                  height: "1px",
+                  alignSelf: "flex-end",
+                  marginBottom: "6px",
+                  opacity: 0.6,
+                }}
+              />
+
+              {/* Page number */}
+              <span
+                className="row-page flex-shrink-0 text-sm font-normal tabular-nums"
+                style={{
+                  color: "#64748B",
+                  fontVariantNumeric: "tabular-nums",
+                  minWidth: "40px",
+                  textAlign: "right",
+                }}
+              >
+                {"p."}
+                {item.startPage}
               </span>
-              <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-[#004B8D] group-hover:translate-x-1 transition-all duration-200" />
-            </div>
-          </button>
-        ))}
+
+              {/* Hover chevron */}
+              <ChevronRight
+                className="row-chevron flex-shrink-0 ml-2"
+                size={16}
+                strokeWidth={2}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Footer subtle branding ── */}
+      <div
+        className="relative mt-auto pt-10 flex items-center gap-3"
+        style={{ zIndex: 10, animation: "fadeIn 1s ease 1.2s both" }}
+      >
+        <div
+          className="h-[1px] flex-1"
+          style={{
+            background: "linear-gradient(90deg, #E2E8F0, transparent)",
+          }}
+        />
+        <span
+          className="text-[10px] font-medium tracking-[0.2em] uppercase"
+          style={{ color: "#94A3B8" }}
+        >
+          Proposal
+        </span>
       </div>
     </div>
   )
