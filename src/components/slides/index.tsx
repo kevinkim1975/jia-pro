@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic"
 import type { SlideContent } from "@/types/proposal"
-import { SlideWrapper } from "@/components/SlideWrapper"
 
 // ── Individual slide imports ──────────────────
 import { CoverSlide } from "./CoverSlide"
@@ -40,152 +39,126 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
   switch (content.type) {
     case "cover":
       return (
-        <SlideWrapper fullHeight showPattern patternType="concentric">
-          <CoverSlide
-            title={content.title}
-            subtitle={content.subtitle}
-            date={content.date}
-            company={content.company}
-          />
-        </SlideWrapper>
+        <CoverSlide
+          title={content.title}
+          subtitle={content.subtitle}
+          date={content.date}
+          company={content.company}
+        />
       )
 
     case "toc":
       return (
-        <SlideWrapper showPattern>
-          <TocSlide
-            items={content.items}
-            onNavigate={onNavigate}
-          />
-        </SlideWrapper>
+        <TocSlide
+          items={content.items}
+          onNavigate={onNavigate}
+        />
       )
 
     case "divider":
       return (
-        <SlideWrapper fullHeight showPattern patternType="radial">
-          <DividerSlide
-            act={content.act}
-            title={content.title}
-            subtitle={content.subtitle}
-          />
-        </SlideWrapper>
+        <DividerSlide
+          act={content.act}
+          title={content.title}
+          subtitle={content.subtitle}
+        />
       )
 
     case "content":
       return (
-        <SlideWrapper showPattern>
-          <ContentSlide
-            title={content.title}
-            content={content.content}
-            bullets={content.bullets}
-            emphasis={content.emphasis}
-            tone={content.tone}
-          />
-        </SlideWrapper>
+        <ContentSlide
+          title={content.title}
+          content={content.content}
+          bullets={content.bullets}
+          emphasis={content.emphasis}
+          tone={content.tone}
+        />
       )
 
     case "cards":
       return (
-        <SlideWrapper showPattern>
-          <CardsSlide
-            title={content.title}
-            cards={content.cards}
-            bottomMessage={content.bottomMessage}
-            tone={content.tone}
-          />
-        </SlideWrapper>
+        <CardsSlide
+          title={content.title}
+          cards={content.cards}
+          bottomMessage={content.bottomMessage}
+          tone={content.tone}
+        />
       )
 
     case "chart":
       return (
-        <SlideWrapper showPattern>
-          <ChartSlideComponent
-            title={content.title}
-            chart={content.chart}
-            highlight={content.highlight}
-            description={content.description}
-          />
-        </SlideWrapper>
+        <ChartSlideComponent
+          title={content.title}
+          chart={content.chart}
+          highlight={content.highlight}
+          description={content.description}
+        />
       )
 
     case "comparison":
       return (
-        <SlideWrapper showPattern>
-          <ComparisonSlide
-            title={content.title}
-            quote={content.quote}
-            before={content.before}
-            after={content.after}
-          />
-        </SlideWrapper>
+        <ComparisonSlide
+          title={content.title}
+          quote={content.quote}
+          before={content.before}
+          after={content.after}
+        />
       )
 
     case "summary":
       return (
-        <SlideWrapper showPattern>
-          <SummarySlide
-            title={content.title}
-            keyPoints={content.keyPoints}
-            nextSteps={content.nextSteps}
-          />
-        </SlideWrapper>
+        <SummarySlide
+          title={content.title}
+          keyPoints={content.keyPoints}
+          nextSteps={content.nextSteps}
+        />
       )
 
     case "closing":
       return (
-        <SlideWrapper fullHeight showPattern patternType="radial">
-          <ClosingSlide
-            title={content.title}
-            subtitle={content.subtitle}
-            contact={content.contact}
-            company={content.company}
-          />
-        </SlideWrapper>
+        <ClosingSlide
+          title={content.title}
+          subtitle={content.subtitle}
+          contact={content.contact}
+          company={content.company}
+        />
       )
 
     case "twoColumn":
       return (
-        <SlideWrapper showPattern>
-          <TwoColumnSlide
-            title={content.title}
-            left={content.left}
-            right={content.right}
-            bottomMessage={content.bottomMessage}
-          />
-        </SlideWrapper>
+        <TwoColumnSlide
+          title={content.title}
+          left={content.left}
+          right={content.right}
+          bottomMessage={content.bottomMessage}
+        />
       )
 
     case "quote":
       return (
-        <SlideWrapper fullHeight showPattern patternType="radial">
-          <QuoteSlide
-            message={content.message}
-            subMessage={content.subMessage}
-          />
-        </SlideWrapper>
+        <QuoteSlide
+          message={content.message}
+          subMessage={content.subMessage}
+        />
       )
 
     case "flowSteps":
       return (
-        <SlideWrapper showPattern>
-          <FlowStepsSlide
-            title={content.title}
-            steps={content.steps}
-            bottomMessage={content.bottomMessage}
-          />
-        </SlideWrapper>
+        <FlowStepsSlide
+          title={content.title}
+          steps={content.steps}
+          bottomMessage={content.bottomMessage}
+        />
       )
 
     default:
       return (
-        <SlideWrapper>
-          <div className="flex items-center justify-center min-h-[400px] text-center text-gray-500">
-            <div className="space-y-2">
-              <p className="text-lg">지원하지 않는 슬라이드 타입입니다.</p>
-              <p className="text-sm text-gray-400">관리자에게 문의해주세요.</p>
-            </div>
+        <div className="flex items-center justify-center min-h-[400px] text-center text-gray-500">
+          <div className="space-y-2">
+            <p className="text-lg">지원하지 않는 슬라이드 타입입니다.</p>
+            <p className="text-sm text-gray-400">관리자에게 문의해주세요.</p>
           </div>
-        </SlideWrapper>
+        </div>
       )
   }
 }
