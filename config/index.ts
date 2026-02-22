@@ -8,11 +8,14 @@
  */
 
 // 테마 설정
-export { 
+export {
   jiaProTheme,
   currentTheme,
   getColor,
   opacity,
+  SLIDE_TOKEN_MAP,
+  BG_GUIDELINES,
+  SLIDE_DIMENSIONS,
   type ThemeConfig,
 } from './theme';
 
@@ -26,6 +29,7 @@ export {
   type ActNumber,
   type ActConfig,
   type SixActStructure,
+  type PersuasionRole,
 } from './structure';
 
 // 메타 정보

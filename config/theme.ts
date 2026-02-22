@@ -232,3 +232,84 @@ export const getColor = (path: string): string => {
   }
   return result;
 };
+
+// ============================================================
+// Semantic Mapping — 슬라이드 타입 → 토큰 역할
+// ============================================================
+
+/**
+ * 슬라이드 타입 → 토큰 역할 매핑
+ *
+ * 방법론 출처: Boris Cherny Semantic Mapping
+ * 색상값: jia-pro 고유 (Cleveland Clinic #004B8D 계열)
+ *
+ * 참고: 프레젠테이션은 슬라이드 전환이 있으므로
+ * 웹과 달리 동일 배경 연속 사용이 허용된다.
+ */
+export const SLIDE_TOKEN_MAP = {
+  // --- 강조 슬라이드 (dark 배경) ---
+  cover:      { bg: 'primary',        text: 'onPrimary' },
+  divider:    { bg: 'primary',        text: 'onPrimary' },
+  closing:    { bg: 'primary',        text: 'onPrimary' },
+  quote:      { bg: 'primary',        text: 'onPrimary' },
+
+  // --- 콘텐츠 슬라이드 (light 배경) ---
+  toc:        { bg: 'surface',        text: 'onSurface', accent: 'primary' },
+  content:    { bg: 'surface',        text: 'onSurface', accent: 'primary' },
+  cards:      { bg: 'surface',        text: 'onSurface', accent: 'primary' },
+  chart:      { bg: 'surface',        text: 'onSurface', accent: 'primary' },
+  comparison: { bg: 'surface',        text: 'onSurface', accent: 'primary' },
+  twoColumn:  { bg: 'surface',        text: 'onSurface', accent: 'primary' },
+
+  // --- 보조 슬라이드 (variant 배경) ---
+  flowSteps:  { bg: 'surfaceVariant', text: 'onSurface', accent: 'primary' },
+  summary:    { bg: 'surfaceVariant', text: 'onSurface', accent: 'primary' },
+} as const;
+
+/** 타입 안전성 (jia-pro SlideType과 1:1 대응) */
+type SlideTokenKey = keyof typeof SLIDE_TOKEN_MAP;
+
+// ============================================================
+// 슬라이드 배경 가이드라인
+// ============================================================
+
+/**
+ * 슬라이드 배경 가이드라인
+ *
+ * 방법론 출처: Boris Cherny Composition Rules
+ * 재해석: 프레젠테이션은 슬라이드 전환이 있으므로
+ *         웹의 "연속 동일 배경 금지"는 강제하지 않는다.
+ *         대신 시각적 리듬을 위한 권장 사항을 제공한다.
+ *
+ * 이것은 런타임 강제가 아닌 작성자 참고용이다.
+ */
+export const BG_GUIDELINES = {
+  /** 권장: 3장 이상 연속 동일 배경은 피한다 (강제 아님) */
+  recommendedMaxConsecutiveSameBg: 3,
+
+  /** 권장: 막(Act) 전환 시 divider로 시각적 구분 */
+  actTransitionUseDivider: true,
+
+  /** 허용되는 배경-텍스트 조합 (이것은 강제) */
+  requiredCombinations: {
+    primary:        { text: 'onPrimary' },
+    surface:        { text: 'onSurface' },
+    surfaceVariant: { text: 'onSurface' },
+  },
+} as const;
+
+// ============================================================
+// 슬라이드 전용 치수 토큰
+// ============================================================
+
+/** jia-pro 고유 치수. howonhp 치수와 무관. */
+export const SLIDE_DIMENSIONS = {
+  topbarHeight: 48,
+  footerHeight: 40,
+  contentPadding: { x: 64, y: 48 },
+  chartMinHeight: 280,
+  metricCardMinWidth: 200,
+  teamAvatarSize: 80,
+  timelineNodeSize: 12,
+  processStepMinWidth: 160,
+} as const;

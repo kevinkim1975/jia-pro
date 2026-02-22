@@ -1,3 +1,8 @@
+/**
+ * @deprecated 이 파일은 slides/ 디렉토리로 분해되었습니다.
+ * 새 import: import { SlideRenderer } from "./slides"
+ * 빌드 검증 완료 후 삭제 예정.
+ */
 "use client"
 
 import dynamic from "next/dynamic"

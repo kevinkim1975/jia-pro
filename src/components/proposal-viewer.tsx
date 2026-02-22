@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react"
 import { TopbarHeader } from "./topbar-header"
 import { ProgressFooter } from "./progress-footer"
-import { SlideRenderer } from "./slide-renderers"
+import { SlideRenderer } from "./slides"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { proposal, getSlideByPage, getTocItems } from "@/data/proposal-data"
 

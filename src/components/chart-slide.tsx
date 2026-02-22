@@ -1,3 +1,7 @@
+/**
+ * @deprecated slides/ChartSlide.tsx에서 re-export됩니다.
+ * 직접 import 대신 slides/ 디렉토리를 사용하세요.
+ */
 "use client"
 
 import { Card } from "@/components/ui/card"

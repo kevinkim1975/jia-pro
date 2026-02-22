@@ -1,27 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  /* Cleveland Clinic 스타일 의료 컨설팅 색상 */
-  --primary: #004B8D;
+  /**
+   * Single Source of Truth: config/theme.ts (jiaProTheme)
+   * 아래 CSS 변수는 shadcn/ui + Tailwind v4 용도.
+   * 슬라이드 전용 토큰은 theme.ts에서 직접 참조한다.
+   */
+
+  /* === theme.ts 매핑 색상 === */
+  --primary: #004B8D;              /* = theme.colors.primary */
   --primary-foreground: #FFFFFF;
+  --ring: #004B8D;                 /* = theme.colors.primary */
+
+  /* === shadcn/ui 전용 (theme.ts와 별도 관리) === */
   --secondary: #48A9C5;
   --secondary-foreground: #FFFFFF;
-  --accent: #10B981;
+  --accent: #10B981;               /* UI용 — theme.ts accent(#0066CC)와 의도적 차이 */
   --accent-foreground: #FFFFFF;
+
+  /* === 중립색 (theme.ts neutral 스케일 참고) === */
   --background: #FFFFFF;
-  --foreground: #1F2937;
-  --muted: #F6F8FA;
-  --muted-foreground: #6B7280;
-  --surface: #F6F8FA;
-  --border: #E5E7EB;
+  --foreground: #1F2937;           /* ≈ theme.colors.neutral.800 (#1E293B) */
+  --muted: #F6F8FA;                /* ≈ theme.colors.neutral.50 (#F8FAFC) */
+  --muted-foreground: #6B7280;     /* ≈ theme.colors.neutral.500 (#64748B) */
+  --surface: #F6F8FA;              /* ≈ theme.colors.neutral.50 */
+  --border: #E5E7EB;               /* ≈ theme.colors.neutral.200 (#E2E8F0) */
   --input: #E5E7EB;
-  --ring: #004B8D;
   --card: #FFFFFF;
   --card-foreground: #1F2937;
   --popover: #FFFFFF;
   --popover-foreground: #1F2937;
-  --destructive: #EF4444;
+
+  /* === 시맨틱 === */
+  --destructive: #EF4444;          /* UI용 — theme.ts semantic.negative(#DC2626)와 차이 */
   --destructive-foreground: #FFFFFF;
+
   --radius: 0.5rem;
 }
 

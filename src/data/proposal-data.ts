@@ -1,14 +1,5 @@
-import type { Proposal, Act, Slide, ActNumber, ActTitle, ActSubtitle } from '@/types/proposal';
-
-// ACT 메타데이터 매핑
-const ACT_METADATA: Record<ActNumber, { title: ActTitle; subtitle: ActSubtitle; purpose: string }> = {
-  1: { title: '상황', subtitle: 'Situation', purpose: '원장님의 세계를 인정하고 공감대 형성' },
-  2: { title: '위기', subtitle: 'Crisis', purpose: '현재 직면한 문제 제시' },
-  3: { title: '전환점', subtitle: 'Turning Point', purpose: '변화의 필요성 인식' },
-  4: { title: '해결책 1: 마케팅 전략', subtitle: 'Marketing Strategy', purpose: '구체적인 마케팅 솔루션 제안' },
-  5: { title: '해결책 2: AI CRM', subtitle: 'AI CRM', purpose: 'CRM 솔루션 소개' },
-  6: { title: '요약 및 Next Step', subtitle: 'Summary & Next Step', purpose: '핵심 요약 및 다음 단계 제시' },
-};
+import type { Proposal, Act, Slide, ActNumber } from '@/types/proposal';
+import { ACT_METADATA } from '../../config/structure';
 
 // 정이안한의원 제안서 슬라이드 데이터
 export const slides: Slide[] = [
