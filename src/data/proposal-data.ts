@@ -916,9 +916,10 @@ export const slides: Slide[] = [
     pageNumber: 49,
     act: 6,
     content: {
-      type: 'quote',
-      message: '맞는 방향이\n올바른 프로세스를 만날 때,\n\n성공하는 의료기관을 만듭니다.',
-      subMessage: '호원앤컴퍼니',
+      type: 'closing',
+      title: '감사합니다',
+      subtitle: '맞는 방향이 올바른 프로세스를 만날 때,\n성공하는 의료기관을 만듭니다.',
+      company: '호원앤컴퍼니',
     },
   },
 ];

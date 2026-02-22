@@ -146,10 +146,6 @@ export interface ClosingSlide {
   readonly type: 'closing';
   readonly title: string;
   readonly subtitle: string;
-  readonly contact: {
-    readonly email: string;
-    readonly person: string;
-  };
   readonly company: string;
 }
 

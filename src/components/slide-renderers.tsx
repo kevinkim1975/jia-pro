@@ -528,14 +528,10 @@ export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps)
 interface ClosingSlideProps {
   readonly title: string
   readonly subtitle: string
-  readonly contact: {
-    readonly email: string
-    readonly person: string
-  }
   readonly company: string
 }
 
-export function ClosingSlide({ title, subtitle, contact, company }: ClosingSlideProps) {
+export function ClosingSlide({ title, subtitle, company }: ClosingSlideProps) {
   return (
     <div className="relative flex flex-col items-center justify-center py-16">
       {/* 배경 장식 - 미니멀 */}
@@ -561,13 +557,9 @@ export function ClosingSlide({ title, subtitle, contact, company }: ClosingSlide
           <div className="w-20 h-1 bg-gradient-to-r from-[#004B8D] to-[#48A9C5] rounded-full" />
         </div>
 
-        {/* 연락처 정보 */}
+        {/* 회사명 */}
         <div className="space-y-4 pt-4">
           <p className="text-lg font-semibold text-[#004B8D]">{company}</p>
-          <div className="flex flex-col items-center gap-2 text-gray-500">
-            <p>{contact.person}</p>
-            <p className="text-[#48A9C5]">{contact.email}</p>
-          </div>
         </div>
       </div>
     </div>
@@ -879,7 +871,6 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
           <ClosingSlide
             title={content.title}
             subtitle={content.subtitle}
-            contact={content.contact}
             company={content.company}
           />
         </SlideWrapper>
