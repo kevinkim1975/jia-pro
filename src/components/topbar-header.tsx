@@ -29,26 +29,16 @@ export function TopbarHeader({
       {/* Left: Logo + Title */}
       <div className="flex items-center gap-3 min-w-0">
         {/* Logo */}
-        <div
-          className="flex items-center justify-center shrink-0 rounded-lg"
+        <img
+          src="/logo.jpg"
+          alt="로고"
+          className="shrink-0"
           style={{
-            width: 26,
             height: 26,
-            border: "1.5px solid #004B8D",
-            backgroundColor: "transparent",
+            width: "auto",
+            filter: "grayscale(100%) opacity(0.45)",
           }}
-        >
-          <span
-            style={{
-              fontSize: 13,
-              fontWeight: 600,
-              color: "#004B8D",
-              lineHeight: 1,
-            }}
-          >
-            정
-          </span>
-        </div>
+        />
 
         {/* Title */}
         <span
