@@ -1,32 +1,4 @@
-/**
- * ContentSlide — 일반 콘텐츠 슬라이드
- *
- * ── Skeleton (고정 불변) ──────────────────────
- * 구조: header → body-text → bullets(Card) → emphasis
- * 배경: SLIDE_TOKEN_MAP.content.bg (surface 계열)
- * 정렬: left
- *
- * ── Exchange Table ─────────────────────────────
- * 교체 가능 (Props):
- *   - title: string
- *   - content: string (본문)
- *   - bullets?: string[] (넘버링 리스트)
- *   - emphasis?: string (하단 강조 문구)
- *   - tone?: 'positive' | 'negative' | 'neutral'
- *
- * 고정 (절대 불변):
- *   - SlideHeader accent-bar 패턴
- *   - bullets는 Card 안에 넘버링 배치
- *   - emphasis는 SlideBottomMessage + Lightbulb icon
- *
- * ── Tailwind 패턴 (확정값) ──────────────────────
- * 본문: "text-lg md:text-xl leading-relaxed text-gray-600"
- * 넘버링: "w-7 h-7 rounded-lg text-white text-sm font-bold" + tone accent color
- * 불릿 텍스트: "text-lg text-gray-700 leading-relaxed"
- */
-
-import { Card } from "@/components/ui/card"
-import { Lightbulb, TrendingUp, Target } from "lucide-react"
+import { TrendingUp, Target, Lightbulb } from "lucide-react"
 import { SlideHeader } from "./shared/SlideHeader"
 import { SlideBottomMessage } from "./shared/SlideBottomMessage"
 
@@ -38,66 +10,141 @@ interface ContentSlideProps {
   readonly tone?: "positive" | "negative" | "neutral"
 }
 
-export function ContentSlide({ title, content, bullets, emphasis, tone = "neutral" }: ContentSlideProps) {
-  const toneConfig = {
-    positive: {
-      accent: "#10B981",
-      bg: "bg-emerald-50",
-      border: "border-emerald-200",
-      text: "text-emerald-700",
-      icon: <TrendingUp className="w-5 h-5" />
-    },
-    negative: {
-      accent: "#EF4444",
-      bg: "bg-red-50",
-      border: "border-red-200",
-      text: "text-red-700",
-      icon: <Target className="w-5 h-5" />
-    },
-    neutral: {
-      accent: "#004B8D",
-      bg: "bg-blue-50",
-      border: "border-blue-200",
-      text: "text-[#004B8D]",
-      icon: <Lightbulb className="w-5 h-5" />
-    }
-  }
+const toneConfig = {
+  positive: {
+    accent: "#059669",
+    bg: "bg-emerald-50",
+    border: "border-emerald-200",
+    text: "text-emerald-700",
+    icon: TrendingUp,
+    badge: "▲ 긍정",
+  },
+  negative: {
+    accent: "#DC2626",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    text: "text-red-700",
+    icon: Target,
+    badge: "▼ 주의",
+  },
+  neutral: {
+    accent: "#004B8D",
+    bg: "bg-blue-50",
+    border: "border-blue-200",
+    text: "text-[#004B8D]",
+    icon: Lightbulb,
+    badge: null,
+  },
+} as const
 
+
+function BulletTimeline({
+  bullets,
+  tone,
+}: {
+  bullets: readonly string[]
+  tone: "positive" | "negative" | "neutral"
+}) {
   const config = toneConfig[tone]
 
   return (
-    <div className="space-y-8">
-      <SlideHeader title={title} />
+    <div className="relative pl-6">
+      {/* Vertical timeline line — spans from first node center to last node center */}
+      {bullets.length > 1 && (
+        <div
+          className="absolute left-[5px] w-0.5"
+          style={{
+            backgroundColor: config.accent,
+            top: "6px",
+            bottom: `calc(${(bullets.length - 1) * 0}px + 6px)`,
+            height: `calc(100% - 12px)`,
+            opacity: 0.3,
+          }}
+        />
+      )}
 
-      <p className="text-lg md:text-xl leading-relaxed text-gray-600">
-        {content}
-      </p>
+      <div className="flex flex-col gap-4">
+        {bullets.map((bullet, index) => (
+          <div key={index} className="relative flex items-start gap-4">
+            {/* Timeline node */}
+            <div
+              className="absolute -left-6 top-[14px] w-3 h-3 border-2 bg-white shrink-0 z-10"
+              style={{ borderColor: config.accent }}
+            />
 
-      {bullets && bullets.length > 0 && (
-        <Card className={`p-6 ${config.bg} ${config.border} border-2 shadow-sm`}>
-          <ul className="space-y-4">
-            {bullets.map((bullet, index) => (
-              <li key={index} className="flex items-start gap-4">
+            {/* Bullet card */}
+            <div className="flex-1 bg-white p-4 shadow-sm border border-gray-100">
+              <div className="flex items-start gap-3">
                 <span
-                  className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-white text-sm font-bold shadow-sm"
-                  style={{ backgroundColor: config.accent }}
+                  className={`text-xs font-bold ${config.text} mt-0.5 shrink-0`}
                 >
-                  {index + 1}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="text-lg text-gray-700 leading-relaxed pt-0.5">
+                <p className="text-base text-gray-700 leading-relaxed">
                   {bullet}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-      )}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
-      {emphasis && (
-        <SlideBottomMessage icon={<Lightbulb className="w-6 h-6 text-[#004B8D] flex-shrink-0 mt-0.5" />}>
-          {emphasis}
-        </SlideBottomMessage>
-      )}
+export function ContentSlide({
+  title,
+  content,
+  bullets,
+  emphasis,
+  tone = "neutral",
+}: ContentSlideProps) {
+  const hasBullets = bullets && bullets.length > 0
+  const hasContent = content !== ""
+  const hasEmphasis = !!emphasis
+  const ToneIcon = toneConfig[tone].icon
+
+  return (
+    <div
+      className="w-full h-full flex flex-col"
+      style={{
+        backgroundColor: "#F8FAFC",
+        fontFamily:
+          "Pretendard, -apple-system, BlinkMacSystemFont, sans-serif",
+      }}
+    >
+      <div className="flex-1 flex flex-col justify-center px-16 py-12">
+        {/* Header */}
+        <div className="flex items-start justify-between">
+          <SlideHeader title={title} />
+          {toneConfig[tone].badge && (
+            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${toneConfig[tone].bg} ${toneConfig[tone].text}`}>
+              {toneConfig[tone].badge}
+            </span>
+          )}
+        </div>
+
+        {/* Body text */}
+        {hasContent && (
+          <p className="text-lg text-gray-500 font-medium mt-3">{content}</p>
+        )}
+
+        {/* Bullets timeline — mt-8 (32px) from subtitle to first bullet, gap-4 (16px) between bullets */}
+        {hasBullets && (
+          <div className="mt-8">
+            <BulletTimeline bullets={bullets} tone={tone} />
+          </div>
+        )}
+
+        {/* Bottom message — mt-8 (32px) = exactly 2x the bullet gap-4 (16px) */}
+        {hasEmphasis && (
+          <div className="mt-8">
+            <SlideBottomMessage icon={<ToneIcon className="w-6 h-6 text-[#004B8D] flex-shrink-0 mt-0.5" />}>
+              {emphasis}
+            </SlideBottomMessage>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
