@@ -796,13 +796,11 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
 
     case "divider":
       return (
-        <SlideWrapper fullHeight showPattern patternType="radial" className="!bg-[linear-gradient(140deg,#004B8D_0%,#002D5A_100%)]">
-          <DividerSlide
-            act={content.act}
-            title={content.title}
-            subtitle={content.subtitle}
-          />
-        </SlideWrapper>
+        <DividerSlide
+          act={content.act}
+          title={content.title}
+          subtitle={content.subtitle}
+        />
       )
 
     case "content":

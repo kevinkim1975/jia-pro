@@ -11,6 +11,7 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
     <div
       className="relative w-full h-full overflow-hidden flex flex-col items-center justify-center"
       style={{
+        background: "linear-gradient(140deg, #004B8D 0%, #002D5A 100%)",
         fontFamily:
           "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
       }}
