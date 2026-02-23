@@ -5,7 +5,8 @@
       "Bash(dir:*)",
       "Bash(curl:*)",
       "Bash(claude mcp add:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(tail:*)"
     ]
   },
   "mcpServers": {
