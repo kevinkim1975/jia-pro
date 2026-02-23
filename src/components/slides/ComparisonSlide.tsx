@@ -46,7 +46,7 @@ export function ComparisonSlide({
 
       {/* Table Container */}
       <div
-        className="w-full max-w-4xl overflow-hidden border bg-white shadow-sm"
+        className={`w-full max-w-4xl overflow-hidden border bg-white shadow-sm ${!quote ? 'mt-10' : ''}`}
         style={{ borderColor: "#E5E7EB" }}
       >
         {/* Header Row */}
