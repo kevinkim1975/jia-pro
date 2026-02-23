@@ -1,61 +1,116 @@
-/**
- * QuoteSlide — 중앙 메시지 박스 슬라이드
- *
- * ── Skeleton (고정 불변) ──────────────────────
- * 구조: bg-decoration → Card → quote-open → message → subMessage? → quote-close
- * 배경: SLIDE_TOKEN_MAP.quote.bg (primary 계열, SlideWrapper가 처리)
- * 정렬: 항상 center
- *
- * ── Exchange Table ─────────────────────────────
- * 교체 가능 (Props):
- *   - message: string (메인 메시지)
- *   - subMessage?: string (보조 설명)
- *
- * 고정 (절대 불변):
- *   - Card 래핑 (border-2, backdrop-blur)
- *   - 인용부호 장식 (6xl, serif)
- *   - 배경 blur 장식 원 2개
- *
- * ── Tailwind 패턴 (확정값) ──────────────────────
- * Card: "p-12 border-2 border-[#004B8D]/20 bg-white/80 backdrop-blur-sm shadow-lg"
- * 메시지: "text-2xl md:text-3xl lg:text-4xl font-bold text-[#004B8D]"
- * 서브: "text-lg md:text-xl text-gray-600 whitespace-pre-line"
- * 인용부호: "text-6xl text-[#004B8D]/20 font-serif"
- */
-
-import { Card } from "@/components/ui/card"
-
 interface QuoteSlideProps {
   readonly message: string
   readonly subMessage?: string
 }
 
 export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
+  const isShortMessage = message.length < 5
+
   return (
-    <div className="relative flex flex-col items-center justify-center py-16">
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-[#004B8D]/[0.03] rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-[#48A9C5]/[0.03] rounded-full blur-3xl" />
-      </div>
+    <div
+      className="relative w-full h-full overflow-hidden"
+      style={{
+        backgroundColor: "#004B8D",
+        fontFamily: "Pretendard, -apple-system, BlinkMacSystemFont, sans-serif",
+      }}
+    >
+      {/* Background decoration — bottom-right subtle glow */}
+      <div
+        className="absolute w-64 h-64 rounded-full"
+        style={{
+          bottom: "-32px",
+          right: "-32px",
+          backgroundColor: "rgba(72, 169, 197, 0.05)",
+          filter: "blur(48px)",
+        }}
+      />
 
-      <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
-        <Card className="p-12 border-2 border-[#004B8D]/20 bg-white/80 backdrop-blur-sm shadow-lg">
-          <div className="space-y-6">
-            <div className="text-6xl text-[#004B8D]/20 font-serif leading-none">&ldquo;</div>
+      {/* Giant opening quote mark — top-left */}
+      <span
+        className="absolute select-none pointer-events-none"
+        aria-hidden="true"
+        style={{
+          top: "-40px",
+          left: "40px",
+          fontSize: "380px",
+          lineHeight: 1,
+          color: "rgba(255, 255, 255, 0.06)",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          zIndex: 0,
+        }}
+      >
+        {"\u201C"}
+      </span>
 
-            <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#004B8D] leading-relaxed">
-              {message}
-            </p>
+      {/* Giant closing quote mark — bottom-right, rotated 180° */}
+      <span
+        className="absolute select-none pointer-events-none"
+        aria-hidden="true"
+        style={{
+          bottom: "-40px",
+          right: "40px",
+          fontSize: "380px",
+          lineHeight: 1,
+          color: "rgba(255, 255, 255, 0.06)",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          transform: "rotate(180deg)",
+          zIndex: 0,
+        }}
+      >
+        {"\u201C"}
+      </span>
 
-            {subMessage && (
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed pt-4 text-left whitespace-pre-line">
+      {/* Content — centered between the two giant quote marks */}
+      <div
+        className="relative flex flex-col items-center justify-center w-full h-full px-16"
+        style={{ zIndex: 1 }}
+      >
+        {/* Message */}
+        <p
+          className="text-center font-bold max-w-3xl"
+          style={{
+            color: "#FFFFFF",
+            fontSize: isShortMessage ? "96px" : "42px",
+            lineHeight: isShortMessage ? 1.1 : 1.35,
+            whiteSpace: "pre-line",
+          }}
+        >
+          {message}
+        </p>
+
+        {/* SubMessage section */}
+        {subMessage && (
+          <>
+            {/* Accent line */}
+            <div
+              className="ml-auto mt-8 mb-5"
+              style={{
+                width: "96px",
+                height: "2px",
+                backgroundColor: "rgba(72, 169, 197, 0.4)",
+                maxWidth: "768px",
+                marginLeft: "auto",
+                marginRight: "calc(50% - 384px + 0px)",
+              }}
+            />
+
+            {/* SubMessage with em dash */}
+            <div className="w-full max-w-3xl">
+              <p
+                className="text-right font-light"
+                style={{
+                  color: "rgba(255, 255, 255, 0.5)",
+                  fontSize: "18px",
+                  lineHeight: 1.7,
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {"— "}
                 {subMessage}
               </p>
-            )}
-
-            <div className="text-6xl text-[#004B8D]/20 font-serif leading-none rotate-180">&ldquo;</div>
-          </div>
-        </Card>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
