@@ -83,21 +83,19 @@ export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
           <>
             {/* Accent line */}
             <div
-              className="ml-auto mt-8 mb-5"
+              className="mt-8 mb-5"
               style={{
                 width: "96px",
                 height: "2px",
                 backgroundColor: "rgba(72, 169, 197, 0.4)",
                 maxWidth: "768px",
-                marginLeft: "auto",
-                marginRight: "calc(50% - 384px + 0px)",
               }}
             />
 
             {/* SubMessage with em dash */}
             <div className="w-full max-w-3xl">
               <p
-                className="text-right font-light"
+                className="text-left font-light"
                 style={{
                   color: "rgba(255, 255, 255, 0.5)",
                   fontSize: "18px",
@@ -105,7 +103,6 @@ export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
                   whiteSpace: "pre-line",
                 }}
               >
-                {"— "}
                 {subMessage}
               </p>
             </div>
