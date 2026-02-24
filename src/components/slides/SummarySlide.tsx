@@ -1,31 +1,4 @@
-/**
- * SummarySlide — 핵심 요약 슬라이드
- *
- * ── Skeleton (고정 불변) ──────────────────────
- * 구조: badge-header → grid(keyPoints | nextSteps?)
- * 배경: SLIDE_TOKEN_MAP.summary.bg (surfaceVariant 계열)
- * 정렬: center header
- *
- * ── Exchange Table ─────────────────────────────
- * 교체 가능 (Props):
- *   - title: string
- *   - keyPoints: string[]
- *   - nextSteps?: string[]
- *
- * 고정 (절대 불변):
- *   - "Summary" 뱃지 + Target 아이콘
- *   - keyPoints 카드 → primary gradient icon
- *   - nextSteps 카드 → emerald gradient icon
- *   - 넘버링 배치
- *
- * ── Tailwind 패턴 (확정값) ──────────────────────
- * 뱃지: "inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10"
- * keyPoints 카드: "border-2 border-[#004B8D]/20 bg-gradient-to-br from-[#004B8D]/5"
- * nextSteps 카드: "border-2 border-[#10B981]/20 bg-gradient-to-br from-[#10B981]/5"
- */
-
-import { Card } from "@/components/ui/card"
-import { Target, Lightbulb, ArrowRight } from "lucide-react"
+import { SlideHeader } from "./shared/SlideHeader"
 
 interface SummarySlideProps {
   readonly title: string
@@ -33,63 +6,137 @@ interface SummarySlideProps {
   readonly nextSteps?: readonly string[]
 }
 
+function interpolateColor(
+  start: [number, number, number],
+  end: [number, number, number],
+  t: number
+): string {
+  const r = Math.round(start[0] + (end[0] - start[0]) * t)
+  const g = Math.round(start[1] + (end[1] - start[1]) * t)
+  const b = Math.round(start[2] + (end[2] - start[2]) * t)
+  return `rgb(${r}, ${g}, ${b})`
+}
+
 export function SummarySlide({ title, keyPoints, nextSteps }: SummarySlideProps) {
+  const primaryRGB: [number, number, number] = [0, 75, 141]   // #004B8D
+  const accentRGB: [number, number, number] = [72, 169, 197]   // #48A9C5
+
+  const hasNextSteps = nextSteps && nextSteps.length > 0
+
   return (
-    <div className="space-y-8">
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004B8D]/10">
-          <Target className="w-4 h-4 text-[#004B8D]" />
-          <span className="text-sm font-semibold text-[#004B8D] uppercase tracking-wider">Summary</span>
+    <div
+      style={{
+        width: 1280,
+        height: 720,
+        fontFamily: "Pretendard, -apple-system, sans-serif",
+        backgroundColor: "#F8FAFC",
+      }}
+      className="flex flex-col"
+    >
+      {/* Content area — vertically centered */}
+      <div className="flex-1 px-16 flex flex-col justify-center">
+        {/* Header */}
+        <div style={{ paddingLeft: 50 }}>
+          <SlideHeader title={title} align="left" />
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          {title}
-        </h2>
+
+        <div className="mt-8">
+          {hasNextSteps ? (
+            /* Asymmetric grid: 65% keyPoints / 35% nextSteps */
+            <div className="flex gap-[28px] items-center">
+              {/* Left — Key Points (65%) */}
+              <div className="flex-none" style={{ width: "65%", paddingLeft: 50 }}>
+                <KeyPointsSection keyPoints={keyPoints} primaryRGB={primaryRGB} accentRGB={accentRGB} />
+              </div>
+
+              {/* Right — Next Steps (35%) */}
+              <div
+                className="flex-none border-l border-[#E5E7EB] pl-8"
+                style={{ width: "35%" }}
+              >
+                <NextStepsSection nextSteps={nextSteps} />
+              </div>
+            </div>
+          ) : (
+            /* Full width keyPoints when no nextSteps */
+            <div className="max-w-3xl" style={{ paddingLeft: 50 }}>
+              <KeyPointsSection keyPoints={keyPoints} primaryRGB={primaryRGB} accentRGB={accentRGB} />
+            </div>
+          )}
+        </div>
       </div>
+    </div>
+  )
+}
 
-      <div className={`grid gap-6 ${nextSteps && nextSteps.length > 0 ? 'md:grid-cols-2' : 'max-w-2xl mx-auto'}`}>
-        <Card className="p-6 border-2 border-[#004B8D]/20 bg-gradient-to-br from-[#004B8D]/5 to-transparent shadow-sm">
-          <div className="space-y-5">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#004B8D] to-[#48A9C5] flex items-center justify-center shadow-md">
-                <Lightbulb className="w-5 h-5 text-white" />
+function KeyPointsSection({
+  keyPoints,
+  primaryRGB,
+  accentRGB,
+}: {
+  keyPoints: readonly string[]
+  primaryRGB: [number, number, number]
+  accentRGB: [number, number, number]
+}) {
+  return (
+    <div>
+      <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "rgba(0, 75, 141, 0.6)" }}>
+        핵심 요약
+      </p>
+      <div className="mt-6 space-y-5">
+        {keyPoints.map((point, i) => {
+          const t = keyPoints.length > 1 ? i / (keyPoints.length - 1) : 0
+          const barColor = interpolateColor(primaryRGB, accentRGB, t)
+          const pointNum = String(i + 1).padStart(2, "0")
+
+          return (
+            <div key={i} className="flex">
+              {/* Accent bar */}
+              <div
+                className="flex-none w-1 rounded-full self-stretch"
+                style={{ backgroundColor: barColor }}
+              />
+              {/* Content */}
+              <div className="pl-4">
+                <p className="text-xs font-bold" style={{ color: "rgba(0, 75, 141, 0.4)" }}>
+                  POINT {pointNum}
+                </p>
+                <p className="text-base text-[#1F2937] leading-relaxed mt-1">
+                  {point}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-[#004B8D]">핵심 요약</h3>
             </div>
-            <ul className="space-y-4">
-              {keyPoints.map((point, index) => (
-                <li key={index} className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-[#004B8D] text-white text-sm font-bold flex items-center justify-center shadow-sm">
-                    {index + 1}
-                  </span>
-                  <span className="text-gray-700 leading-relaxed pt-0.5">{point}</span>
-                </li>
-              ))}
-            </ul>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function NextStepsSection({ nextSteps }: { nextSteps: readonly string[] }) {
+  return (
+    <div>
+      <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "rgba(16, 185, 129, 0.6)" }}>
+        Next Steps
+      </p>
+      <div className="mt-6 space-y-4">
+        {nextSteps.map((step, i) => (
+          <div key={i} className="flex items-start">
+            {/* Number circle */}
+            <div
+              className="flex-none w-6 h-6 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: "rgba(16, 185, 129, 0.1)" }}
+            >
+              <span className="text-xs font-bold" style={{ color: "#10B981" }}>
+                {i + 1}
+              </span>
+            </div>
+            {/* Text */}
+            <p className="text-sm text-[#374151] leading-snug ml-3">
+              {step}
+            </p>
           </div>
-        </Card>
-
-        {nextSteps && nextSteps.length > 0 && (
-          <Card className="p-6 border-2 border-[#10B981]/20 bg-gradient-to-br from-[#10B981]/5 to-transparent shadow-sm">
-            <div className="space-y-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10B981] to-[#48A9C5] flex items-center justify-center shadow-md">
-                  <ArrowRight className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-[#10B981]">Next Steps</h3>
-              </div>
-              <ul className="space-y-4">
-                {nextSteps.map((step, index) => (
-                  <li key={index} className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-[#10B981] text-white text-sm font-bold flex items-center justify-center shadow-sm">
-                      {index + 1}
-                    </span>
-                    <span className="text-gray-700 leading-relaxed pt-0.5">{step}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Card>
-        )}
+        ))}
       </div>
     </div>
   )
