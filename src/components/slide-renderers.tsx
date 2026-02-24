@@ -774,14 +774,12 @@ export function SlideRenderer({ content, onNavigate }: SlideRendererProps) {
   switch (content.type) {
     case "cover":
       return (
-        <SlideWrapper fullHeight showPattern patternType="concentric">
-          <CoverSlide
-            title={content.title}
-            subtitle={content.subtitle}
-            date={content.date}
-            company={content.company}
-          />
-        </SlideWrapper>
+        <CoverSlide
+          title={content.title}
+          subtitle={content.subtitle}
+          date={content.date}
+          company={content.company}
+        />
       )
 
     case "toc":
