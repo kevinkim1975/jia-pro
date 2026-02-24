@@ -1,4 +1,3 @@
-import { SlideHeader } from "./shared/SlideHeader"
 import { SlideBottomMessage } from "./shared/SlideBottomMessage"
 
 interface FlowStepsSlideProps {
@@ -69,7 +68,17 @@ export function FlowStepsSlide({
         justifyContent: "center",
       }}
     >
-      <SlideHeader title={title} align="left" />
+      <h1
+        style={{
+          fontSize: "28px",
+          fontWeight: 800,
+          color: "#004B8D",
+          lineHeight: 1.3,
+          margin: 0,
+        }}
+      >
+        {title}
+      </h1>
 
       <div
         className={`grid ${getGridClass(steps.length)} gap-8 items-start`}
@@ -135,7 +144,9 @@ export function FlowStepsSlide({
       </div>
 
       {bottomMessage && (
-        <SlideBottomMessage>{bottomMessage}</SlideBottomMessage>
+        <div style={{ marginTop: "32px" }} className="[&>div]:rounded-none">
+          <SlideBottomMessage>{bottomMessage}</SlideBottomMessage>
+        </div>
       )}
     </div>
   )
