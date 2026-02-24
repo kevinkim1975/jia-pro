@@ -180,7 +180,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* Title */}
         <h1
           style={{
-            fontSize: "70px",
+            fontSize: "84px",
             fontWeight: 700,
             color: "#004B8D",
             letterSpacing: "-0.025em",
@@ -196,7 +196,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {subtitle && (
           <p
             style={{
-              fontSize: "30px",
+              fontSize: "36px",
               fontWeight: 500,
               color: "#48A9C5",
               letterSpacing: "0.025em",
@@ -246,7 +246,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* Date */}
         <p
           style={{
-            fontSize: "17.5px",
+            fontSize: "21px",
             fontWeight: 400,
             color: "#64748B",
             lineHeight: 1.5,
@@ -261,7 +261,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* Company */}
         <p
           style={{
-            fontSize: "20px",
+            fontSize: "24px",
             fontWeight: 600,
             color: "#004B8D",
             lineHeight: 1.5,
@@ -276,7 +276,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* PROPOSAL label */}
         <p
           style={{
-            fontSize: "13.75px",
+            fontSize: "16.5px",
             fontWeight: 600,
             color: "#CBD5E1",
             textTransform: "uppercase",
