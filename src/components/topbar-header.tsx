@@ -7,6 +7,8 @@ interface TopbarHeaderProps {
   currentPage: number
   totalPages: number
   onTocClick: () => void
+  onFullscreenToggle?: () => void
+  isFullscreen?: boolean
   title?: string
 }
 
@@ -14,6 +16,8 @@ export function TopbarHeader({
   currentPage,
   totalPages,
   onTocClick,
+  onFullscreenToggle,
+  isFullscreen = false,
   title = "정이안한의원 마케팅 전략 제안",
 }: TopbarHeaderProps) {
   return (
@@ -67,6 +71,16 @@ export function TopbarHeader({
         >
           {currentPage} / {totalPages}
         </span>
+
+        {/* Fullscreen Toggle */}
+        {onFullscreenToggle && (
+          <span
+            onClick={onFullscreenToggle}
+            className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer"
+          >
+            {isFullscreen ? "축소" : "전체화면"}
+          </span>
+        )}
 
         {/* TOC Button */}
         <Button

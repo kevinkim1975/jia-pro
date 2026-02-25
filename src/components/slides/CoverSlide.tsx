@@ -39,8 +39,8 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes floatSlow {
-          0%, 100% { transform: translate(calc(-50% + 40px), calc(-50% + 115px)); }
-          50% { transform: translate(calc(-50% + 46px), calc(-50% + 105px)); }
+          0%, 100% { transform: translate(calc(-50% + 140px), calc(-50% + 115px)); }
+          50% { transform: translate(calc(-50% + 146px), calc(-50% + 105px)); }
         }
         @keyframes arcPulse {
           0%, 100% { opacity: 0.08; transform: scale(1); }
@@ -71,7 +71,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(calc(-50% + 40px), calc(-50% + 115px))",
+            transform: "translate(calc(-50% + 140px), calc(-50% + 115px))",
             fontSize: 120,
             fontWeight: 900,
             color: "rgba(255,255,255,0.06)",

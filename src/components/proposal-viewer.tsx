@@ -10,6 +10,7 @@ import { proposal, getSlideByPage, getTocItems } from "@/data/proposal-data"
 export function ProposalViewer() {
   const [currentPage, setCurrentPage] = useState(1)
   const [tocOpen, setTocOpen] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const totalPages = proposal.totalPages
 
   // 현재 슬라이드 가져오기
@@ -47,6 +48,24 @@ export function ProposalViewer() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [handlePrevious, handleNext, totalPages])
 
+  // 전체화면 토글
+  const handleFullscreenToggle = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+    } else {
+      document.exitFullscreen()
+    }
+  }, [])
+
+  // ESC 등으로 전체화면 해제 시 상태 동기화
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement)
+    }
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange)
+  }, [])
+
   const handleTocClick = () => {
     setTocOpen(true)
   }
@@ -66,6 +85,8 @@ export function ProposalViewer() {
         currentPage={currentPage}
         totalPages={totalPages}
         onTocClick={handleTocClick}
+        onFullscreenToggle={handleFullscreenToggle}
+        isFullscreen={isFullscreen}
         title={`${proposal.clientName} 마케팅 전략 제안`}
       />
 
