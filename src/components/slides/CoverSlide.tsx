@@ -11,8 +11,8 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
   return (
     <div
       style={{
-        width: 1280,
-        height: 720,
+        width: "100%",
+        height: "100%",
         fontFamily:
           "Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
         overflow: "hidden",
