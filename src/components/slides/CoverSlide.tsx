@@ -120,7 +120,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         <span
           style={{
             position: "absolute",
-            bottom: 163,
+            bottom: 113,
             right: 32,
             fontSize: 13,
             fontWeight: 600,
