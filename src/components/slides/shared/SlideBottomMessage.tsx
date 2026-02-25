@@ -3,7 +3,7 @@
  *
  * ── Skeleton ──────────────────────────────────
  * 구조: rounded-xl container → message text
- * 배경: gradient from-[#004B8D]/10 to-[#48A9C5]/10
+ * 배경: gradient primary/10 → secondary/10
  * 좌측: 4px primary border
  *
  * ── Exchange Table ─────────────────────────────
@@ -16,6 +16,9 @@
  */
 
 import type { ReactNode } from "react"
+import { currentTheme } from "../../../../config/theme"
+
+const t = currentTheme
 
 interface SlideBottomMessageProps {
   readonly children: ReactNode
@@ -24,9 +27,15 @@ interface SlideBottomMessageProps {
 
 export function SlideBottomMessage({ children, icon }: SlideBottomMessageProps) {
   return (
-    <div className="flex items-start gap-4 p-5 rounded-xl bg-gradient-to-r from-[#004B8D]/10 to-[#48A9C5]/10 border-l-4 border-[#004B8D]">
+    <div
+      className="flex items-start gap-4 p-5 rounded-xl border-l-4"
+      style={{
+        background: `linear-gradient(to right, ${t.colors.primary}1A, ${t.colors.secondary}1A)`,
+        borderColor: t.colors.primary,
+      }}
+    >
       {icon}
-      <p className="text-xl font-semibold text-[#004B8D]">
+      <p className="text-xl font-semibold" style={{ color: t.colors.primary }}>
         {children}
       </p>
     </div>

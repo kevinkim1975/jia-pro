@@ -1,3 +1,7 @@
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
+
 interface QuoteSlideProps {
   readonly message: string
   readonly subMessage?: string
@@ -10,8 +14,8 @@ export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
     <div
       className="relative w-full h-full overflow-hidden"
       style={{
-        backgroundColor: "#004B8D",
-        fontFamily: "Pretendard, -apple-system, BlinkMacSystemFont, sans-serif",
+        backgroundColor: t.colors.primary,
+        fontFamily: t.typography.fontFamily,
       }}
     >
       {/* Background decoration — bottom-right subtle glow */}
@@ -69,8 +73,8 @@ export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
         <p
           className="text-center font-bold max-w-3xl"
           style={{
-            color: "#FFFFFF",
-            fontSize: isShortMessage ? "96px" : "42px",
+            color: t.colors.white,
+            fontSize: isShortMessage ? t.typography.fontSize["96"] : t.typography.fontSize["42"],
             lineHeight: isShortMessage ? 1.1 : 1.35,
             whiteSpace: "pre-line",
           }}
@@ -98,7 +102,7 @@ export function QuoteSlide({ message, subMessage }: QuoteSlideProps) {
                 className="text-left font-light"
                 style={{
                   color: "rgba(255, 255, 255, 0.5)",
-                  fontSize: "18px",
+                  fontSize: t.typography.fontSize.lg,
                   lineHeight: 1.7,
                   whiteSpace: "pre-line",
                 }}

@@ -1,6 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 interface ClosingSlideProps {
   readonly title: string
@@ -29,8 +32,7 @@ export function ClosingSlide({
     <div
       className="relative w-full overflow-hidden"
       style={{
-        fontFamily:
-          "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+        fontFamily: t.typography.fontFamily,
         minHeight: "560px",
         padding: "64px 0",
       }}
@@ -106,8 +108,8 @@ export function ClosingSlide({
         <svg width="2" height="100%" viewBox="0 0 2 100" preserveAspectRatio="none" style={{ overflow: "visible" }}>
           <defs>
             <linearGradient id="cl-line-g" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#004B8D" />
-              <stop offset="100%" stopColor="#48A9C5" />
+              <stop offset="0%" stopColor={t.colors.primary} />
+              <stop offset="100%" stopColor={t.colors.secondary} />
             </linearGradient>
           </defs>
           <line x1="1" y1="0" x2="1" y2="100" stroke="url(#cl-line-g)" strokeWidth="2" strokeLinecap="round"
@@ -232,7 +234,7 @@ export function ClosingSlide({
           <h1
             className={mounted ? "closing-fade-title" : ""}
             style={{
-              fontSize: "60px", fontWeight: 700, color: "#004B8D",
+              fontSize: t.typography.fontSize["60"], fontWeight: 700, color: t.colors.primary,
               letterSpacing: "-0.02em", lineHeight: 1.1, margin: 0,
               opacity: mounted ? undefined : 0,
             }}
@@ -243,7 +245,7 @@ export function ClosingSlide({
           <p
             className={mounted ? "closing-fade-subtitle" : ""}
             style={{
-              fontSize: "21px", fontWeight: 400, color: "#475569",
+              fontSize: t.typography.fontSize["21"], fontWeight: 400, color: t.colors.neutral[600],
               lineHeight: 1.7, whiteSpace: "pre-line",
               margin: 0, marginBlockStart: "22px",
               opacity: mounted ? undefined : 0,
@@ -260,7 +262,7 @@ export function ClosingSlide({
               className={mounted ? "closing-rule-reveal" : ""}
               style={{
                 height: "1px",
-                background: "linear-gradient(to right, #004B8D, transparent)",
+                background: `linear-gradient(to right, ${t.colors.primary}, transparent)`,
                 width: mounted ? undefined : "0%",
               }}
             />
@@ -271,7 +273,7 @@ export function ClosingSlide({
           className={mounted ? "closing-fade-company" : ""}
           style={{ alignSelf: "flex-end", marginTop: "80px", opacity: mounted ? undefined : 0 }}
         >
-          <span style={{ fontSize: "18px", fontWeight: 600, color: "#004B8D", letterSpacing: "0.01em" }}>
+          <span style={{ fontSize: t.typography.fontSize.lg, fontWeight: 600, color: t.colors.primary, letterSpacing: "0.01em" }}>
             {company}
           </span>
         </div>

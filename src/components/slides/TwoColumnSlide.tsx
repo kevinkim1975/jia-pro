@@ -6,11 +6,13 @@
  * Boris Cherny의 TypeScript 설계 원칙 적용:
  * 1. readonly를 통한 불변성 보장 — props는 절대 변이되지 않음
  * 2. 타입 좁히기(narrowing)로 옵셔널 필드의 안전한 처리
- * 3. 상수 객체는 as const로 동결하여 리터럴 타입 추론 활용
- * 4. 각 함수/컴포넌트의 타입 시그니처가 곧 문서
+ * 3. 각 함수/컴포넌트의 타입 시그니처가 곧 문서
  */
 
 import { useEffect, useState } from "react"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 // ─── Step 1: 타입 정의 (Type-Level Design) ───────────────────────
 // Boris Cherny: "타입은 코드의 첫 번째 설계 문서다."
@@ -29,34 +31,7 @@ interface TwoColumnSlideProps {
   readonly bottomMessage?: string
 }
 
-// ─── Step 2: 디자인 토큰 (Compile-Time Constants) ────────────────
-// as const로 리터럴 타입을 추론시켜, 실수로 잘못된 색상을 사용하는 것을 방지한다.
-// Boris Cherny: "상수는 값이 아니라 '의도'를 인코딩해야 한다."
-
-const COLORS = {
-  primary: "#004B8D",
-  primaryLight: "#E8F4FC",
-  primaryDark: "#003366",
-  secondary: "#48A9C5",
-  accent: "#10B981",
-  neutral: {
-    50: "#F8FAFC",
-    100: "#F1F5F9",
-    200: "#E2E8F0",
-    300: "#CBD5E1",
-    400: "#94A3B8",
-    500: "#64748B",
-    600: "#475569",
-    700: "#334155",
-    800: "#1E293B",
-    900: "#0F172A",
-  },
-} as const
-
-const FONT_FAMILY =
-  "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif" as const
-
-// ─── Step 3: 칼럼 "identity" 타입 ────────────────────────────────
+// ─── Step 2: 칼럼 "identity" 타입 ────────────────────────────────
 // Boris Cherny: "유니온 타입은 '가능한 상태의 집합'을 정확하게 표현한다."
 // left와 right 각각의 색상 identity를 타입 수준에서 구분한다.
 
@@ -66,24 +41,24 @@ type ColumnSide = "left" | "right"
 function getColumnColors(side: ColumnSide) {
   return side === "left"
     ? {
-        accent: COLORS.primary,
+        accent: t.colors.primary,
         bgTint: "rgba(0, 75, 141, 0.03)",
         border: "rgba(0, 75, 141, 0.10)",
         separatorColor: "rgba(0, 75, 141, 0.15)",
         highlightBg: "rgba(0, 75, 141, 0.06)",
-        bulletColor: COLORS.primary,
+        bulletColor: t.colors.primary,
       }
     : {
-        accent: COLORS.secondary,
+        accent: t.colors.secondary,
         bgTint: "rgba(72, 169, 197, 0.03)",
         border: "rgba(72, 169, 197, 0.10)",
         separatorColor: "rgba(72, 169, 197, 0.15)",
         highlightBg: "rgba(72, 169, 197, 0.07)",
-        bulletColor: COLORS.secondary,
+        bulletColor: t.colors.secondary,
       }
-} // as const 반환은 함수에서 불필요 — TS가 리터럴을 자동 추론
+}
 
-// ─── Step 4: 서브 컴포넌트 — 단일 책임 원칙 ─────────────────────
+// ─── Step 3: 서브 컴포넌트 — 단일 책임 원칙 ─────────────────────
 // Boris Cherny: "작은 함수, 작은 타입, 명확한 계약."
 
 /** 카드 내부의 하이라이트 "hero badge" — highlight가 있을 때만 렌더링 */
@@ -103,7 +78,7 @@ function HighlightBadge({
     >
       <p
         className="text-2xl font-bold"
-        style={{ color: textColor, fontFamily: FONT_FAMILY }}
+        style={{ color: textColor, fontFamily: t.typography.fontFamily }}
       >
         {text}
       </p>
@@ -133,7 +108,7 @@ function ListItem({
       />
       <span
         className="text-base leading-relaxed"
-        style={{ color: COLORS.neutral[700], fontFamily: FONT_FAMILY }}
+        style={{ color: t.colors.neutral[700], fontFamily: t.typography.fontFamily }}
       >
         {text}
       </span>
@@ -168,7 +143,7 @@ function ColumnCard({
         {/* Column Title */}
         <h3
           className="text-xl font-bold pb-3"
-          style={{ color: colors.accent, fontFamily: FONT_FAMILY }}
+          style={{ color: colors.accent, fontFamily: t.typography.fontFamily }}
         >
           {data.title}
         </h3>
@@ -206,7 +181,7 @@ function ColumnCard({
   )
 }
 
-// ─── Step 5: 데코레이티브 요소 ───────────────────────────────────
+// ─── Step 4: 데코레이티브 요소 ───────────────────────────────────
 // 사양의 5개 기하학적 요소를 정확하게 구현
 
 function GeometricElements() {
@@ -286,7 +261,7 @@ function GeometricElements() {
   )
 }
 
-// ─── Step 6: 메인 컴포넌트 ──────────────────────────────────────
+// ─── Step 5: 메인 컴포넌트 ──────────────────────────────────────
 // Boris Cherny: "export된 함수의 시그니처는 모듈의 공개 API다.
 // 이름, 매개변수 타입, 반환 타입 — 이 세 가지가 모든 것을 말해야 한다."
 
@@ -353,8 +328,8 @@ export function TwoColumnSlide({
       <div
         className="relative w-full overflow-hidden"
         style={{
-          fontFamily: FONT_FAMILY,
-          backgroundColor: COLORS.neutral[50],
+          fontFamily: t.typography.fontFamily,
+          backgroundColor: t.colors.neutral[50],
           minHeight: "100dvh",
         }}
       >
@@ -370,12 +345,12 @@ export function TwoColumnSlide({
               style={{
                 width: 48,
                 height: 4,
-                background: `linear-gradient(to right, ${COLORS.primary}, ${COLORS.secondary})`,
+                background: `linear-gradient(to right, ${t.colors.primary}, ${t.colors.secondary})`,
               }}
             />
             <h2
               className="tcs-title-text text-2xl md:text-3xl font-bold tracking-tight"
-              style={{ color: COLORS.neutral[900], fontFamily: FONT_FAMILY }}
+              style={{ color: t.colors.neutral[900], fontFamily: t.typography.fontFamily }}
             >
               {title}
             </h2>
@@ -393,15 +368,15 @@ export function TwoColumnSlide({
             <div
               className="tcs-message-enter px-5 py-3.5"
               style={{
-                borderLeft: `4px solid ${COLORS.secondary}`,
+                borderLeft: `4px solid ${t.colors.secondary}`,
                 background: `linear-gradient(to right, rgba(72, 169, 197, 0.05), transparent)`,
               }}
             >
               <p
                 className="text-sm"
                 style={{
-                  color: COLORS.neutral[600],
-                  fontFamily: FONT_FAMILY,
+                  color: t.colors.neutral[600],
+                  fontFamily: t.typography.fontFamily,
                 }}
               >
                 {bottomMessage}
@@ -414,8 +389,7 @@ export function TwoColumnSlide({
   )
 }
 
-// ─── Step 7: 샘플 데이터 (Preview용) ────────────────────────────
-// as const로 모든 문자열을 리터럴 타입으로 고정.
+// ─── Step 6: 샘플 데이터 (Preview용) ────────────────────────────
 // Boris Cherny: "테스트 데이터도 타입이 보호해야 한다."
 
 const sampleData = {

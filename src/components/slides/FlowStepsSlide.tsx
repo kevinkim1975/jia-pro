@@ -1,4 +1,7 @@
 import { SlideBottomMessage } from "./shared/SlideBottomMessage"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 interface FlowStepsSlideProps {
   readonly title: string
@@ -30,9 +33,9 @@ function interpolateColor(
 }
 
 function getAccentColor(index: number, total: number): string {
-  if (total <= 1) return "#004B8D"
+  if (total <= 1) return t.colors.primary
   const factor = index / (total - 1)
-  return interpolateColor("#004B8D", "#48A9C5", factor)
+  return interpolateColor(t.colors.primary, t.colors.secondary, factor)
 }
 
 function getGridClass(count: number): string {
@@ -60,8 +63,8 @@ export function FlowStepsSlide({
       style={{
         width: "1280px",
         height: "720px",
-        backgroundColor: "#F8FAFC",
-        fontFamily: "Pretendard, -apple-system, sans-serif",
+        backgroundColor: t.colors.neutral[50],
+        fontFamily: t.typography.fontFamily,
         padding: "0 64px",
         display: "flex",
         flexDirection: "column",
@@ -72,7 +75,7 @@ export function FlowStepsSlide({
         style={{
           fontSize: "28px",
           fontWeight: 800,
-          color: "#004B8D",
+          color: t.colors.primary,
           lineHeight: 1.3,
           margin: 0,
         }}
@@ -97,7 +100,7 @@ export function FlowStepsSlide({
               style={{
                 fontSize: "48px",
                 fontWeight: 900,
-                color: "#004B8D",
+                color: t.colors.primary,
                 opacity: 0.2,
                 lineHeight: 1,
                 marginTop: "12px",
@@ -109,7 +112,7 @@ export function FlowStepsSlide({
               style={{
                 fontSize: "18px",
                 fontWeight: 700,
-                color: "#1F2937",
+                color: t.colors.textDark,
                 lineHeight: 1.4,
                 marginTop: "8px",
               }}
@@ -120,7 +123,7 @@ export function FlowStepsSlide({
               <div
                 style={{
                   fontSize: "14px",
-                  color: "#6B7280",
+                  color: t.colors.textMuted,
                   lineHeight: 1.5,
                   marginTop: "4px",
                 }}
@@ -134,7 +137,7 @@ export function FlowStepsSlide({
                 style={{
                   width: "1px",
                   height: "80%",
-                  backgroundColor: "#E5E7EB",
+                  backgroundColor: t.colors.border,
                   transform: "translateX(16px)",
                 }}
               />

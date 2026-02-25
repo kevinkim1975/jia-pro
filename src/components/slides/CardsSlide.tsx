@@ -1,5 +1,9 @@
 "use client"
 
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
+
 // ============================================================================
 // TYPE DEFINITIONS
 // ============================================================================
@@ -36,36 +40,36 @@ interface ToneColors {
 
 const TONE_MAP: Record<Tone, ToneColors> = {
   positive: {
-    cardBg: "#FFFFFF",
-    cardBorder: "#DEE5ED",
-    accentFrom: "#004B8D",
-    accentTo: "#48A9C5",
-    titleColor: "#004B8D",
-    subtitleColor: "#48A9C5",
-    bottomBorder: "#004B8D",
+    cardBg: t.colors.white,
+    cardBorder: t.colors.borderCard,
+    accentFrom: t.colors.primary,
+    accentTo: t.colors.secondary,
+    titleColor: t.colors.primary,
+    subtitleColor: t.colors.secondary,
+    bottomBorder: t.colors.primary,
     bottomBg: "rgba(0, 75, 141, 0.04)",
   },
   neutral: {
-    cardBg: "#FFFFFF",
-    cardBorder: "#DEE5ED",
-    accentFrom: "#475569",
-    accentTo: "#94A3B8",
-    titleColor: "#475569",
-    subtitleColor: "#64748B",
-    bottomBorder: "#475569",
+    cardBg: t.colors.white,
+    cardBorder: t.colors.borderCard,
+    accentFrom: t.colors.neutral[600],
+    accentTo: t.colors.neutral[400],
+    titleColor: t.colors.neutral[600],
+    subtitleColor: t.colors.neutral[500],
+    bottomBorder: t.colors.neutral[600],
     bottomBg: "rgba(100, 116, 139, 0.04)",
   },
   negative: {
-    cardBg: "#FFFFFF",
-    cardBorder: "#DEE5ED",
-    accentFrom: "#475569",
-    accentTo: "#94A3B8",
-    titleColor: "#475569",
-    subtitleColor: "#64748B",
-    bottomBorder: "#475569",
+    cardBg: t.colors.white,
+    cardBorder: t.colors.borderCard,
+    accentFrom: t.colors.neutral[600],
+    accentTo: t.colors.neutral[400],
+    titleColor: t.colors.neutral[600],
+    subtitleColor: t.colors.neutral[500],
+    bottomBorder: t.colors.neutral[600],
     bottomBg: "rgba(100, 116, 139, 0.04)",
   },
-} as const
+}
 
 // ============================================================================
 // HELPERS
@@ -100,9 +104,8 @@ export function CardsSlide({
     <div
       className="relative w-full overflow-hidden"
       style={{
-        fontFamily:
-          "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
-        background: "#F6F8FA",
+        fontFamily: t.typography.fontFamily,
+        background: t.colors.surfaceAlt,
         aspectRatio: "16 / 9",
       }}
     >
@@ -146,7 +149,7 @@ export function CardsSlide({
             style={{
               fontSize: 28,
               fontWeight: 700,
-              color: "#0F172A",
+              color: t.colors.neutral[900],
               lineHeight: 1.3,
               letterSpacing: "-0.01em",
               animation: "cardsTitleFade 0.5s ease-out 0.1s both",
@@ -243,7 +246,7 @@ export function CardsSlide({
                   <div
                     style={{
                       height: 1,
-                      background: "#E2E8F0",
+                      background: t.colors.neutral[200],
                       marginTop: 12,
                       marginBottom: 10,
                     }}
@@ -253,7 +256,7 @@ export function CardsSlide({
                     style={{
                       fontSize: 14,
                       fontWeight: 400,
-                      color: "#64748B",
+                      color: t.colors.neutral[500],
                       lineHeight: 1.5,
                     }}
                   >
@@ -284,7 +287,7 @@ export function CardsSlide({
               style={{
                 fontSize: 15,
                 fontWeight: 500,
-                color: "#334155",
+                color: t.colors.neutral[700],
                 lineHeight: 1.5,
               }}
             >
@@ -302,31 +305,31 @@ export function CardsSlide({
 // ============================================================================
 
 const sampleData: CardsSlideProps = {
-  title: "\uD638\uC6D0\uC564\uCEF4\uD37C\uB2C8 CRM \uC5F0\uD601",
+  title: "호원앤컴퍼니 CRM 연혁",
   cards: [
     {
       title: "2003",
-      subtitle: "\uC11C\uC6B8\uB300 \uBD84\uB2F9\uBCD1\uC6D0",
-      description: "CRM \uAC1C\uBC1C",
+      subtitle: "서울대 분당병원",
+      description: "CRM 개발",
     },
     {
       title: "2004",
-      subtitle: "\uCD08\uC774\uC2A4\uD53C\uBD80\uACFC",
-      description: "\uB85C\uCEEC \uCD5C\uCD08",
+      subtitle: "초이스피부과",
+      description: "로컬 최초",
     },
     {
-      title: "\uD604\uC7AC",
-      subtitle: "150\uAC1C \uAE30\uAD00",
-      description: "\uC6B4\uC601",
+      title: "현재",
+      subtitle: "150개 기관",
+      description: "운영",
     },
     {
       title: "2025.12",
       subtitle: "AI CRM",
-      description: "\uAC1C\uBC1C 5\uAC1C \uC2DC\uBC94",
+      description: "개발 5개 시범",
     },
   ],
   bottomMessage:
-    "\u201C20\uB144\uAC04 \uC758\uB8CC\uAE30\uAD00 CRM\uC744 \uB9CC\uB4E4\uC5B4 \uC654\uC2B5\uB2C8\uB2E4\u201D",
+    "\u201C20년간 의료기관 CRM을 만들어 왔습니다\u201D",
   tone: "positive",
 }
 
@@ -334,7 +337,7 @@ export default function CardsSlidePreview() {
   return (
     <div
       className="flex items-center justify-center min-h-screen"
-      style={{ background: "#F6F8FA" }}
+      style={{ background: t.colors.surfaceAlt }}
     >
       <div style={{ width: "100%", maxWidth: 1100, padding: "40px" }}>
         <CardsSlide {...sampleData} />

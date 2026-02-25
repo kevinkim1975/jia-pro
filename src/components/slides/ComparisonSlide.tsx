@@ -1,5 +1,8 @@
 import { CheckCircle2 } from "lucide-react"
 import { SlideHeader } from "./shared/SlideHeader"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 interface ComparisonSlideProps {
   readonly title: string
@@ -28,8 +31,8 @@ export function ComparisonSlide({
       style={{
         width: 1280,
         height: 720,
-        fontFamily: "Pretendard, -apple-system, sans-serif",
-        backgroundColor: "#F8FAFC",
+        fontFamily: t.typography.fontFamily,
+        backgroundColor: t.colors.neutral[50],
       }}
     >
       {/* Header */}
@@ -37,24 +40,24 @@ export function ComparisonSlide({
 
       {/* Quote (optional) */}
       {quote && (
-        <p className="mb-8 text-center text-base italic" style={{ color: "#6B7280" }}>
-          <span style={{ color: "#48A9C5" }}>{'" '}</span>
+        <p className="mb-8 text-center text-base italic" style={{ color: t.colors.textMuted }}>
+          <span style={{ color: t.colors.secondary }}>{'" '}</span>
           {quote}
-          <span style={{ color: "#48A9C5" }}>{' "'}</span>
+          <span style={{ color: t.colors.secondary }}>{' "'}</span>
         </p>
       )}
 
       {/* Table Container */}
       <div
         className={`w-full max-w-4xl overflow-hidden border bg-white shadow-sm ${!quote ? 'mt-10' : ''}`}
-        style={{ borderColor: "#E5E7EB" }}
+        style={{ borderColor: t.colors.border }}
       >
         {/* Header Row */}
         <div className="grid grid-cols-2">
           <div
             className="px-6 py-4 text-lg font-semibold"
             style={{
-              color: "#9CA3AF",
+              color: t.colors.textLight,
               backgroundColor: "rgba(243, 244, 246, 0.5)",
             }}
           >
@@ -63,9 +66,9 @@ export function ComparisonSlide({
           <div
             className="px-6 py-4 text-lg font-semibold"
             style={{
-              color: "#004B8D",
+              color: t.colors.primary,
               backgroundColor: "rgba(0, 75, 141, 0.05)",
-              borderLeft: "2px solid #E5E7EB",
+              borderLeft: `2px solid ${t.colors.border}`,
             }}
           >
             {after.label}
@@ -83,7 +86,7 @@ export function ComparisonSlide({
               key={i}
               className="grid grid-cols-2"
               style={{
-                borderTop: "1px solid #F3F4F6",
+                borderTop: `1px solid ${t.colors.neutral[100]}`,
               }}
             >
               {/* Before Cell */}
@@ -92,11 +95,11 @@ export function ComparisonSlide({
                   <>
                     <span
                       className="h-2 w-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: "#D1D5DB" }}
+                      style={{ backgroundColor: t.colors.neutral[300] }}
                     />
                     <span
                       className="text-base"
-                      style={{ color: "#6B7280" }}
+                      style={{ color: t.colors.textMuted }}
                     >
                       {beforeItem}
                     </span>
@@ -108,18 +111,18 @@ export function ComparisonSlide({
               <div
                 className="flex items-center gap-3 px-6 py-5"
                 style={{
-                  borderLeft: "2px solid #E5E7EB",
+                  borderLeft: `2px solid ${t.colors.border}`,
                 }}
               >
                 {afterItem ? (
                   <>
                     <CheckCircle2
                       className="h-5 w-5 shrink-0"
-                      style={{ color: "#10B981" }}
+                      style={{ color: t.colors.accent }}
                     />
                     <span
                       className="text-base font-medium"
-                      style={{ color: "#1F2937" }}
+                      style={{ color: t.colors.textDark }}
                     >
                       {afterItem}
                     </span>
