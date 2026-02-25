@@ -1,6 +1,9 @@
 "use client"
 
 import { ChevronRight } from "lucide-react"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 interface TocItem {
   readonly act: number
@@ -26,7 +29,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
   return (
     <div
       className="relative w-full h-full flex flex-col px-6 py-14 overflow-hidden select-none"
-      style={{ fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif" }}
+      style={{ fontFamily: t.typography.fontFamily }}
     >
       <style>{`
         @keyframes fadeSlideIn {
@@ -127,22 +130,22 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
 
         .toc-row:hover .act-number {
           opacity: 1 !important;
-          color: #004B8D;
+          color: ${t.colors.primary};
         }
 
         .toc-row:hover .row-title {
-          color: #004B8D;
+          color: ${t.colors.primary};
           transform: translateX(4px);
         }
 
         .toc-row:hover .row-page {
-          color: #004B8D;
+          color: ${t.colors.primary};
         }
 
         .toc-row:hover .row-chevron {
           opacity: 1;
           transform: translateX(0);
-          color: #48A9C5;
+          color: ${t.colors.secondary};
         }
 
         .toc-row:hover .dot-leader {
@@ -150,20 +153,20 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
         }
 
         .toc-row:focus-visible {
-          outline: 2px solid #48A9C5;
+          outline: 2px solid ${t.colors.secondary};
           outline-offset: 4px;
           border-radius: 4px;
         }
 
         @keyframes pulseOpacity1 {
-          0%, 100% { opacity: 0.04; border-color: #004B8D; }
-          30% { opacity: 0.12; border-color: #48A9C5; }
+          0%, 100% { opacity: 0.04; border-color: ${t.colors.primary}; }
+          30% { opacity: 0.12; border-color: ${t.colors.secondary}; }
           60% { opacity: 0.06; border-color: #0068C8; }
         }
 
         @keyframes pulseOpacity2 {
-          0%, 100% { opacity: 0.05; border-color: #48A9C5; }
-          40% { opacity: 0.14; border-color: #004B8D; }
+          0%, 100% { opacity: 0.05; border-color: ${t.colors.secondary}; }
+          40% { opacity: 0.14; border-color: ${t.colors.primary}; }
           70% { opacity: 0.03; border-color: #6BC5DB; }
         }
 
@@ -205,7 +208,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
             width: "280px",
             height: "280px",
             borderRadius: "50%",
-            border: "1.5px solid #004B8D",
+            border: `1.5px solid ${t.colors.primary}`,
             opacity: 0.05,
           }}
         />
@@ -217,7 +220,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
             right: "60px",
             width: "120px",
             height: "120px",
-            border: "1.5px solid #48A9C5",
+            border: `1.5px solid ${t.colors.secondary}`,
             opacity: 0.06,
             transform: "rotate(45deg)",
           }}
@@ -231,7 +234,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
             width: "90px",
             height: "90px",
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #004B8D, #48A9C5)",
+            background: `linear-gradient(135deg, ${t.colors.primary}, ${t.colors.secondary})`,
             opacity: 0.04,
           }}
         />
@@ -243,7 +246,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
             right: "100px",
             width: "180px",
             height: "1.5px",
-            background: "linear-gradient(90deg, transparent, #004B8D, transparent)",
+            background: `linear-gradient(90deg, transparent, ${t.colors.primary}, transparent)`,
             opacity: 0.06,
           }}
         />
@@ -253,14 +256,14 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
       <div className="relative mb-14" style={{ zIndex: 10 }}>
         <p
           className="toc-header-label text-xs font-semibold tracking-[0.25em] uppercase mb-3"
-          style={{ color: "#004B8D" }}
+          style={{ color: t.colors.primary }}
         >
           Contents
         </p>
         <div
           className="toc-header-line h-[2px] w-24"
           style={{
-            background: "linear-gradient(90deg, #004B8D, #48A9C5)",
+            background: `linear-gradient(90deg, ${t.colors.primary}, ${t.colors.secondary})`,
           }}
         />
       </div>
@@ -273,7 +276,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
             className="toc-vertical-line absolute right-0 top-0 bottom-0"
             style={{
               width: "1.5px",
-              background: "linear-gradient(180deg, #004B8D 0%, #48A9C5 60%, transparent 100%)",
+              background: `linear-gradient(180deg, ${t.colors.primary} 0%, ${t.colors.secondary} 60%, transparent 100%)`,
               opacity: 0.3,
             }}
           />
@@ -297,7 +300,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
                   textAlign: "right",
                   fontSize: "54px",
                   lineHeight: "1",
-                  color: "#004B8D",
+                  color: t.colors.primary,
                   opacity: 0.15,
                   letterSpacing: "-0.03em",
                 }}
@@ -308,7 +311,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
               {/* Title */}
               <span
                 className="row-title flex-shrink-0 text-lg font-medium"
-                style={{ color: "#1E293B" }}
+                style={{ color: t.colors.neutral[800] }}
               >
                 {item.title}
               </span>
@@ -317,7 +320,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
               <span
                 className="dot-leader flex-1 mx-4 overflow-hidden"
                 style={{
-                  borderBottom: "1.5px dotted #CBD5E1",
+                  borderBottom: `1.5px dotted ${t.colors.neutral[300]}`,
                   minWidth: "40px",
                   height: "1px",
                   alignSelf: "flex-end",
@@ -330,7 +333,7 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
               <span
                 className="row-page flex-shrink-0 text-sm font-normal tabular-nums"
                 style={{
-                  color: "#64748B",
+                  color: t.colors.neutral[500],
                   fontVariantNumeric: "tabular-nums",
                   minWidth: "40px",
                   textAlign: "right",
@@ -359,12 +362,12 @@ export function TocSlide({ items = sampleItems, onNavigate }: TocSlideProps) {
         <div
           className="h-[1px] flex-1"
           style={{
-            background: "linear-gradient(90deg, #E2E8F0, transparent)",
+            background: `linear-gradient(90deg, ${t.colors.neutral[200]}, transparent)`,
           }}
         />
         <span
           className="text-[10px] font-medium tracking-[0.2em] uppercase"
-          style={{ color: "#94A3B8" }}
+          style={{ color: t.colors.neutral[400] }}
         >
           Proposal
         </span>

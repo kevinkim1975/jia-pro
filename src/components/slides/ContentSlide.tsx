@@ -1,6 +1,9 @@
 import { TrendingUp, Target, Lightbulb } from "lucide-react"
 import { SlideHeader } from "./shared/SlideHeader"
 import { SlideBottomMessage } from "./shared/SlideBottomMessage"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 interface ContentSlideProps {
   readonly title: string
@@ -12,30 +15,33 @@ interface ContentSlideProps {
 
 const toneConfig = {
   positive: {
-    accent: "#059669",
+    accent: t.colors.semantic.positive,
     bg: "bg-emerald-50",
     border: "border-emerald-200",
     text: "text-emerald-700",
+    textColor: undefined as string | undefined,
     icon: TrendingUp,
     badge: "▲ 긍정",
   },
   negative: {
-    accent: "#DC2626",
+    accent: t.colors.semantic.negative,
     bg: "bg-red-50",
     border: "border-red-200",
     text: "text-red-700",
+    textColor: undefined as string | undefined,
     icon: Target,
     badge: "▼ 주의",
   },
   neutral: {
-    accent: "#004B8D",
+    accent: t.colors.primary,
     bg: "bg-blue-50",
     border: "border-blue-200",
-    text: "text-[#004B8D]",
+    text: "",
+    textColor: t.colors.primary as string | undefined,
     icon: Lightbulb,
     badge: null,
   },
-} as const
+}
 
 
 function BulletTimeline({
@@ -77,6 +83,7 @@ function BulletTimeline({
               <div className="flex items-start gap-3">
                 <span
                   className={`text-xs font-bold ${config.text} mt-0.5 shrink-0`}
+                  style={config.textColor ? { color: config.textColor } : undefined}
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -108,9 +115,8 @@ export function ContentSlide({
     <div
       className="w-full h-full flex flex-col"
       style={{
-        backgroundColor: "#F8FAFC",
-        fontFamily:
-          "Pretendard, -apple-system, BlinkMacSystemFont, sans-serif",
+        backgroundColor: t.colors.neutral[50],
+        fontFamily: t.typography.fontFamily,
       }}
     >
       <div className="flex-1 flex flex-col justify-center px-16 py-12">
@@ -118,7 +124,10 @@ export function ContentSlide({
         <div className="flex items-start justify-between">
           <SlideHeader title={title} />
           {toneConfig[tone].badge && (
-            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${toneConfig[tone].bg} ${toneConfig[tone].text}`}>
+            <span
+              className={`text-xs px-2 py-0.5 rounded-full font-medium ${toneConfig[tone].bg} ${toneConfig[tone].text}`}
+              style={toneConfig[tone].textColor ? { color: toneConfig[tone].textColor } : undefined}
+            >
               {toneConfig[tone].badge}
             </span>
           )}
@@ -139,7 +148,7 @@ export function ContentSlide({
         {/* Bottom message — mt-8 (32px) = exactly 2x the bullet gap-4 (16px) */}
         {hasEmphasis && (
           <div className="mt-8">
-            <SlideBottomMessage icon={<ToneIcon className="w-6 h-6 text-[#004B8D] flex-shrink-0 mt-0.5" />}>
+            <SlideBottomMessage icon={<ToneIcon className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: t.colors.primary }} />}>
               {emphasis}
             </SlideBottomMessage>
           </div>

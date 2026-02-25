@@ -12,7 +12,6 @@ export {
   jiaProTheme,
   currentTheme,
   getColor,
-  opacity,
   SLIDE_TOKEN_MAP,
   BG_GUIDELINES,
   SLIDE_DIMENSIONS,

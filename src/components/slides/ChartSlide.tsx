@@ -5,6 +5,9 @@ import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
 } from "recharts"
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
 
 // ── Interfaces ──────────────────────────────────────────
 
@@ -39,16 +42,16 @@ interface ChartSlideProps {
 // ── Colors ──────────────────────────────────────────────
 
 const CHART_COLORS = {
-  primary: "#004B8D",
-  secondary: "#48A9C5",
-  accent: "#10B981",
-  warning: "#F59E0B",
-  danger: "#EF4444",
+  primary: t.colors.primary,
+  secondary: t.colors.secondary,
+  accent: t.colors.accent,
+  warning: t.chart.warning,
+  danger: t.chart.danger,
 } as const
 
-const PIE_COLORS = ["#004B8D","#48A9C5","#10B981","#F59E0B","#EF4444","#8B5CF6","#EC4899","#14B8A6"] as const
+const PIE_COLORS = t.chart.palette
 
-const FONT = "Pretendard, -apple-system, sans-serif"
+const FONT = t.typography.fontFamily
 
 // ── Custom Tooltip ──────────────────────────────────────
 
@@ -57,15 +60,15 @@ function CustomTooltip({ active, payload, label }: { active?: boolean; payload?:
   return (
     <div
       style={{
-        background: "#fff",
+        background: t.colors.white,
         borderRadius: 10,
         boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
         padding: "10px 16px",
-        border: "1px solid #E5E7EB",
+        border: `1px solid ${t.colors.border}`,
         fontFamily: FONT,
       }}
     >
-      <p style={{ fontSize: 12, color: "#6B7280", marginBottom: 2 }}>{label}</p>
+      <p style={{ fontSize: 12, color: t.colors.textMuted, marginBottom: 2 }}>{label}</p>
       <p style={{ fontSize: 18, fontWeight: 700, color: CHART_COLORS.primary }}>{payload[0].value.toLocaleString()}</p>
     </div>
   )
@@ -83,21 +86,21 @@ function RenderLineChart({ data, yAxisLabel }: { data: readonly ChartDataPoint[]
             <stop offset="100%" stopColor={CHART_COLORS.secondary} />
           </linearGradient>
         </defs>
-        <CartesianGrid vertical={false} stroke="#E5E7EB" strokeDasharray="4 4" />
+        <CartesianGrid vertical={false} stroke={t.colors.border} strokeDasharray="4 4" />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 13, fill: "#6B7280", fontFamily: FONT }}
-          axisLine={{ stroke: "#E5E7EB" }}
+          tick={{ fontSize: 13, fill: t.colors.textMuted, fontFamily: FONT }}
+          axisLine={{ stroke: t.colors.border }}
           tickLine={false}
         />
         <YAxis
-          tick={{ fontSize: 12, fill: "#9CA3AF", fontFamily: FONT }}
+          tick={{ fontSize: 12, fill: t.colors.textLight, fontFamily: FONT }}
           axisLine={false}
           tickLine={false}
           width={48}
           label={
             yAxisLabel
-              ? { value: yAxisLabel, angle: -90, position: "insideLeft", offset: -4, style: { fontSize: 12, fill: "#9CA3AF", fontFamily: FONT } }
+              ? { value: yAxisLabel, angle: -90, position: "insideLeft", offset: -4, style: { fontSize: 12, fill: t.colors.textLight, fontFamily: FONT } }
               : undefined
           }
         />
@@ -107,8 +110,8 @@ function RenderLineChart({ data, yAxisLabel }: { data: readonly ChartDataPoint[]
           dataKey="value"
           stroke="url(#lineGrad)"
           strokeWidth={3}
-          dot={{ r: 5, fill: CHART_COLORS.primary, stroke: "#fff", strokeWidth: 2 }}
-          activeDot={{ r: 7, fill: CHART_COLORS.secondary, stroke: "#fff", strokeWidth: 2 }}
+          dot={{ r: 5, fill: CHART_COLORS.primary, stroke: t.colors.white, strokeWidth: 2 }}
+          activeDot={{ r: 7, fill: CHART_COLORS.secondary, stroke: t.colors.white, strokeWidth: 2 }}
         />
       </LineChart>
     </ResponsiveContainer>
@@ -125,21 +128,21 @@ function RenderBarChart({ data, yAxisLabel }: { data: readonly ChartDataPoint[];
             <stop offset="100%" stopColor={CHART_COLORS.secondary} />
           </linearGradient>
         </defs>
-        <CartesianGrid vertical={false} stroke="#E5E7EB" strokeDasharray="4 4" />
+        <CartesianGrid vertical={false} stroke={t.colors.border} strokeDasharray="4 4" />
         <XAxis
           dataKey="label"
-          tick={{ fontSize: 13, fill: "#6B7280", fontFamily: FONT }}
-          axisLine={{ stroke: "#E5E7EB" }}
+          tick={{ fontSize: 13, fill: t.colors.textMuted, fontFamily: FONT }}
+          axisLine={{ stroke: t.colors.border }}
           tickLine={false}
         />
         <YAxis
-          tick={{ fontSize: 12, fill: "#9CA3AF", fontFamily: FONT }}
+          tick={{ fontSize: 12, fill: t.colors.textLight, fontFamily: FONT }}
           axisLine={false}
           tickLine={false}
           width={48}
           label={
             yAxisLabel
-              ? { value: yAxisLabel, angle: -90, position: "insideLeft", offset: -4, style: { fontSize: 12, fill: "#9CA3AF", fontFamily: FONT } }
+              ? { value: yAxisLabel, angle: -90, position: "insideLeft", offset: -4, style: { fontSize: 12, fill: t.colors.textLight, fontFamily: FONT } }
               : undefined
           }
         />
@@ -158,7 +161,7 @@ function RenderPieChart({ data }: { data: readonly ChartDataPoint[] }) {
         <Legend
           verticalAlign="bottom"
           iconType="circle"
-          wrapperStyle={{ fontSize: 12, fontFamily: FONT, color: "#6B7280" }}
+          wrapperStyle={{ fontSize: 12, fontFamily: FONT, color: t.colors.textMuted }}
         />
         <Pie
           data={[...data].map(d => ({ name: d.label, value: d.value }))}
@@ -216,10 +219,10 @@ function AnnotationPanel({
           >
             HIGHLIGHT
           </span>
-          <p style={{ fontSize: 20, fontWeight: 700, color: "#10B981", marginTop: 8, lineHeight: 1.3 }}>
+          <p style={{ fontSize: 20, fontWeight: 700, color: t.colors.accent, marginTop: 8, lineHeight: 1.3 }}>
             {highlight}
           </p>
-          <div style={{ width: 32, height: 2, background: "#10B981", marginTop: 12, borderRadius: 1 }} />
+          <div style={{ width: 32, height: 2, background: t.colors.accent, marginTop: 12, borderRadius: 1 }} />
         </div>
       )}
 
@@ -230,14 +233,14 @@ function AnnotationPanel({
             <p style={{ fontSize: 18, fontWeight: 700, color: CHART_COLORS.primary, lineHeight: 1.2 }}>
               {point.value.toLocaleString()}
             </p>
-            <p style={{ fontSize: 11, color: "#9CA3AF", marginTop: 2 }}>{point.label}</p>
+            <p style={{ fontSize: 11, color: t.colors.textLight, marginTop: 2 }}>{point.label}</p>
             {point.annotation && point.annotation.length > 0 && (
               <p
                 style={{
                   fontSize: 11,
                   marginTop: 2,
                   fontWeight: 600,
-                  color: point.annotation.startsWith("-") ? CHART_COLORS.primary : "#10B981",
+                  color: point.annotation.startsWith("-") ? CHART_COLORS.primary : t.colors.accent,
                 }}
               >
                 {point.annotation}
@@ -249,7 +252,7 @@ function AnnotationPanel({
 
       {/* Description */}
       {description && description.length > 0 && (
-        <p style={{ fontSize: 13, color: "#9CA3AF", marginTop: 16, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 13, color: t.colors.textLight, marginTop: 16, lineHeight: 1.6 }}>
           {description}
         </p>
       )}
@@ -279,7 +282,7 @@ export function ChartSlide({ title, chart, highlight, description }: ChartSlideP
       style={{
         width: CANVAS_W,
         height: CANVAS_H,
-        background: "#F8FAFC",
+        background: t.colors.neutral[50],
         fontFamily: FONT,
         display: "flex",
         flexDirection: "column",
@@ -324,7 +327,7 @@ export function ChartSlide({ title, chart, highlight, description }: ChartSlideP
           style={{
             width: 1,
             alignSelf: "stretch",
-            background: "#E5E7EB",
+            background: t.colors.border,
             marginLeft: GAP / 2,
             marginRight: GAP / 2,
             flexShrink: 0,

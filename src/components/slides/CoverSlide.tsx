@@ -1,5 +1,9 @@
 "use client"
 
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
+
 interface CoverSlideProps {
   readonly title: string
   readonly subtitle?: string
@@ -13,8 +17,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
       style={{
         width: "100%",
         height: "100%",
-        fontFamily:
-          "Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+        fontFamily: t.typography.fontFamily,
         overflow: "hidden",
         position: "relative",
         display: "flex",
@@ -57,7 +60,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         style={{
           width: "40%",
           height: "100%",
-          background: "linear-gradient(160deg, #001529 0%, #003366 40%, #004B8D 100%)",
+          background: `linear-gradient(160deg, ${t.colors.primaryDeep} 0%, ${t.colors.primaryDark} 40%, ${t.colors.primary} 100%)`,
           position: "relative",
           animation: "slideInFromLeft 500ms ease-out 0ms both",
           display: "flex",
@@ -72,7 +75,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
             top: "50%",
             left: "50%",
             transform: "translate(calc(-50% + 140px), calc(-50% + 115px))",
-            fontSize: 120,
+            fontSize: t.typography.fontSize["120"],
             fontWeight: 900,
             color: "rgba(255,255,255,0.06)",
             letterSpacing: "-0.02em",
@@ -122,7 +125,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
             position: "absolute",
             bottom: 113,
             right: 32,
-            fontSize: 13,
+            fontSize: t.typography.fontSize["13"],
             fontWeight: 600,
             letterSpacing: "0.4em",
             color: "rgba(255,255,255,0.18)",
@@ -151,8 +154,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
           style={{
             width: "100%",
             height: "100%",
-            background:
-              "linear-gradient(to bottom, transparent 0%, #48A9C5 30%, #48A9C5 70%, transparent 100%)",
+            background: `linear-gradient(to bottom, transparent 0%, ${t.colors.secondary} 30%, ${t.colors.secondary} 70%, transparent 100%)`,
           }}
         />
       </div>
@@ -162,7 +164,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         style={{
           flex: 1,
           height: "100%",
-          background: "#FFFFFF",
+          background: t.colors.white,
           display: "flex",
           flexDirection: "column" as const,
           justifyContent: "center",
@@ -174,9 +176,9 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* Title */}
         <h1
           style={{
-            fontSize: 64,
+            fontSize: t.typography.fontSize["64"],
             fontWeight: 800,
-            color: "#004B8D",
+            color: t.colors.primary,
             lineHeight: 1.15,
             margin: 0,
             animation: "fadeInRight 500ms ease-out 500ms both",
@@ -189,9 +191,9 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {subtitle && (
           <p
             style={{
-              fontSize: 24,
+              fontSize: t.typography.fontSize["2xl"],
               fontWeight: 500,
-              color: "#48A9C5",
+              color: t.colors.secondary,
               margin: 0,
               marginTop: 14,
               animation: "fadeInRight 500ms ease-out 600ms both",
@@ -206,7 +208,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
           style={{
             width: 72,
             height: 2,
-            background: "linear-gradient(to right, #004B8D, #48A9C5)",
+            background: `linear-gradient(to right, ${t.colors.primary}, ${t.colors.secondary})`,
             marginTop: 28,
             borderRadius: 1,
             animation: "fadeIn 400ms ease-out 700ms both",
@@ -216,9 +218,9 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* Date */}
         <p
           style={{
-            fontSize: 16,
+            fontSize: t.typography.fontSize.base,
             fontWeight: 400,
-            color: "#64748B",
+            color: t.colors.neutral[500],
             margin: 0,
             marginTop: 28,
             animation: "fadeIn 400ms ease-out 800ms both",
@@ -230,9 +232,9 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
         {/* Company */}
         <p
           style={{
-            fontSize: 19,
+            fontSize: t.typography.fontSize["19"],
             fontWeight: 600,
-            color: "#004B8D",
+            color: t.colors.primary,
             margin: 0,
             marginTop: 6,
             animation: "fadeIn 400ms ease-out 900ms both",
@@ -276,7 +278,7 @@ export function CoverSlide({ title, subtitle, date, company }: CoverSlideProps) 
             right: 48,
             width: 48,
             height: 2,
-            background: "linear-gradient(to right, #48A9C5, rgba(72,169,197,0.2))",
+            background: `linear-gradient(to right, ${t.colors.secondary}, rgba(72,169,197,0.2))`,
             borderRadius: 1,
             animation: "fadeIn 400ms ease-out 1000ms both",
           }}

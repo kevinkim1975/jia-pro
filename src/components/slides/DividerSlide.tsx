@@ -1,5 +1,9 @@
 "use client"
 
+import { currentTheme } from "../../../config/theme"
+
+const t = currentTheme
+
 interface DividerSlideProps {
   readonly act: number
   readonly title: string
@@ -11,9 +15,8 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
     <div
       className="relative w-full h-full overflow-hidden flex flex-col items-center justify-center"
       style={{
-        background: "linear-gradient(140deg, #004B8D 0%, #002D5A 100%)",
-        fontFamily:
-          "'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+        background: `linear-gradient(140deg, ${t.colors.primary} 0%, ${t.colors.primaryDarker} 100%)`,
+        fontFamily: t.typography.fontFamily,
       }}
     >
       <style>{`
@@ -214,7 +217,7 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
         >
           <span
             style={{
-              fontSize: 44,
+              fontSize: t.typography.fontSize["44"],
               fontWeight: 700,
               color: "rgba(255,255,255,0.85)",
               lineHeight: 1,
@@ -231,10 +234,10 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
         {/* ACT label */}
         <span
           style={{
-            fontSize: 11,
+            fontSize: t.typography.fontSize["11"],
             fontWeight: 600,
             letterSpacing: "0.3em",
-            color: "#48A9C5",
+            color: t.colors.secondary,
             textTransform: "uppercase",
             animation: "labelPulse 7s ease-in-out infinite",
           }}
@@ -245,9 +248,9 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
         {/* Title */}
         <h2
           style={{
-            fontSize: title.length > 12 ? 30 : 36,
+            fontSize: title.length > 12 ? t.typography.fontSize["3xl"] : t.typography.fontSize["4xl"],
             fontWeight: 700,
-            color: "#FFFFFF",
+            color: t.colors.white,
             marginTop: 14,
             textAlign: "center",
             lineHeight: 1.2,
@@ -263,7 +266,7 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
         {/* Subtitle */}
         <span
           style={{
-            fontSize: 14,
+            fontSize: t.typography.fontSize.sm,
             fontWeight: 400,
             letterSpacing: "0.15em",
             color: "rgba(72,169,197,0.8)",
@@ -281,7 +284,6 @@ export function DividerSlide({ act, title, subtitle }: DividerSlideProps) {
           style={{
             gap: 12,
             marginTop: 20,
-
           }}
           aria-hidden="true"
         >
