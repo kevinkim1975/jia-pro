@@ -70,7 +70,7 @@ export function ProposalViewer() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 h-0 overflow-hidden">
         <div className={`h-full mx-auto ${currentSlide?.content.type === "cover" || currentSlide?.content.type === "divider" || currentSlide?.content.type === "quote" ? "" : "max-w-[1280px] px-4 md:px-6 lg:px-8"}`}>
           <div className={`h-full ${currentSlide?.content.type === "cover" || currentSlide?.content.type === "divider" || currentSlide?.content.type === "quote" ? "" : "flex items-center"}`}>
             <div className={currentSlide?.content.type === "cover" || currentSlide?.content.type === "divider" || currentSlide?.content.type === "quote" ? "h-full" : "w-full"}>
