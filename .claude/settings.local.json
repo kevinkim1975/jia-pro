@@ -12,7 +12,15 @@
       "Bash(cd /c/MyProject/crmp/jia-pro && git add src/components/proposal-viewer.tsx && git commit -m \"$\\(cat <<'EOF'\nfix: main 태그에 h-0 추가하여 flex 자식 높이 전파 수정\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git status)",
       "Bash(cd /c/MyProject/crmp/jia-pro && git add src/components/slides/CoverSlide.tsx src/components/proposal-viewer.tsx src/components/topbar-header.tsx && git commit -m \"$\\(cat <<'EOF'\nfeat: CoverSlide 2026 텍스트 위치 조정 및 전체화면 토글 추가\n\n- CoverSlide \"2026\" 워터마크 X축 100px 오른쪽 이동\n- proposal-viewer에 브라우저 전체화면 토글 기능 추가\n- TopbarHeader 목차 버튼 왼쪽에 전체화면/축소 텍스트 버튼 배치\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git status)",
       "Bash(cd /c/MyProject/crmp/jia-pro && git add src/components/slides/CoverSlide.tsx && git commit -m \"$\\(cat <<'EOF'\nfix: CoverSlide PROPOSAL 텍스트 100px 위로 이동\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(cd /c/MyProject/crmp/jia-pro && git add src/components/slides/CoverSlide.tsx && git commit -m \"$\\(cat <<'EOF'\nfix: CoverSlide PROPOSAL 텍스트 위치 미세 조정 \\(bottom 163→113\\)\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(cd /c/MyProject/crmp/jia-pro && git add src/components/slides/CoverSlide.tsx && git commit -m \"$\\(cat <<'EOF'\nfix: CoverSlide PROPOSAL 텍스트 위치 미세 조정 \\(bottom 163→113\\)\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(ls:*)",
+      "Bash(cd /c/MyProject/crmp/pro-template && npx tsx generate.ts 2>&1)",
+      "Bash(grep bottomMessage:*)",
+      "Bash(cd /c/MyProject/crmp/pro-template/input && python3 -c \"\nimport re\nwith open\\('layout.md', 'r', encoding='utf-8'\\) as f:\n    content = f.read\\(\\)\ncontent = content.replace\\('\\\\\\\\\\\\\\\\u201C', '\\\\u201C'\\).replace\\('\\\\\\\\\\\\\\\\u201D', '\\\\u201D'\\)\nwith open\\('layout.md', 'w', encoding='utf-8'\\) as f:\n    f.write\\(content\\)\nprint\\('Done'\\)\n\" 2>&1)",
+      "Bash(cd /c/MyProject/crmp/pro-template/input && python3 << 'PYEOF'\nwith open\\('layout.md', 'r', encoding='utf-8'\\) as f:\n    content = f.read\\(\\)\ncontent = content.replace\\('\\\\\\\\u201C', '\\\\u201C'\\).replace\\('\\\\\\\\u201D', '\\\\u201D'\\)\nwith open\\('layout.md', 'w', encoding='utf-8'\\) as f:\n    f.write\\(content\\)\nprint\\('Done'\\)\nPYEOF)",
+      "Bash(python3:*)",
+      "Bash(grep 콘텐츠의 힘:*)",
+      "Bash(cd /c/MyProject/crmp/pro-template/output && npm run build 2>&1)"
     ]
   },
   "mcpServers": {
